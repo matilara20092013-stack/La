@@ -1,263 +1,630 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Consultoría y logística internacional. Expande tus productos hacia Europa con más de 30 años de experiencia, seguridad y una red global de transporte.">
-  <title>GlobalRoute Consulting | Expansión y Logística hacia Europa</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <meta name="description" content="ViralForge AI — Genera ganchos virales para TikTok e Instagram y descripciones SEO en segundos. 3 créditos gratis, sin tarjeta.">
+  <title>ViralForge AI | Ganchos Virales y SEO para Creadores</title>
 
-  <!-- ===== Header / Navegación ===== -->
-  <header class="header" id="inicio">
-    <nav class="nav container">
-      <a href="#inicio" class="nav__logo">
-        <span class="nav__logo-icon">&#9992;</span>
-        Global<span class="nav__logo-accent">Route</span>
+  <!-- ============================================================
+       TAILWIND CSS (CDN) — estilos modernos sin build step
+       ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:'#f5f3ff',100:'#ede9fe',200:'#ddd6fe',300:'#c4b5fd',
+              400:'#a78bfa',500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9',
+              800:'#5b21b6',900:'#4c1d95'
+            },
+            ink: { 900:'#0a0a0f', 800:'#12121a', 700:'#1a1a26', 600:'#242433' }
+          },
+          fontFamily: { sans: ['Inter','system-ui','sans-serif'] },
+          animation: {
+            'fade-up': 'fadeUp .6s ease-out both',
+            'pulse-slow': 'pulse 3s cubic-bezier(.4,0,.6,1) infinite',
+            'shimmer': 'shimmer 1.4s linear infinite'
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity:0, transform:'translateY(16px)' }, '100%': { opacity:1, transform:'translateY(0)' } },
+            shimmer: { '0%': { backgroundPosition:'-400px 0' }, '100%': { backgroundPosition:'400px 0' } }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ============================================================
+       ⚙️ CONFIGURACIÓN DE PAGOS — EDITA ESTA SECCIÓN
+       ============================================================
+       ▸ PAYPAL:
+         1. Crea una cuenta PayPal Business con el correo:
+            matilara20092013@gmail.com
+            (las notificaciones de venta y los fondos llegan a la
+            cuenta dueña del Client ID; la asociación se hace en
+            PayPal, no en el código).
+         2. Entra a https://developer.paypal.com → Apps & Credentials.
+         3. Crea una App y copia tu CLIENT ID (usa el de "Sandbox"
+            para pruebas y el de "Live" para cobrar de verdad).
+         4. Pégalo abajo en PAYPAL_CLIENT_ID.
+
+       ▸ STRIPE (alternativa):
+         1. Crea una cuenta en https://dashboard.stripe.com con el
+            correo de cobros y verifica tu identidad.
+         2. Crea un "Payment Link" (Products → Payment Links) para
+            el Pase Diario ($5) y otro para la Suscripción.
+         3. Pega las URLs abajo en STRIPE_LINK_DAYPASS / _SUB.
+
+       ⚠️ IMPORTANTE ANTES DE COBRAR DINERO REAL:
+       La "IA" de este archivo es una SIMULACIÓN local con plantillas
+       (ver sección MOTOR DE GENERACIÓN). Antes de aceptar pagos
+       reales debes conectar una API de IA real (p. ej. la API de
+       Claude) en la función `generateContent()`, desde un backend.
+       Cobrar por un resultado simulado presentándolo como IA real
+       sería engañoso y puede causar reembolsos, disputas y el
+       cierre de tu cuenta de PayPal/Stripe.
+       ============================================================ -->
+  <script>
+    const PAYPAL_CLIENT_ID   = "TU_CLIENT_ID_DE_PAYPAL_AQUI";      // ← Pega tu Client ID de PayPal
+    const PAYPAL_MERCHANT_EMAIL = "matilara20092013@gmail.com";    // Correo de la cuenta Business que recibe pagos/notificaciones
+    const STRIPE_LINK_DAYPASS = "";  // ← Pega aquí tu Payment Link de Stripe para el Pase Diario ($5)
+    const STRIPE_LINK_SUB     = "";  // ← Pega aquí tu Payment Link de Stripe para la Suscripción mensual
+    const PRICE_DAYPASS = "5.00";    // USD
+    const PRICE_SUB     = "19.00";   // USD / mes
+  </script>
+
+  <style>
+    ::selection { background:#7c3aed; color:#fff; }
+    .glass { background:rgba(26,26,38,.7); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+    .glow  { box-shadow:0 0 60px -12px rgba(139,92,246,.45); }
+    .text-gradient { background:linear-gradient(92deg,#c4b5fd 0%,#8b5cf6 45%,#38bdf8 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .skeleton { background:linear-gradient(90deg,#1a1a26 25%,#242433 50%,#1a1a26 75%); background-size:800px 100%; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',system-ui,sans-serif; }
+  </style>
+</head>
+
+<body class="bg-ink-900 text-slate-200 antialiased overflow-x-hidden">
+
+  <!-- Resplandor decorativo de fondo -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-brand-600/20 blur-[140px]"></div>
+    <div class="absolute bottom-0 right-0 h-[400px] w-[500px] rounded-full bg-sky-500/10 blur-[120px]"></div>
+  </div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="sticky top-0 z-40 glass border-b border-white/5">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#" class="flex items-center gap-2 text-lg font-extrabold tracking-tight text-white">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-sky-500 text-white glow">⚡</span>
+        ViralForge<span class="text-gradient">AI</span>
       </a>
-      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav__menu" id="nav-menu">
-        <li><a href="#propuesta" class="nav__link">Quiénes Somos</a></li>
-        <li><a href="#beneficios" class="nav__link">Beneficios</a></li>
-        <li><a href="#simulador" class="nav__link">Simulador</a></li>
-        <li><a href="#simulador" class="nav__link nav__link--cta">Contacto</a></li>
-      </ul>
+      <div class="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
+        <a href="#herramienta" class="hover:text-white transition">Herramienta</a>
+        <a href="#precios" class="hover:text-white transition">Precios</a>
+        <a href="#faq" class="hover:text-white transition">FAQ</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- Contador de créditos (siempre visible) -->
+        <div id="creditBadge" class="flex items-center gap-2 rounded-full border border-brand-500/40 bg-brand-500/10 px-4 py-1.5 text-sm font-semibold text-brand-300">
+          <span class="h-2 w-2 rounded-full bg-brand-400 animate-pulse-slow"></span>
+          <span id="creditCount">3</span>&nbsp;créditos
+        </div>
+        <a href="#herramienta" class="hidden rounded-xl bg-white px-4 py-2 text-sm font-bold text-ink-900 transition hover:bg-brand-100 sm:block">Probar gratis</a>
+      </div>
     </nav>
   </header>
 
-  <main>
+  <!-- ===================== HERO ===================== -->
+  <section class="mx-auto max-w-6xl px-5 pt-20 pb-16 text-center">
+    <p class="animate-fade-up mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-300">
+      🚀 La herramienta favorita de los creadores
+    </p>
+    <h1 class="animate-fade-up mx-auto max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl" style="animation-delay:.05s">
+      Deja de perder horas.<br>
+      <span class="text-gradient">Genera ganchos virales en 10 segundos.</span>
+    </h1>
+    <p class="animate-fade-up mx-auto mt-6 max-w-2xl text-lg text-slate-400" style="animation-delay:.1s">
+      La herramienta que convierte cualquier idea en <strong class="text-white">ganchos irresistibles para TikTok e Instagram</strong> y
+      <strong class="text-white">descripciones optimizadas para SEO</strong>. Tu próximo video viral empieza aquí — con
+      <strong class="text-brand-300">3 créditos gratis, sin tarjeta</strong>.
+    </p>
+    <div class="animate-fade-up mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row" style="animation-delay:.15s">
+      <a href="#herramienta" class="w-full rounded-2xl bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-4 text-base font-bold text-white glow transition hover:scale-[1.03] sm:w-auto">
+        ⚡ Generar mi primer gancho — GRATIS
+      </a>
+      <a href="#precios" class="w-full rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-base font-semibold text-slate-300 transition hover:bg-white/10 sm:w-auto">
+        Ver precios
+      </a>
+    </div>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-slate-500">
+      <span>✓ Sin registro</span><span>✓ Resultados al instante</span><span>✓ Cancela cuando quieras</span>
+    </div>
+  </section>
 
-    <!-- ===== Hero Section ===== -->
-    <section class="hero">
-      <div class="hero__overlay"></div>
-      <div class="container hero__content" data-animate>
-        <p class="hero__eyebrow">Consultoría &amp; Logística Internacional</p>
-        <h1 class="hero__title">
-          Lleva tus productos a <span class="text-gold">Europa</span><br>
-          con la seguridad de los expertos
-        </h1>
-        <p class="hero__subtitle">
-          Diseñamos tu estrategia de exportación de principio a fin: normativas,
-          aranceles, transporte y distribución en los principales mercados europeos.
-        </p>
-        <a href="#simulador" class="btn btn--gold btn--lg" id="cta-hero">Iniciar Expansión &rarr;</a>
-        <div class="hero__stats">
-          <div class="hero__stat">
-            <span class="hero__stat-number" data-counter="30" data-suffix="+">0</span>
-            <span class="hero__stat-label">Años de experiencia</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-number" data-counter="27" data-suffix="">0</span>
-            <span class="hero__stat-label">Países de la UE cubiertos</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-number" data-counter="120" data-suffix="+">0</span>
-            <span class="hero__stat-label">Destinos globales</span>
-          </div>
+  <!-- ===================== HERRAMIENTA ===================== -->
+  <section id="herramienta" class="mx-auto max-w-4xl px-5 py-12">
+    <div class="rounded-3xl border border-white/10 bg-ink-800/80 p-6 shadow-2xl sm:p-10">
+      <div class="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h2 class="text-2xl font-extrabold text-white">🎯 Tu generador de contenido</h2>
+          <p class="mt-1 text-sm text-slate-400">Describe tu video o producto y obtén resultados al instante.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-ink-700 px-4 py-2 text-sm text-slate-300">
+          Te quedan <span id="creditCountInline" class="font-bold text-brand-300">3</span> generaciones gratis
         </div>
       </div>
-    </section>
 
-    <!-- ===== Propuesta de Valor ===== -->
-    <section class="value" id="propuesta">
-      <div class="container">
-        <div class="value__banner" data-animate>
-          <span class="value__years">+30</span>
-          <div class="value__banner-text">
-            <h2>Más de 30 años de experiencia internacional</h2>
-            <p>Tres décadas abriendo mercados y moviendo mercancías por todo el mundo nos avalan.</p>
-          </div>
+      <!-- Selector de modo -->
+      <div class="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-3" role="tablist">
+        <button data-mode="hooks" class="mode-btn rounded-2xl border-2 border-brand-500 bg-brand-500/10 px-4 py-3 text-left transition">
+          <span class="block text-lg">🪝</span>
+          <span class="block text-sm font-bold text-white">Ganchos virales</span>
+          <span class="block text-xs text-slate-400">TikTok · Reels · Shorts</span>
+        </button>
+        <button data-mode="seo" class="mode-btn rounded-2xl border-2 border-white/10 bg-ink-700 px-4 py-3 text-left transition hover:border-brand-500/50">
+          <span class="block text-lg">🔍</span>
+          <span class="block text-sm font-bold text-white">Descripción SEO</span>
+          <span class="block text-xs text-slate-400">YouTube · Blog · E-commerce</span>
+        </button>
+        <button data-mode="ideas" class="mode-btn rounded-2xl border-2 border-white/10 bg-ink-700 px-4 py-3 text-left transition hover:border-brand-500/50">
+          <span class="block text-lg">💡</span>
+          <span class="block text-sm font-bold text-white">Ideas de contenido</span>
+          <span class="block text-xs text-slate-400">Calendario semanal</span>
+        </button>
+      </div>
+
+      <!-- Input -->
+      <label for="userInput" class="mb-2 block text-sm font-semibold text-slate-300">¿De qué trata tu contenido?</label>
+      <textarea id="userInput" rows="3" maxlength="300"
+        placeholder="Ej: recetas fáciles de cocina saludable para gente sin tiempo…"
+        class="w-full resize-none rounded-2xl border border-white/10 bg-ink-700 p-4 text-white placeholder-slate-500 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30"></textarea>
+
+      <button id="generateBtn"
+        class="mt-5 w-full rounded-2xl bg-gradient-to-r from-brand-600 to-sky-500 py-4 text-base font-extrabold text-white transition hover:scale-[1.01] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50">
+        ✨ Generar ahora <span class="font-normal opacity-80">(1 crédito)</span>
+      </button>
+
+      <!-- Animación de carga -->
+      <div id="loading" class="mt-8 hidden">
+        <div class="mb-3 flex items-center gap-3 text-sm font-semibold text-brand-300">
+          <svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+            <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z"/>
+          </svg>
+          <span id="loadingText">Analizando tu nicho…</span>
         </div>
-        <div class="value__grid">
-          <article class="value__card" data-animate>
-            <div class="value__icon">&#128737;</div>
-            <h3>Seguridad garantizada</h3>
-            <p>Cada operación está respaldada por protocolos de seguridad, seguros de carga y trazabilidad completa de tu mercancía puerta a puerta.</p>
-          </article>
-          <article class="value__card" data-animate>
-            <div class="value__icon">&#9878;</div>
-            <h3>Normativas de la Unión Europea</h3>
-            <p>Dominamos la regulación aduanera, sanitaria y fiscal de la UE. Tu producto entra al mercado europeo cumpliendo cada requisito legal.</p>
-          </article>
-          <article class="value__card" data-animate>
-            <div class="value__icon">&#127758;</div>
-            <h3>Red global de transporte</h3>
-            <p>Alianzas marítimas, aéreas y terrestres que conectan tu origen con múltiples destinos del mundo, con rutas optimizadas y tiempos fiables.</p>
-          </article>
+        <div class="space-y-3">
+          <div class="skeleton animate-shimmer h-5 w-full rounded-lg"></div>
+          <div class="skeleton animate-shimmer h-5 w-5/6 rounded-lg"></div>
+          <div class="skeleton animate-shimmer h-5 w-4/6 rounded-lg"></div>
         </div>
       </div>
-    </section>
 
-    <!-- ===== Beneficios ===== -->
-    <section class="benefits" id="beneficios">
-      <div class="container">
-        <header class="section-head" data-animate>
-          <p class="section-head__eyebrow">Ventajas competitivas</p>
-          <h2 class="section-head__title">¿Por qué exportar con nosotros?</h2>
-        </header>
-        <ul class="benefits__list">
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">01</span>
-            <div>
-              <h3>Gestión de aranceles</h3>
-              <p>Clasificación arancelaria precisa y aprovechamiento de acuerdos comerciales para reducir al mínimo tus costes de importación en la UE.</p>
-            </div>
-          </li>
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">02</span>
-            <div>
-              <h3>Logística integrada</h3>
-              <p>Un único interlocutor para todo el flujo: recogida, consolidación, transporte internacional, despacho de aduanas y entrega final.</p>
-            </div>
-          </li>
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">03</span>
-            <div>
-              <h3>Consultoría legal</h3>
-              <p>Asesoramiento en contratos internacionales, etiquetado, certificaciones CE y requisitos regulatorios específicos de cada país europeo.</p>
-            </div>
-          </li>
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">04</span>
-            <div>
-              <h3>Optimización de rutas</h3>
-              <p>Analizamos costes, plazos y huella de carbono para elegir siempre la combinación de rutas más eficiente para tu carga.</p>
-            </div>
-          </li>
+      <!-- Resultados -->
+      <div id="results" class="mt-8 hidden animate-fade-up">
+        <div class="mb-4 flex items-center justify-between">
+          <h3 class="text-lg font-bold text-white">🔥 Resultados listos</h3>
+          <button id="copyAllBtn" class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:bg-white/10">📋 Copiar todo</button>
+        </div>
+        <div id="resultsList" class="space-y-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BENEFICIOS ===================== -->
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <h2 class="text-center text-3xl font-black text-white">Diseñado para que <span class="text-gradient">tus vistas exploten</span></h2>
+    <div class="mt-10 grid gap-5 sm:grid-cols-3">
+      <div class="rounded-2xl border border-white/10 bg-ink-800 p-6">
+        <span class="text-2xl">⏱️</span>
+        <h3 class="mt-3 font-bold text-white">Ahorra horas cada semana</h3>
+        <p class="mt-2 text-sm text-slate-400">Lo que antes te tomaba una tarde de lluvia de ideas, ahora sale en segundos. Más tiempo para grabar, menos para bloquearte.</p>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-ink-800 p-6">
+        <span class="text-2xl">🧠</span>
+        <h3 class="mt-3 font-bold text-white">Fórmulas de retención probadas</h3>
+        <p class="mt-2 text-sm text-slate-400">Ganchos construidos con las estructuras que dominan el feed: curiosidad, controversia, promesa y urgencia.</p>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-ink-800 p-6">
+        <span class="text-2xl">📈</span>
+        <h3 class="mt-3 font-bold text-white">SEO que posiciona</h3>
+        <p class="mt-2 text-sm text-slate-400">Títulos, meta descripciones, keywords y hashtags listos para copiar y pegar en YouTube, tu blog o tu tienda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRECIOS ===================== -->
+  <section id="precios" class="mx-auto max-w-5xl px-5 py-16">
+    <h2 class="text-center text-3xl font-black text-white">Precios simples. <span class="text-gradient">ROI absurdo.</span></h2>
+    <p class="mx-auto mt-3 max-w-xl text-center text-slate-400">Un solo video viral vale más que 100 pases diarios. Tú decides cuánto quieres crecer.</p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <!-- Pase diario -->
+      <div class="rounded-3xl border border-white/10 bg-ink-800 p-8">
+        <h3 class="text-lg font-bold text-white">⚡ Pase Diario</h3>
+        <p class="mt-2 text-4xl font-black text-white">$5 <span class="text-base font-medium text-slate-500">USD / 24 horas</span></p>
+        <ul class="mt-6 space-y-3 text-sm text-slate-300">
+          <li>✓ Generaciones <strong>ilimitadas</strong> por 24 h</li>
+          <li>✓ Los 3 modos: ganchos, SEO e ideas</li>
+          <li>✓ Sin suscripción, pago único</li>
         </ul>
+        <button onclick="openPaywall('daypass')" class="mt-8 w-full rounded-2xl border border-brand-500 bg-brand-500/10 py-3.5 font-bold text-brand-300 transition hover:bg-brand-500/20">Comprar pase de $5</button>
       </div>
-    </section>
-
-    <!-- ===== Simulador / Formulario ===== -->
-    <section class="simulator" id="simulador">
-      <div class="container simulator__grid">
-        <div class="simulator__intro" data-animate>
-          <p class="section-head__eyebrow section-head__eyebrow--light">Simulador de expansión</p>
-          <h2 class="section-head__title section-head__title--light">Comienza tu ruta hacia Europa</h2>
-          <p class="simulator__text">
-            Cuéntanos qué exportas, desde dónde y hacia qué mercado europeo.
-            Nuestro equipo preparará una propuesta personalizada de logística
-            y consultoría en menos de 48 horas.
-          </p>
-          <ul class="simulator__checks">
-            <li>&#10003; Respuesta en 48 horas</li>
-            <li>&#10003; Análisis arancelario incluido</li>
-            <li>&#10003; Sin compromiso</li>
-          </ul>
-        </div>
-
-        <form class="form" id="expansion-form" novalidate data-animate>
-          <h3 class="form__title">Solicita tu simulación gratuita</h3>
-
-          <div class="form__group">
-            <label for="nombre">Nombre y empresa <span class="req">*</span></label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ej: María Pérez — Alimentos del Sur S.A." required>
-            <small class="form__error" data-error-for="nombre">Por favor, indica tu nombre o empresa.</small>
-          </div>
-
-          <div class="form__group">
-            <label for="email">Correo electrónico <span class="req">*</span></label>
-            <input type="email" id="email" name="email" placeholder="tucorreo@empresa.com" required>
-            <small class="form__error" data-error-for="email">Introduce un correo electrónico válido.</small>
-          </div>
-
-          <div class="form__group">
-            <label for="producto">Tipo de producto <span class="req">*</span></label>
-            <select id="producto" name="producto" required>
-              <option value="" disabled selected>Selecciona una categoría</option>
-              <option value="alimentos">Alimentos y bebidas</option>
-              <option value="textil">Textil y moda</option>
-              <option value="tecnologia">Tecnología y electrónica</option>
-              <option value="industrial">Maquinaria e industrial</option>
-              <option value="cosmetica">Cosmética y farmacéutica</option>
-              <option value="artesania">Artesanía y decoración</option>
-              <option value="otro">Otro</option>
-            </select>
-            <small class="form__error" data-error-for="producto">Selecciona el tipo de producto.</small>
-          </div>
-
-          <div class="form__row">
-            <div class="form__group">
-              <label for="origen">País de origen <span class="req">*</span></label>
-              <select id="origen" name="origen" required>
-                <option value="" disabled selected>Selecciona origen</option>
-                <option>México</option>
-                <option>Colombia</option>
-                <option>Argentina</option>
-                <option>Chile</option>
-                <option>Perú</option>
-                <option>Ecuador</option>
-                <option>Brasil</option>
-                <option>Estados Unidos</option>
-                <option>Otro</option>
-              </select>
-              <small class="form__error" data-error-for="origen">Selecciona el país de origen.</small>
-            </div>
-
-            <div class="form__group">
-              <label for="destino">Destino en Europa <span class="req">*</span></label>
-              <select id="destino" name="destino" required>
-                <option value="" disabled selected>Selecciona destino</option>
-                <option>España</option>
-                <option>Francia</option>
-                <option>Alemania</option>
-                <option>Italia</option>
-                <option>Países Bajos</option>
-                <option>Bélgica</option>
-                <option>Portugal</option>
-                <option>Polonia</option>
-                <option>Otro país de la UE</option>
-              </select>
-              <small class="form__error" data-error-for="destino">Selecciona el país de destino.</small>
-            </div>
-          </div>
-
-          <div class="form__group">
-            <label for="mensaje">Cuéntanos más (opcional)</label>
-            <textarea id="mensaje" name="mensaje" rows="3" placeholder="Volumen estimado, plazos, dudas sobre normativas..."></textarea>
-          </div>
-
-          <button type="submit" class="btn btn--navy btn--block">Solicitar simulación</button>
-
-          <div class="form__success" id="form-success" role="status" hidden>
-            <span class="form__success-icon">&#10004;</span>
-            <h4>¡Solicitud enviada con éxito!</h4>
-            <p id="form-success-detail">
-              Gracias por confiar en nosotros. Nuestro equipo te contactará en menos de 48 horas.
-            </p>
-            <button type="button" class="btn btn--outline" id="form-reset">Enviar otra solicitud</button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===== Footer ===== -->
-  <footer class="footer">
-    <div class="container footer__grid">
-      <div>
-        <p class="footer__logo">Global<span class="nav__logo-accent">Route</span> Consulting</p>
-        <p class="footer__tagline">Más de 30 años conectando tu negocio con el mundo.</p>
-      </div>
-      <nav class="footer__links" aria-label="Enlaces del pie de página">
-        <a href="#propuesta">Quiénes Somos</a>
-        <a href="#beneficios">Beneficios</a>
-        <a href="#simulador">Simulador</a>
-      </nav>
-      <div class="footer__contact">
-        <p>&#9993; contacto@globalroute.example</p>
-        <p>&#9742; +34 900 000 000</p>
+      <!-- Suscripción -->
+      <div class="relative rounded-3xl border-2 border-brand-500 bg-ink-800 p-8 glow">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-600 to-sky-500 px-4 py-1 text-xs font-bold text-white">MÁS POPULAR · MEJOR PRECIO</span>
+        <h3 class="text-lg font-bold text-white">👑 Pro Ilimitado</h3>
+        <p class="mt-2 text-4xl font-black text-white">$19 <span class="text-base font-medium text-slate-500">USD / mes</span></p>
+        <ul class="mt-6 space-y-3 text-sm text-slate-300">
+          <li>✓ Todo lo del Pase Diario, <strong>todos los días</strong></li>
+          <li>✓ Acceso prioritario a nuevos modos</li>
+          <li>✓ Historial de generaciones</li>
+          <li>✓ Cancela cuando quieras, sin permanencia</li>
+        </ul>
+        <button onclick="openPaywall('sub')" class="mt-8 w-full rounded-2xl bg-gradient-to-r from-brand-600 to-sky-500 py-3.5 font-bold text-white transition hover:brightness-110">Hazte Pro ahora</button>
       </div>
     </div>
-    <div class="footer__bottom">
-      <p>&copy; <span id="year"></span> GlobalRoute Consulting. Todos los derechos reservados.</p>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" class="mx-auto max-w-3xl px-5 py-16">
+    <h2 class="text-center text-3xl font-black text-white">Preguntas frecuentes</h2>
+    <div class="mt-8 space-y-3">
+      <details class="group rounded-2xl border border-white/10 bg-ink-800 p-5">
+        <summary class="cursor-pointer list-none font-semibold text-white">¿De verdad es gratis empezar?</summary>
+        <p class="mt-3 text-sm text-slate-400">Sí. Tienes 3 créditos gratis sin registrarte y sin tarjeta. Cuando se acaben, eliges el Pase Diario de $5 o el plan Pro.</p>
+      </details>
+      <details class="group rounded-2xl border border-white/10 bg-ink-800 p-5">
+        <summary class="cursor-pointer list-none font-semibold text-white">¿Cómo pago y es seguro?</summary>
+        <p class="mt-3 text-sm text-slate-400">Procesamos pagos con PayPal / Stripe, líderes mundiales en pagos seguros. Nunca vemos ni guardamos los datos de tu tarjeta.</p>
+      </details>
+      <details class="group rounded-2xl border border-white/10 bg-ink-800 p-5">
+        <summary class="cursor-pointer list-none font-semibold text-white">¿Puedo cancelar la suscripción?</summary>
+        <p class="mt-3 text-sm text-slate-400">Cuando quieras, con un clic, sin preguntas y sin permanencia mínima.</p>
+      </details>
     </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-white/5 py-10 text-center text-xs text-slate-600">
+    <p>© 2026 ViralForge AI · Hecho para creadores que quieren crecer en serio.</p>
+    <p class="mt-1">Soporte: <a href="mailto:matilara20092013@gmail.com" class="text-brand-400 hover:underline">matilara20092013@gmail.com</a></p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- ===================== MODAL DE PAGO (PAYWALL) ===================== -->
+  <div id="paywall" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closePaywall()"></div>
+    <div class="relative w-full max-w-md animate-fade-up rounded-3xl border border-brand-500/40 bg-ink-800 p-8 glow">
+      <button onclick="closePaywall()" class="absolute right-4 top-4 text-slate-500 transition hover:text-white" aria-label="Cerrar">✕</button>
+      <div class="text-center">
+        <span class="text-4xl">🔒</span>
+        <h3 id="paywallTitle" class="mt-3 text-2xl font-black text-white">¡Se acabaron tus créditos gratis!</h3>
+        <p class="mt-2 text-sm text-slate-400">
+          No pares ahora que ya viste el poder de la herramienta.
+          Desbloquea <strong class="text-white">generaciones ilimitadas</strong> por menos de lo que cuesta un café.
+        </p>
+      </div>
+
+      <!-- Selector de plan dentro del modal -->
+      <div class="mt-6 grid grid-cols-2 gap-3 text-center text-sm">
+        <button id="planDaypass" onclick="selectPlan('daypass')" class="plan-btn rounded-xl border-2 border-brand-500 bg-brand-500/10 p-3">
+          <span class="block font-bold text-white">Pase 24h</span>
+          <span class="block text-xl font-black text-brand-300">$5</span>
+        </button>
+        <button id="planSub" onclick="selectPlan('sub')" class="plan-btn rounded-xl border-2 border-white/10 p-3">
+          <span class="block font-bold text-white">Pro mensual</span>
+          <span class="block text-xl font-black text-brand-300">$19</span>
+        </button>
+      </div>
+
+      <!-- Botones de PayPal (el SDK los renderiza aquí cuando configures tu Client ID) -->
+      <div id="paypal-button-container" class="mt-6"></div>
+
+      <!-- Botón Stripe (se muestra si configuras STRIPE_LINK_*) -->
+      <a id="stripeBtn" href="#" target="_blank" rel="noopener"
+         class="mt-3 hidden w-full items-center justify-center gap-2 rounded-2xl bg-[#635bff] py-3.5 font-bold text-white transition hover:brightness-110">
+        Pagar con tarjeta (Stripe)
+      </a>
+
+      <!-- Botón de DEMO: solo aparece mientras no hay pasarela configurada -->
+      <button id="demoPayBtn" onclick="simulatePayment()"
+        class="mt-3 w-full rounded-2xl bg-gradient-to-r from-brand-600 to-sky-500 py-3.5 font-bold text-white transition hover:brightness-110">
+        💳 Pagar ahora (DEMO — no se cobra nada)
+      </button>
+
+      <p class="mt-4 text-center text-[11px] leading-relaxed text-slate-500">
+        Pago seguro procesado por PayPal / Stripe · Garantía de reembolso de 24 h<br>
+        Recibirás tu confirmación por correo electrónico.
+      </p>
+    </div>
+  </div>
+
+  <!-- Toast de notificación -->
+  <div id="toast" class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-2xl border border-brand-500/40 bg-ink-700 px-6 py-3 text-sm font-semibold text-white shadow-2xl"></div>
+
+  <!-- ============================================================
+       LÓGICA DE LA APLICACIÓN (JavaScript nativo)
+       ============================================================ -->
+  <script>
+  'use strict';
+
+  /* ---------- 1. SISTEMA DE CRÉDITOS ---------- */
+  const FREE_CREDITS = 3;
+  const store = {
+    get credits() {
+      const v = localStorage.getItem('vf_credits');
+      return v === null ? FREE_CREDITS : parseInt(v, 10);
+    },
+    set credits(n) { localStorage.setItem('vf_credits', n); },
+    get premiumUntil() { return parseInt(localStorage.getItem('vf_premium_until') || '0', 10); },
+    set premiumUntil(ts) { localStorage.setItem('vf_premium_until', ts); }
+  };
+  const isPremium = () => Date.now() < store.premiumUntil;
+
+  function renderCredits() {
+    const label = isPremium() ? '∞' : store.credits;
+    document.getElementById('creditCount').textContent = label;
+    document.getElementById('creditCountInline').textContent = label;
+    const btn = document.getElementById('generateBtn');
+    if (!isPremium() && store.credits <= 0) {
+      btn.innerHTML = '🔒 Desbloquear generaciones ilimitadas';
+    } else {
+      btn.innerHTML = '✨ Generar ahora <span class="font-normal opacity-80">(1 crédito)</span>';
+    }
+  }
+
+  /* ---------- 2. MODOS DE GENERACIÓN ---------- */
+  let currentMode = 'hooks';
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentMode = btn.dataset.mode;
+      document.querySelectorAll('.mode-btn').forEach(b => {
+        b.classList.remove('border-brand-500', 'bg-brand-500/10');
+        b.classList.add('border-white/10', 'bg-ink-700');
+      });
+      btn.classList.add('border-brand-500', 'bg-brand-500/10');
+      btn.classList.remove('border-white/10', 'bg-ink-700');
+    });
+  });
+
+  /* ---------- 3. MOTOR DE GENERACIÓN (SIMULACIÓN DE IA) ----------
+     ⚠️ ESTO ES UNA SIMULACIÓN con plantillas + el texto del usuario.
+     Antes de cobrar dinero real, reemplaza generateContent() por una
+     llamada a una API de IA real (p. ej. la API de Claude) desde un
+     backend tuyo (nunca pongas la API key de la IA en el frontend). */
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+
+  function generateContent(topic, mode) {
+    const t = topic.trim().replace(/\.$/, '');
+    const short = t.length > 60 ? t.slice(0, 57) + '…' : t;
+    if (mode === 'hooks') {
+      return [
+        pick([`🤯 Nadie te ha contado ESTO sobre ${short}…`, `Lo que descubrí sobre ${short} me voló la cabeza 🤯`]),
+        pick([`Deja de hacer ${short} MAL. Haz esto en su lugar 👇`, `El error #1 que todos cometen con ${short} (y cómo evitarlo)`]),
+        pick([`3 secretos de ${short} que los expertos no comparten 🤫`, `Probé ${short} durante 30 días y esto pasó…`]),
+        pick([`POV: por fin entiendes ${short} y tu vida cambia ✨`, `Si empiezas hoy con ${short}, en 90 días no te vas a reconocer`]),
+        `⚠️ Guarda este video: la guía definitiva de ${short} en 60 segundos`
+      ];
+    }
+    if (mode === 'seo') {
+      const kw = t.toLowerCase();
+      const firstWord = kw.split(' ')[0] || 'guía';
+      return [
+        `📌 Título SEO: ${short.charAt(0).toUpperCase() + short.slice(1)} — Guía Completa ${new Date().getFullYear()} (Paso a Paso)`,
+        `📝 Meta descripción: Descubre todo sobre ${kw}: consejos prácticos, errores comunes y trucos de expertos. Guía actualizada paso a paso. ¡Empieza hoy!`,
+        `🔑 Palabras clave sugeridas: ${kw} · cómo ${kw.split(' ').slice(0, 3).join(' ')} · ${firstWord} para principiantes · mejores trucos de ${firstWord}`,
+        `#️⃣ Hashtags: #${kw.split(' ').map(w => w.replace(/[^a-záéíóúñü0-9]/gi,'')).filter(Boolean).slice(0,3).join(' #')} #viral #parati #fyp`,
+        `💬 CTA sugerido: "¿Te sirvió? Guarda este post 📌 y sígueme para más contenido de ${short}"`
+      ];
+    }
+    // ideas
+    return [
+      `📅 Lunes — "Mitos vs. Realidad": desmonta 3 mitos comunes sobre ${short}`,
+      `📅 Miércoles — Tutorial rápido: "${short} en menos de 60 segundos" (formato acelerado)`,
+      `📅 Viernes — Storytime: tu mayor error con ${short} y qué aprendiste`,
+      `📅 Sábado — Tendencia: adapta el audio viral del momento a ${short}`,
+      `📅 Domingo — Q&A: responde las 3 preguntas más frecuentes de tu audiencia sobre ${short}`
+    ];
+  }
+
+  /* ---------- 4. FLUJO DE GENERACIÓN + ANIMACIÓN DE CARGA (2 s) ---------- */
+  const loadingMsgs = ['Analizando tu nicho…', 'Estudiando tendencias virales…', 'Redactando con psicología de retención…', 'Puliendo los resultados…'];
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    // Sin créditos y sin premium → bloquear y abrir modal de pago
+    if (!isPremium() && store.credits <= 0) { openPaywall('daypass'); return; }
+
+    const topic = document.getElementById('userInput').value.trim();
+    if (topic.length < 3) { showToast('✍️ Escribe primero de qué trata tu contenido'); return; }
+
+    const btn = document.getElementById('generateBtn');
+    const loading = document.getElementById('loading');
+    const results = document.getElementById('results');
+    btn.disabled = true;
+    results.classList.add('hidden');
+    loading.classList.remove('hidden');
+
+    // Mensajes de carga rotativos
+    let i = 0;
+    document.getElementById('loadingText').textContent = loadingMsgs[0];
+    const msgTimer = setInterval(() => {
+      i = (i + 1) % loadingMsgs.length;
+      document.getElementById('loadingText').textContent = loadingMsgs[i];
+    }, 600);
+
+    // Procesamiento con retardo de 2 segundos (simula el tiempo de la IA)
+    setTimeout(() => {
+      clearInterval(msgTimer);
+      loading.classList.add('hidden');
+      btn.disabled = false;
+
+      // Descontar crédito (solo usuarios gratuitos)
+      if (!isPremium()) { store.credits = store.credits - 1; }
+      renderCredits();
+
+      // Pintar resultados
+      const list = document.getElementById('resultsList');
+      list.innerHTML = '';
+      generateContent(topic, currentMode).forEach(text => {
+        const row = document.createElement('div');
+        row.className = 'flex items-start justify-between gap-3 rounded-2xl border border-white/10 bg-ink-700 p-4';
+        const p = document.createElement('p');
+        p.className = 'text-sm leading-relaxed text-slate-200';
+        p.textContent = text;
+        const copy = document.createElement('button');
+        copy.className = 'shrink-0 rounded-lg bg-white/5 px-2.5 py-1.5 text-xs text-slate-400 transition hover:bg-brand-500/20 hover:text-white';
+        copy.textContent = '📋';
+        copy.title = 'Copiar';
+        copy.addEventListener('click', () => { navigator.clipboard.writeText(text); showToast('✅ Copiado al portapapeles'); });
+        row.append(p, copy);
+        list.appendChild(row);
+      });
+      results.classList.remove('hidden');
+      results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Si fue el último crédito, abrir el paywall tras mostrar el valor
+      if (!isPremium() && store.credits <= 0) {
+        setTimeout(() => openPaywall('daypass'), 2500);
+      }
+    }, 2000);
+  });
+
+  document.getElementById('copyAllBtn').addEventListener('click', () => {
+    const all = [...document.querySelectorAll('#resultsList p')].map(p => p.textContent).join('\n\n');
+    navigator.clipboard.writeText(all);
+    showToast('✅ Todos los resultados copiados');
+  });
+
+  /* ---------- 5. MODAL DE PAGO ---------- */
+  let selectedPlan = 'daypass';
+
+  function openPaywall(plan) {
+    selectPlan(plan || 'daypass');
+    document.getElementById('paywallTitle').textContent =
+      (!isPremium() && store.credits <= 0) ? '¡Se acabaron tus créditos gratis!' : 'Desbloquea todo el poder';
+    const modal = document.getElementById('paywall');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+  function closePaywall() {
+    const modal = document.getElementById('paywall');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+  function selectPlan(plan) {
+    selectedPlan = plan;
+    const dp = document.getElementById('planDaypass'), sub = document.getElementById('planSub');
+    [dp, sub].forEach(b => { b.classList.remove('border-brand-500','bg-brand-500/10'); b.classList.add('border-white/10'); });
+    const active = plan === 'daypass' ? dp : sub;
+    active.classList.add('border-brand-500','bg-brand-500/10');
+    active.classList.remove('border-white/10');
+    updateStripeLink();
+    renderPayPalButtons();
+  }
+  const planPrice = () => selectedPlan === 'daypass' ? PRICE_DAYPASS : PRICE_SUB;
+  const planName  = () => selectedPlan === 'daypass' ? 'ViralForge AI — Pase Diario 24h' : 'ViralForge AI — Suscripción Pro Mensual';
+
+  /* ---------- 6. ACTIVACIÓN DEL ACCESO TRAS EL PAGO ---------- */
+  function grantAccess() {
+    const DAY = 24 * 60 * 60 * 1000;
+    store.premiumUntil = Date.now() + (selectedPlan === 'daypass' ? DAY : 30 * DAY);
+    renderCredits();
+    closePaywall();
+    showToast('🎉 ¡Pago recibido! Acceso ilimitado activado. Revisa tu correo.');
+  }
+
+  /* ---------- 7. PAYPAL — INTEGRACIÓN REAL ----------
+     Se activa automáticamente cuando pegas tu Client ID arriba.
+     El dinero y las notificaciones de venta llegan a la cuenta
+     PayPal Business dueña de ese Client ID (la que crees con
+     matilara20092013@gmail.com). */
+  function payPalConfigured() {
+    return PAYPAL_CLIENT_ID && !PAYPAL_CLIENT_ID.startsWith('TU_CLIENT_ID');
+  }
+
+  function loadPayPalSdk() {
+    if (!payPalConfigured()) return;
+    const s = document.createElement('script');
+    s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(PAYPAL_CLIENT_ID)}&currency=USD&intent=capture`;
+    s.onload = renderPayPalButtons;
+    document.head.appendChild(s);
+  }
+
+  function renderPayPalButtons() {
+    const container = document.getElementById('paypal-button-container');
+    if (!payPalConfigured() || typeof paypal === 'undefined') return;
+    container.innerHTML = '';
+    document.getElementById('demoPayBtn').classList.add('hidden'); // con pasarela real, fuera el botón demo
+    paypal.Buttons({
+      style: { layout: 'vertical', color: 'gold', shape: 'pill', label: 'pay' },
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{
+          description: planName(),
+          amount: { currency_code: 'USD', value: planPrice() }
+        }]
+      }),
+      onApprove: (data, actions) => actions.order.capture().then(details => {
+        // ✅ Pago real capturado. PayPal envía la notificación de venta
+        // al correo de tu cuenta Business (matilara20092013@gmail.com).
+        // Para producción seria: verifica la orden en un backend con
+        // la API de PayPal antes de dar acceso (esto es solo frontend).
+        grantAccess();
+      }),
+      onError: () => showToast('⚠️ Hubo un problema con el pago. Intenta de nuevo.')
+    }).render('#paypal-button-container');
+  }
+
+  /* ---------- 8. STRIPE (Payment Links) ----------
+     Si pegaste tus Payment Links arriba, se muestra el botón.
+     Nota: con Payment Links el acceso se confirma por correo/backend;
+     este frontend no puede verificar el pago por sí solo. */
+  function updateStripeLink() {
+    const link = selectedPlan === 'daypass' ? STRIPE_LINK_DAYPASS : STRIPE_LINK_SUB;
+    const btn = document.getElementById('stripeBtn');
+    if (link) { btn.href = link; btn.classList.remove('hidden'); btn.classList.add('flex'); }
+    else { btn.classList.add('hidden'); btn.classList.remove('flex'); }
+  }
+
+  /* ---------- 9. PAGO DEMO (solo mientras no hay pasarela) ----------
+     Simula el flujo comercial completo para que pruebes la experiencia.
+     Desaparece automáticamente al configurar PayPal. NO cobra nada,
+     y el botón lo dice explícitamente para no engañar a nadie. */
+  function simulatePayment() {
+    const btn = document.getElementById('demoPayBtn');
+    btn.disabled = true;
+    btn.textContent = 'Procesando pago seguro…';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = '💳 Pagar ahora (DEMO — no se cobra nada)';
+      grantAccess();
+      console.info(`[DEMO] Pago simulado de $${planPrice()} USD — en producción la notificación llegaría a ${PAYPAL_MERCHANT_EMAIL}`);
+    }, 1800);
+  }
+
+  /* ---------- 10. TOAST ---------- */
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.remove('hidden');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.add('hidden'), 3200);
+  }
+
+  /* ---------- INICIO ---------- */
+  renderCredits();
+  loadPayPalSdk();
+  window.openPaywall = openPaywall;
+  window.closePaywall = closePaywall;
+  window.selectPlan = selectPlan;
+  window.simulatePayment = simulatePayment;
+  </script>
 </body>
 </html>
