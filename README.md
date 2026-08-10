@@ -1,9 +1,33 @@
 # Lara Global Export
 
-Aplicación web de una página para el negocio de exportación de productos a Europa.
+Aplicación web para el negocio de exportación de productos a Europa. Dos páginas:
 
-**Sitio:** página profesional en español con secciones de Quiénes somos, Servicios,
-Cómo funciona, formulario de Contacto y Donaciones ($5 – $1,000 USD).
+- **`index.html`** — página pública para clientes: Quiénes somos, Servicios, Cómo
+  funciona, chat con **LIA** (recepcionista inteligente) y Donaciones ($5 – $1,000 USD).
+- **`admin.html`** — panel **privado** solo para Luigi: chat con LIA para recibir
+  avisos de clientes nuevos y controlar la fila de espera.
+
+## LIA — la recepcionista inteligente
+
+- El cliente habla con LIA en la página pública; ella toma su nombre y su mensaje
+  y lo entrega al Gmail de Luigi (asunto: «LIA — Nuevo cliente»).
+- En el panel privado, LIA avisa: «🔔 Hay un cliente que quiere trabajar contigo».
+- Si Luigi le dice **«ocupado»**, los siguientes clientes ven:
+  «Por favor espere a que le atendamos», y LIA avisa a Luigi de cada uno.
+- Cuando Luigi le dice **«disponible»**, LIA les dice a los que esperan
+  «Ya podemos atenderle» y les muestra el formulario de contacto.
+
+### Puesta en marcha del panel (una sola vez)
+
+1. Abre `admin.html` en tu sitio publicado. Código de acceso: **2026**
+   (cámbialo en la línea `var ADMIN_PIN = "2026";` de `admin.html`).
+2. Dile a LIA **«crear canal»**. Ella crea el canal de control y te muestra el
+   **enlace para clientes** — ese es el link que debes compartir (incluye `#c=...`).
+3. Listo: usa los botones «Ocupado» / «Disponible» o escríbeselo en el chat.
+
+Nota: el canal usa un servicio gratuito (jsonblob.com). Si pasa más de un mes sin
+ninguna visita, puede expirar; en ese caso dile a LIA «crear canal» otra vez y
+comparte el enlace nuevo.
 
 ## Cómo publicar el sitio con GitHub Pages (gratis)
 

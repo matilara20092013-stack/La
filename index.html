@@ -190,6 +190,20 @@
   .form-note{ display:none; margin-top:14px; padding:12px 14px; font-size:14px; border:1px solid var(--ok); color:var(--ok); }
   .form-note.show{ display:block; }
 
+  /* chat con LIA */
+  .lia-log{ display:flex; flex-direction:column; gap:10px; margin-bottom:18px; max-height:340px; overflow-y:auto; }
+  .lia-msg{ max-width:85%; padding:11px 14px; font-size:14.5px; white-space:pre-wrap; }
+  .lia-msg.ai{ background:var(--bg); border:1px solid var(--line); align-self:flex-start; }
+  .lia-msg.ai .who{ display:block; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:5px; }
+  .lia-msg.yo{ background:var(--accent); color:var(--accent-ink); align-self:flex-end; font-weight:600; }
+  .lia-msg.espera{ border-left:3px solid var(--accent); }
+  .lia-row{ display:flex; gap:10px; }
+  .lia-row input{ flex:1; }
+  .lia-row .btn{ flex:none; }
+  #contact-form[hidden]{ display:none; }
+  .pulse{ display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--accent); margin-right:8px; animation:pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:.35; } 50%{ opacity:1; } }
+
   /* ============ DONACIONES ============ */
   .donate{ background:var(--navy); color:var(--navy-ink); border-bottom:1px solid var(--line); }
   .donate .sec-num, .donate .muted{ color:color-mix(in srgb, var(--navy-ink) 62%, transparent); }
@@ -383,18 +397,21 @@
       <div class="sec-head"><span class="sec-num mono">SEC 04</span><h2>Contáctenos</h2></div>
       <div class="cols">
         <div class="prose">
-          <p class="lead">Cuéntenos qué quiere mover y hacia dónde. Le respondemos con una propuesta concreta.</p>
+          <p class="lead">Cuéntenos qué quiere mover y hacia dónde. LIA, nuestra recepcionista inteligente, le atiende de inmediato.</p>
           <p class="muted">
-            Su mensaje llega directamente a nuestro correo. No necesita registrarse ni crear una
-            cuenta: solo su nombre, un medio para responderle y su mensaje.
-          </p>
-          <p class="muted mono" style="font-size:13px">
-            Correo directo: <a href="mailto:luigilara@gmail.com" style="color:var(--accent)">luigilara@gmail.com</a>
+            LIA recibe su mensaje, avisa a nuestro equipo y le confirma en pantalla. Si estamos
+            atendiendo a otro cliente, ella le pedirá esperar y le avisará en cuanto podamos atenderle.
           </p>
         </div>
         <div class="panel">
-          <form action="https://formsubmit.co/luigilara@gmail.com" method="POST" id="contact-form">
-            <input type="hidden" name="_subject" value="Nuevo mensaje — Lara Global Export">
+          <div class="lia-log" id="lia-log" aria-live="polite"></div>
+          <div class="lia-row" id="lia-nombre-row">
+            <label for="lia-nombre" style="position:absolute;left:-9999px">Su nombre</label>
+            <input id="lia-nombre" type="text" autocomplete="name" placeholder="Escriba su nombre…">
+            <button class="btn btn-primary" type="button" id="lia-nombre-btn">Continuar</button>
+          </div>
+          <form action="https://formsubmit.co/luigilara@gmail.com" method="POST" id="contact-form" hidden>
+            <input type="hidden" name="_subject" value="LIA — Nuevo cliente · Lara Global Export">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_next" value="">
             <div class="field">
@@ -410,7 +427,7 @@
               <textarea id="f-msg" name="Mensaje" required placeholder="Ejemplo: Quiero llevar 200 paneles solares de China a España. ¿Qué me recomiendan y cuánto costaría?"></textarea>
             </div>
             <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-            <p class="hint">Al enviar, su mensaje se entrega al correo de Lara Global Export. Le responderemos a la brevedad.</p>
+            <p class="hint">LIA entrega su mensaje a Lara Global Export y le responderemos a su correo a la brevedad.</p>
           </form>
         </div>
       </div>
@@ -505,5 +522,130 @@
     } else if (next) {
       next.parentNode.removeChild(next);
     }
+  })();
+
+  /* =========================================================
+     LIA — recepcionista inteligente (lado del cliente)
+     Lee el estado (disponible / ocupado) del canal de control
+     que administra el panel privado (admin.html).
+     ========================================================= */
+  (function(){
+    var STORE   = "https://jsonblob.com/api/jsonBlob";
+    var POLL_MS = 9000;
+    var canal   = (location.hash + location.search).match(/c=([\w-]+)/);
+    canal = canal ? canal[1] : "";
+
+    var log       = document.getElementById("lia-log");
+    var nombreRow = document.getElementById("lia-nombre-row");
+    var form      = document.getElementById("contact-form");
+    var nombre    = "";
+    var enEspera  = false;
+
+    function lia(texto, extra){
+      var d = document.createElement("div");
+      d.className = "lia-msg ai" + (extra ? " " + extra : "");
+      d.innerHTML = '<span class="who">LIA · Recepcionista</span>';
+      d.appendChild(document.createTextNode(texto));
+      log.appendChild(d); log.scrollTop = log.scrollHeight;
+      return d;
+    }
+    function yo(texto){
+      var d = document.createElement("div");
+      d.className = "lia-msg yo";
+      d.textContent = texto;
+      log.appendChild(d); log.scrollTop = log.scrollHeight;
+    }
+
+    function leerEstado(){
+      if (!canal) return Promise.resolve({ estado:"disponible", avisos:[] });
+      return fetch(STORE + "/" + canal, {cache:"no-store"})
+        .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+        .catch(function(){ return { estado:"disponible", avisos:[] }; });
+    }
+    function registrar(tipo){
+      if (!canal) return Promise.resolve();
+      return leerEstado().then(function(d){
+        d.avisos = d.avisos || [];
+        d.avisos.push({ nombre:nombre, tipo:tipo, hora:new Date().toISOString() });
+        return fetch(STORE + "/" + canal, {
+          method:"PUT", headers:{"Content-Type":"application/json"},
+          body: JSON.stringify(d)
+        });
+      }).catch(function(){});
+    }
+
+    function abrirFormulario(){
+      document.getElementById("f-nombre").value = nombre;
+      form.hidden = false;
+      document.getElementById("f-email").focus();
+    }
+
+    function atender(estado){
+      if (estado === "ocupado"){
+        enEspera = true;
+        var m = lia("Por favor espere a que le atendamos. En este momento estamos con otro cliente.\n\nNo cierre esta página: yo misma le aviso aquí en cuanto podamos atenderle.", "espera");
+        var p = document.createElement("div");
+        p.innerHTML = '<span class="pulse"></span><em style="font-size:12.5px">En espera…</em>';
+        p.style.marginTop = "8px";
+        m.appendChild(p);
+        registrar("espera");
+        var timer = setInterval(function(){
+          leerEstado().then(function(d){
+            if (d.estado !== "ocupado"){
+              clearInterval(timer);
+              enEspera = false;
+              lia("✅ ¡Gracias por su paciencia, " + nombre + "! Ya podemos atenderle. Déjeme su correo y cuénteme qué desea hacer:");
+              abrirFormulario();
+            }
+          });
+        }, POLL_MS);
+      } else {
+        lia("Perfecto, " + nombre + ". Estamos disponibles para usted. Déjeme un correo para responderle y cuénteme qué desea hacer:");
+        abrirFormulario();
+      }
+    }
+
+    document.getElementById("lia-nombre-btn").addEventListener("click", empezar);
+    document.getElementById("lia-nombre").addEventListener("keydown", function(e){
+      if (e.key === "Enter"){ e.preventDefault(); empezar(); }
+    });
+    function empezar(){
+      var v = document.getElementById("lia-nombre").value.trim();
+      if (!v) return;
+      nombre = v;
+      yo(nombre);
+      nombreRow.remove();
+      lia("Mucho gusto, " + nombre + ". Un momento, reviso la agenda…");
+      leerEstado().then(function(d){ atender(d.estado || "disponible"); });
+    }
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var datos = {
+        Nombre:  document.getElementById("f-nombre").value,
+        Correo:  document.getElementById("f-email").value,
+        Mensaje: document.getElementById("f-msg").value,
+        _subject:"LIA — Nuevo cliente · Lara Global Export",
+        _template:"table"
+      };
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true; btn.textContent = "Enviando…";
+      registrar("nuevo").then(function(){
+        return fetch("https://formsubmit.co/ajax/luigilara@gmail.com", {
+          method:"POST",
+          headers:{ "Content-Type":"application/json", "Accept":"application/json" },
+          body: JSON.stringify(datos)
+        });
+      }).then(function(r){
+        if (!r || !r.ok) throw 0;
+        form.hidden = true;
+        lia("✅ Su mensaje fue entregado, " + datos.Nombre + ". Ya avisé al equipo de Lara Global Export; le responderemos a " + datos.Correo + " a la brevedad. ¡Gracias por su confianza!");
+      }).catch(function(){
+        /* si el envío directo falla, usar el envío clásico del formulario */
+        form.submit();
+      });
+    });
+
+    lia("Hola 👋 Soy LIA, la recepcionista inteligente de Lara Global Export. ¿Cuál es su nombre?");
   })();
 </script>

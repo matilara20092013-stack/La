@@ -1,0 +1,345 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIA — Panel privado · Lara Global Export</title>
+<style>
+  /* Panel de control privado — un solo tema, sala de control nocturna */
+  :root{
+    --bg:      #0A141C;
+    --surface: #101F2B;
+    --raise:   #16293A;
+    --ink:     #E8EEF2;
+    --muted:   #8FA3B0;
+    --line:    #E8EEF21F;
+    --accent:  #ED743A;
+    --accent-ink:#14100C;
+    --ok:      #4FBE87;
+    --warn:    #E8B33A;
+  }
+  *{ box-sizing:border-box; margin:0; }
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height:1.55; min-height:100vh; display:flex; flex-direction:column;
+  }
+  .mono{ font-family:ui-monospace, "SF Mono", Consolas, Menlo, monospace; }
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  header{
+    border-bottom:1px solid var(--line); padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand-mark{ width:36px; height:36px; background:var(--accent); color:var(--accent-ink); display:grid; place-items:center; font-weight:800; font-size:14px; }
+  .brand b{ font-size:14px; letter-spacing:.04em; text-transform:uppercase; display:block; }
+  .brand small{ font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; }
+  .status-pill{
+    display:inline-flex; align-items:center; gap:8px; padding:8px 14px;
+    border:1px solid var(--line); font-size:12px; letter-spacing:.1em;
+    text-transform:uppercase; font-weight:700;
+  }
+  .status-pill .dot{ width:9px; height:9px; border-radius:50%; background:var(--muted); }
+  .status-pill.libre .dot{ background:var(--ok); box-shadow:0 0 8px var(--ok); }
+  .status-pill.ocupado .dot{ background:var(--warn); box-shadow:0 0 8px var(--warn); }
+
+  main{ flex:1; display:flex; flex-direction:column; max-width:860px; width:100%; margin:0 auto; padding:20px; gap:16px; }
+
+  /* chat */
+  .chat{
+    flex:1; background:var(--surface); border:1px solid var(--line);
+    display:flex; flex-direction:column; min-height:420px;
+  }
+  .chat-head{ padding:12px 18px; border-bottom:1px solid var(--line); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+  .chat-log{ flex:1; overflow-y:auto; padding:20px 18px; display:flex; flex-direction:column; gap:12px; }
+  .msg{ max-width:78%; padding:12px 15px; font-size:14.5px; white-space:pre-wrap; }
+  .msg.ai{ background:var(--raise); border:1px solid var(--line); align-self:flex-start; }
+  .msg.ai .who{ display:block; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:6px; }
+  .msg.me{ background:var(--accent); color:var(--accent-ink); align-self:flex-end; font-weight:600; }
+  .msg.alerta{ border-left:3px solid var(--warn); }
+  .chat-quick{ display:flex; gap:8px; flex-wrap:wrap; padding:0 18px 12px; }
+  .chat-quick button{
+    font:inherit; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:transparent; color:var(--ink); border:1px solid var(--line); padding:8px 14px; cursor:pointer;
+  }
+  .chat-quick button:hover{ border-color:var(--accent); color:var(--accent); }
+  .chat-input{ display:flex; border-top:1px solid var(--line); }
+  .chat-input input{
+    flex:1; font:inherit; font-size:15px; background:transparent; color:var(--ink);
+    border:none; padding:15px 18px;
+  }
+  .chat-input input::placeholder{ color:var(--muted); }
+  .chat-input input:focus{ outline:none; }
+  .chat-input button{
+    font:inherit; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--accent); color:var(--accent-ink); border:none; padding:0 26px; cursor:pointer;
+  }
+  .chat-input button:hover{ filter:brightness(1.1); }
+
+  .share{ background:var(--surface); border:1px solid var(--line); padding:16px 18px; font-size:13px; color:var(--muted); }
+  .share code{ color:var(--ink); word-break:break-all; }
+  .share button{ font:inherit; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:transparent; color:var(--accent); border:1px solid var(--accent); padding:6px 12px; cursor:pointer; margin-left:8px; }
+
+  /* candado */
+  .lock{
+    position:fixed; inset:0; background:var(--bg); z-index:50;
+    display:grid; place-items:center; padding:20px;
+  }
+  .lock form{ width:min(360px,100%); background:var(--surface); border:1px solid var(--line); padding:32px; }
+  .lock h1{ font-size:16px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px; }
+  .lock p{ font-size:13px; color:var(--muted); margin-bottom:18px; }
+  .lock input{ width:100%; font:inherit; font-size:16px; letter-spacing:.3em; text-align:center; background:var(--bg); color:var(--ink); border:1px solid var(--line); padding:12px; margin-bottom:14px; }
+  .lock button{ width:100%; font:inherit; font-weight:700; letter-spacing:.1em; text-transform:uppercase; font-size:13px; background:var(--accent); color:var(--accent-ink); border:none; padding:13px; cursor:pointer; }
+  .lock .err{ color:var(--warn); font-size:13px; margin-top:10px; display:none; }
+</style>
+
+<div class="lock" id="lock">
+  <form id="lock-form">
+    <h1>Panel privado</h1>
+    <p>Acceso exclusivo de Luigi Lara. Ingrese su código.</p>
+    <label for="pin" style="position:absolute;left:-9999px">Código de acceso</label>
+    <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="····">
+    <button type="submit">Entrar</button>
+    <p class="err" id="lock-err">Código incorrecto.</p>
+  </form>
+</div>
+
+<header>
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">LG</span>
+    <span><b>Panel privado · LIA</b><small>Asistente de Lara Global Export</small></span>
+  </div>
+  <span class="status-pill" id="pill"><span class="dot"></span><span id="pill-text">Conectando…</span></span>
+</header>
+
+<main>
+  <div class="share" id="share" hidden>
+    Enlace para sus clientes: <code id="share-url"></code>
+    <button type="button" id="share-copy">Copiar</button>
+  </div>
+
+  <div class="chat" aria-label="Chat con LIA">
+    <div class="chat-head">LIA · Recepcionista inteligente</div>
+    <div class="chat-log" id="log" aria-live="polite"></div>
+    <div class="chat-quick" id="quick"></div>
+    <form class="chat-input" id="chat-form">
+      <label for="chat-text" style="position:absolute;left:-9999px">Mensaje para LIA</label>
+      <input id="chat-text" autocomplete="off" placeholder="Escríbale a LIA… (ej. «ocupado», «disponible», «estado»)">
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</main>
+
+<script>
+/* ================= CONFIGURACIÓN ================= */
+var ADMIN_PIN = "2026";            // ← cambie su código de acceso aquí
+var STORE     = "https://jsonblob.com/api/jsonBlob";
+var POLL_MS   = 12000;
+
+/* ================= ESTADO LOCAL ================= */
+var canalId   = localStorage.getItem("lge_canal") || "";
+var vistos    = Number(localStorage.getItem("lge_avisos_vistos") || 0);
+var estadoAct = "";
+
+var log   = document.getElementById("log");
+var quick = document.getElementById("quick");
+
+function say(texto, extra){
+  var d = document.createElement("div");
+  d.className = "msg ai" + (extra ? " " + extra : "");
+  d.innerHTML = '<span class="who">LIA</span>';
+  d.appendChild(document.createTextNode(texto));
+  log.appendChild(d); log.scrollTop = log.scrollHeight;
+}
+function mine(texto){
+  var d = document.createElement("div");
+  d.className = "msg me";
+  d.textContent = texto;
+  log.appendChild(d); log.scrollTop = log.scrollHeight;
+}
+function setQuick(botones){
+  quick.innerHTML = "";
+  botones.forEach(function(b){
+    var el = document.createElement("button");
+    el.type = "button"; el.textContent = b;
+    el.addEventListener("click", function(){ handle(b); });
+    quick.appendChild(el);
+  });
+}
+function pill(estado){
+  var p = document.getElementById("pill"), t = document.getElementById("pill-text");
+  p.className = "status-pill";
+  if (estado === "disponible"){ p.classList.add("libre"); t.textContent = "Disponible"; }
+  else if (estado === "ocupado"){ p.classList.add("ocupado"); t.textContent = "Ocupado — clientes en espera"; }
+  else { t.textContent = "Sin canal"; }
+}
+
+/* ================= ALMACÉN COMPARTIDO ================= */
+function leer(){
+  if (!canalId) return Promise.reject(new Error("sin canal"));
+  return fetch(STORE + "/" + canalId, {cache:"no-store"}).then(function(r){
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  });
+}
+function escribir(data){
+  return fetch(STORE + "/" + canalId, {
+    method:"PUT", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(data)
+  });
+}
+function crearCanal(){
+  var inicial = { estado:"disponible", avisos:[], creado:new Date().toISOString() };
+  return fetch(STORE, {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(inicial)
+  }).then(function(r){
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    var loc = r.headers.get("Location") || r.headers.get("X-jsonblob") || "";
+    var id = (loc.match(/jsonBlob\/([\w-]+)/) || [,""])[1] || loc.split("/").pop();
+    if (!id) throw new Error("sin id");
+    canalId = id;
+    localStorage.setItem("lge_canal", id);
+    return id;
+  });
+}
+function clienteUrl(){
+  var base = location.href.split("#")[0].replace(/admin\.html.*$/i, "");
+  return base + "#c=" + canalId;
+}
+function mostrarShare(){
+  if (!canalId) return;
+  document.getElementById("share").hidden = false;
+  document.getElementById("share-url").textContent = clienteUrl();
+}
+
+/* ================= LÓGICA DE LIA ================= */
+function cambiarEstado(nuevo){
+  leer().then(function(d){
+    d.estado = nuevo; d.actualizado = new Date().toISOString();
+    return escribir(d);
+  }).then(function(){
+    estadoAct = nuevo; pill(nuevo);
+    if (nuevo === "ocupado"){
+      say("Entendido. Desde ahora, a cada cliente nuevo le mostraré el mensaje:\n«Por favor espere a que le atendamos.»\n\nCuando termine con su cliente, dígame «disponible» y yo aviso a los que están esperando.");
+    } else {
+      say("✅ Listo. Ya les avisé a los clientes en espera que puede atenderlos: en su pantalla les apareció «Ya podemos atenderle» junto con el formulario para enviarle su mensaje.\n\nSus mensajes le llegarán a luigilara@gmail.com.");
+    }
+  }).catch(function(){
+    say("No pude actualizar el estado. Revise su conexión e inténtelo de nuevo.", "alerta");
+  });
+}
+
+function revisarAvisos(d){
+  var avisos = d.avisos || [];
+  if (avisos.length > vistos){
+    avisos.slice(vistos).forEach(function(a, i){
+      var esPrimero = (vistos === 0 && i === 0);
+      if (a.tipo === "espera"){
+        say("🔔 Un cliente más quiere contactarle: " + a.nombre + ". Como usted está ocupado, ya le puse el mensaje «Por favor espere a que le atendamos». Le avisaré en cuanto usted me diga «disponible».", "alerta");
+      } else if (esPrimero){
+        say("🔔 Oye, hay un cliente que quiere trabajar contigo: " + a.nombre + ". Su mensaje completo y su correo ya están en tu Gmail (luigilara@gmail.com). Si me dices «pásame el contacto», te digo dónde encontrarlo.", "alerta");
+      } else {
+        say("🔔 Nuevo cliente: " + a.nombre + ". Su mensaje y contacto completos ya están en tu Gmail.", "alerta");
+      }
+    });
+    vistos = avisos.length;
+    localStorage.setItem("lge_avisos_vistos", String(vistos));
+  }
+}
+
+function sync(silencioso){
+  leer().then(function(d){
+    estadoAct = d.estado || "disponible";
+    pill(estadoAct);
+    revisarAvisos(d);
+    if (!silencioso){
+      var n = (d.avisos || []).length;
+      say("Estado actual: " + (estadoAct === "ocupado" ? "OCUPADO — los clientes nuevos ven el mensaje de espera." : "DISPONIBLE — los clientes pueden enviarle su mensaje.") + "\nClientes registrados hasta ahora: " + n + ".");
+    }
+  }).catch(function(){
+    if (!silencioso) say("No pude leer el canal. Revise su conexión.", "alerta");
+  });
+}
+
+function handle(textoRaw){
+  var texto = textoRaw.trim();
+  if (!texto) return;
+  mine(texto);
+  var t = texto.toLowerCase();
+
+  if (!canalId){
+    if (/crear|canal|empezar|iniciar|s[ií]/.test(t)){
+      say("Creando su canal de control…");
+      crearCanal().then(function(){
+        mostrarShare();
+        pill("disponible");
+        say("✅ Canal creado. Copie el «Enlace para sus clientes» (arriba) y compártalo: esa es la página donde los clientes hablarán conmigo.\n\nComandos que entiendo:\n• «ocupado» — pongo a los clientes nuevos en espera\n• «disponible» — aviso a los que esperan que ya puede atenderlos\n• «estado» — le digo cómo está todo\n• «pásame el contacto» — le digo dónde ver los datos del cliente");
+        setQuick(["Ocupado","Disponible","Estado"]);
+      }).catch(function(){
+        say("No pude crear el canal (el servicio no respondió). Inténtelo de nuevo en unos segundos con «crear canal».", "alerta");
+      });
+    } else {
+      say("Antes de empezar necesito crear su canal de control. Dígame «crear canal» o toque el botón.");
+      setQuick(["Crear canal"]);
+    }
+    return;
+  }
+
+  if (/ocupado|espera|no molestar|estoy con/.test(t))        cambiarEstado("ocupado");
+  else if (/disponible|libre|termin[eé]|ya puedo|listo/.test(t)) cambiarEstado("disponible");
+  else if (/estado|c[oó]mo va|resumen/.test(t))              sync(false);
+  else if (/contacto|correo|datos|p[aá]same/.test(t))
+    say("Los datos completos de cada cliente (nombre, correo y mensaje) se los envié a su Gmail: luigilara@gmail.com. Busque los correos con asunto «LIA — Nuevo cliente». Desde ahí puede responderle directamente al cliente.");
+  else if (/enlace|link|compartir/.test(t)){ mostrarShare(); say("El enlace para sus clientes está arriba. Tóquele «Copiar» y mándelo a quien quiera."); }
+  else if (/limpiar|borrar/.test(t)){
+    leer().then(function(d){ d.avisos = []; return escribir(d); }).then(function(){
+      vistos = 0; localStorage.setItem("lge_avisos_vistos","0");
+      say("Listo, limpié la lista de avisos.");
+    });
+  }
+  else say("Le puedo ayudar con esto:\n• «ocupado» — clientes nuevos verán «Por favor espere a que le atendamos»\n• «disponible» — aviso a los que esperan que ya puede atenderlos\n• «estado» — resumen del día\n• «pásame el contacto» — dónde ver los datos del cliente\n• «enlace» — el link para compartir con clientes");
+}
+
+document.getElementById("chat-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  var input = document.getElementById("chat-text");
+  handle(input.value); input.value = "";
+});
+document.getElementById("share-copy").addEventListener("click", function(){
+  var url = document.getElementById("share-url").textContent;
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
+    function(){ this.textContent = "¡Copiado!"; }.bind(this),
+    function(){ window.prompt("Copie el enlace:", url); }
+  );
+});
+
+/* ================= CANDADO ================= */
+document.getElementById("lock-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  if (document.getElementById("pin").value === ADMIN_PIN){
+    sessionStorage.setItem("lge_admin_ok","1");
+    document.getElementById("lock").remove();
+    arrancar();
+  } else {
+    document.getElementById("lock-err").style.display = "block";
+  }
+});
+function arrancar(){
+  say("Hola, Luigi. Soy LIA, su recepcionista inteligente. Yo recibo a sus clientes, le aviso cuando alguien quiera trabajar con usted y pongo en espera a los demás cuando esté ocupado.");
+  if (canalId){
+    mostrarShare();
+    setQuick(["Ocupado","Disponible","Estado"]);
+    sync(true);
+    say("Su canal ya está activo. Le aviso aquí en cuanto llegue un cliente.");
+  } else {
+    setQuick(["Crear canal"]);
+    say("Para empezar, dígame «crear canal» (solo se hace una vez).");
+  }
+  setInterval(function(){ if (canalId) sync(true); }, POLL_MS);
+}
+if (sessionStorage.getItem("lge_admin_ok") === "1"){
+  document.getElementById("lock").remove();
+  arrancar();
+}
+</script>
