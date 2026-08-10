@@ -223,7 +223,7 @@ function cambiarEstado(nuevo){
     if (nuevo === "ocupado"){
       say("Entendido. Desde ahora, a cada cliente nuevo le mostraré el mensaje:\n«Por favor espere a que le atendamos.»\n\nCuando termine con su cliente, dígame «disponible» y yo aviso a los que están esperando.");
     } else {
-      say("✅ Listo. Ya les avisé a los clientes en espera que puede atenderlos: en su pantalla les apareció «Ya podemos atenderle» junto con el formulario para enviarle su mensaje.\n\nSus mensajes le llegarán a luigilara@gmail.com.");
+      say("✅ Listo. Ya les avisé a los clientes en espera que puede atenderlos: en su pantalla les apareció «Ya podemos atenderle» junto con el formulario para enviarle su mensaje.\n\nSus mensajes le llegarán a matilara20092013@gmail.com.");
     }
   }).catch(function(){
     say("No pude actualizar el estado. Revise su conexión e inténtelo de nuevo.", "alerta");
@@ -238,7 +238,7 @@ function revisarAvisos(d){
       if (a.tipo === "espera"){
         say("🔔 Un cliente más quiere contactarle: " + a.nombre + ". Como usted está ocupado, ya le puse el mensaje «Por favor espere a que le atendamos». Le avisaré en cuanto usted me diga «disponible».", "alerta");
       } else if (esPrimero){
-        say("🔔 Oye, hay un cliente que quiere trabajar contigo: " + a.nombre + ". Su mensaje completo y su correo ya están en tu Gmail (luigilara@gmail.com). Si me dices «pásame el contacto», te digo dónde encontrarlo.", "alerta");
+        say("🔔 Oye, hay un cliente que quiere trabajar contigo: " + a.nombre + ". Su mensaje completo y su correo ya están en tu Gmail (matilara20092013@gmail.com). Si me dices «pásame el contacto», te digo dónde encontrarlo.", "alerta");
       } else {
         say("🔔 Nuevo cliente: " + a.nombre + ". Su mensaje y contacto completos ya están en tu Gmail.", "alerta");
       }
@@ -290,7 +290,7 @@ function handle(textoRaw){
   else if (/disponible|libre|termin[eé]|ya puedo|listo/.test(t)) cambiarEstado("disponible");
   else if (/estado|c[oó]mo va|resumen/.test(t))              sync(false);
   else if (/contacto|correo|datos|p[aá]same/.test(t))
-    say("Los datos completos de cada cliente (nombre, correo y mensaje) se los envié a su Gmail: luigilara@gmail.com. Busque los correos con asunto «LIA — Nuevo cliente». Desde ahí puede responderle directamente al cliente.");
+    say("Los datos completos de cada cliente (nombre, correo y mensaje) se los envié a su Gmail: matilara20092013@gmail.com. Busque los correos con asunto «LIA — Nuevo cliente». Desde ahí puede responderle directamente al cliente.");
   else if (/enlace|link|compartir/.test(t)){ mostrarShare(); say("El enlace para sus clientes está arriba. Tóquele «Copiar» y mándelo a quien quiera."); }
   else if (/limpiar|borrar/.test(t)){
     leer().then(function(d){ d.avisos = []; return escribir(d); }).then(function(){

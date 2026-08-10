@@ -41,10 +41,10 @@ comparte el enlace nuevo.
 ## Cómo activar el formulario de contacto (llega a tu Gmail)
 
 El formulario usa [FormSubmit](https://formsubmit.co), que envía los mensajes
-directamente a **luigilara@gmail.com** sin necesidad de servidor.
+directamente a **matilara20092013@gmail.com** sin necesidad de servidor.
 
 1. Publica el sitio (paso anterior) y envía un mensaje de prueba desde el formulario.
-2. La **primera vez**, FormSubmit te mandará un correo a luigilara@gmail.com con un
+2. La **primera vez**, FormSubmit te mandará un correo a matilara20092013@gmail.com con un
    botón **"Activate Form"**. Haz clic para confirmarlo.
 3. A partir de ahí, cada mensaje de un cliente (nombre, correo y mensaje) llegará
    a tu bandeja de Gmail automáticamente.
