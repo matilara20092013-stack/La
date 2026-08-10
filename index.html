@@ -506,7 +506,7 @@
   </button>
 
   <!-- Panel del chat -->
-  <div id="chatPanel" class="fixed bottom-24 right-6 z-40 hidden w-[calc(100vw-3rem)] max-w-sm flex-col overflow-hidden rounded-lg border border-ink-600 bg-ink-900 shadow-2xl">
+  <div id="chatPanel" class="fixed bottom-24 right-6 z-40 hidden max-h-[calc(100vh-7.5rem)] w-[calc(100vw-3rem)] max-w-sm flex-col overflow-hidden rounded-lg border border-ink-600 bg-ink-900 shadow-2xl">
     <div class="border-b border-ink-700 bg-ink-800 px-5 py-4">
       <p class="text-sm font-bold text-white">Soporte ViralForge</p>
       <p id="chatStatus" class="mt-0.5 flex items-center gap-1.5 text-xs text-mist-500">
@@ -514,7 +514,7 @@
         Asistente virtual · respuesta inmediata
       </p>
     </div>
-    <div id="chatMessages" class="flex h-80 flex-col gap-3 overflow-y-auto p-4"></div>
+    <div id="chatMessages" class="flex h-80 min-h-0 flex-col gap-3 overflow-y-auto p-4"></div>
     <div class="border-t border-ink-700 p-3">
       <form id="chatForm" class="flex gap-2">
         <input id="chatInput" type="text" maxlength="500" autocomplete="off"
