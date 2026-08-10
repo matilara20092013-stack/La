@@ -1,0 +1,509 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lara Global Export — Llevamos sus productos a Europa</title>
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:        #F4F6F7;   /* niebla portuaria clara */
+    --surface:   #FFFFFF;
+    --ink:       #10222E;   /* azul marino tinta */
+    --ink-soft:  #45586614;
+    --muted:     #5A6B77;
+    --line:      #10222E22;
+    --accent:    #D95B22;   /* naranja contenedor */
+    --accent-ink:#FFFFFF;
+    --accent-soft:#D95B2216;
+    --navy:      #10222E;
+    --navy-ink:  #EDF2F5;
+    --ok:        #1F7A4D;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:        #0C1720;
+      --surface:   #12212C;
+      --ink:       #E8EEF2;
+      --ink-soft:  #E8EEF212;
+      --muted:     #93A6B2;
+      --line:      #E8EEF224;
+      --accent:    #ED743A;
+      --accent-ink:#14100C;
+      --accent-soft:#ED743A1F;
+      --navy:      #0A1319;
+      --navy-ink:  #E8EEF2;
+      --ok:        #4FBE87;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:        #0C1720;
+    --surface:   #12212C;
+    --ink:       #E8EEF2;
+    --ink-soft:  #E8EEF212;
+    --muted:     #93A6B2;
+    --line:      #E8EEF224;
+    --accent:    #ED743A;
+    --accent-ink:#14100C;
+    --accent-soft:#ED743A1F;
+    --navy:      #0A1319;
+    --navy-ink:  #E8EEF2;
+    --ok:        #4FBE87;
+  }
+
+  *{ box-sizing:border-box; margin:0; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *{ transition:none !important; animation:none !important; } }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, Menlo, monospace; }
+
+  a{ color:inherit; }
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; border-radius:2px; }
+
+  .wrap{ max-width:1060px; margin:0 auto; padding:0 24px; }
+
+  /* ============ ENCABEZADO ============ */
+  header.top{
+    border-bottom:1px solid var(--line);
+    background:var(--bg);
+    position:sticky; top:0; z-index:20;
+  }
+  .top-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0; }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand-mark{
+    width:38px; height:38px; flex:none;
+    background:var(--accent); color:var(--accent-ink);
+    display:grid; place-items:center;
+    font-weight:800; font-size:15px; letter-spacing:.5px;
+  }
+  .brand-name{ font-weight:800; letter-spacing:.02em; font-size:15px; text-transform:uppercase; }
+  .brand-name small{ display:block; font-weight:500; font-size:11px; letter-spacing:.14em; color:var(--muted); }
+  nav.main{ display:flex; gap:22px; align-items:center; }
+  nav.main a{ text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  nav.main a:hover{ color:var(--ink); }
+  nav.main a.cta{
+    background:var(--ink); color:var(--bg); padding:9px 16px;
+  }
+  nav.main a.cta:hover{ background:var(--accent); color:var(--accent-ink); }
+  @media (max-width:720px){ nav.main a:not(.cta){ display:none; } }
+
+  /* ============ HERO ============ */
+  .hero{ padding:72px 0 56px; border-bottom:1px solid var(--line); }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .eyebrow::before{ content:""; width:26px; height:2px; background:var(--accent); }
+  .hero h1{
+    font-size:clamp(2.3rem, 6vw, 4.1rem);
+    line-height:1.04; font-weight:800; letter-spacing:-.02em;
+    text-wrap:balance; margin:18px 0 20px; max-width:16ch;
+  }
+  .hero h1 em{ font-style:normal; color:var(--accent); }
+  .hero p.lede{ max-width:56ch; font-size:1.08rem; color:var(--muted); }
+  .hero-actions{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .btn{
+    display:inline-block; text-decoration:none; font-weight:700; font-size:14px;
+    letter-spacing:.06em; text-transform:uppercase; padding:14px 26px;
+    border:1px solid transparent; cursor:pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); }
+  .btn-primary:hover{ background:var(--ink); color:var(--bg); }
+  .btn-ghost{ border-color:var(--line); color:var(--ink); background:transparent; }
+  .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
+
+  /* línea de ruta */
+  .route{ margin-top:56px; border:1px solid var(--line); background:var(--surface); padding:22px 26px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .route .port{ display:flex; flex-direction:column; gap:2px; }
+  .route .port b{ font-size:14px; letter-spacing:.08em; }
+  .route .port span{ font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; }
+  .route .lane{ flex:1; min-width:120px; position:relative; height:2px; background:var(--line); }
+  .route .lane::after{
+    content:""; position:absolute; top:50%; left:0; width:10px; height:10px;
+    background:var(--accent); transform:translate(-2px,-50%) rotate(45deg);
+    animation: sail 6s linear infinite;
+  }
+  @keyframes sail{ from{ left:0; } to{ left:calc(100% - 8px); } }
+  .route .modes{ font-size:11px; color:var(--muted); letter-spacing:.14em; text-transform:uppercase; }
+
+  /* ============ SECCIONES ============ */
+  section{ padding:64px 0; border-bottom:1px solid var(--line); }
+  .sec-head{ display:flex; align-items:baseline; gap:18px; margin-bottom:34px; }
+  .sec-num{ color:var(--muted); font-size:12px; letter-spacing:.14em; }
+  h2{ font-size:clamp(1.5rem, 3vw, 2.1rem); font-weight:800; letter-spacing:-.01em; text-wrap:balance; }
+  .cols{ display:grid; grid-template-columns: 1.1fr .9fr; gap:44px; align-items:start; }
+  @media (max-width:820px){ .cols{ grid-template-columns:1fr; } }
+  .prose p{ margin-bottom:1em; max-width:62ch; }
+  .prose p:last-child{ margin-bottom:0; }
+  .prose .lead{ font-size:1.05rem; }
+  .muted{ color:var(--muted); }
+
+  .case{
+    background:var(--surface); border:1px solid var(--line); padding:26px;
+  }
+  .case .tag{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:14px; display:block; }
+  .case dl{ display:grid; grid-template-columns:auto 1fr; gap:8px 18px; font-size:14px; }
+  .case dt{ color:var(--muted); font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding-top:2px; }
+  .case dd{ font-weight:600; }
+  .case .note{ margin-top:16px; padding-top:16px; border-top:1px dashed var(--line); font-size:13.5px; color:var(--muted); }
+
+  /* servicios */
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  @media (max-width:820px){ .grid3{ grid-template-columns:1fr; } }
+  .cell{ background:var(--surface); padding:26px 24px; }
+  .cell .glyph{ font-size:20px; color:var(--accent); margin-bottom:14px; display:block; }
+  .cell h3{ font-size:15px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:8px; }
+  .cell p{ font-size:14px; color:var(--muted); }
+
+  /* pasos */
+  .steps{ counter-reset:step; display:grid; gap:0; border:1px solid var(--line); background:var(--surface); }
+  .step{ display:grid; grid-template-columns:70px 1fr; gap:20px; padding:24px 26px; border-bottom:1px solid var(--line); }
+  .step:last-child{ border-bottom:none; }
+  .step::before{
+    counter-increment:step; content:"0" counter(step);
+    font-family:ui-monospace, Consolas, monospace; font-size:26px; font-weight:700;
+    color:var(--accent); line-height:1.1;
+  }
+  .step h3{ font-size:15px; letter-spacing:.05em; text-transform:uppercase; margin-bottom:6px; }
+  .step p{ font-size:14.5px; color:var(--muted); max-width:60ch; }
+
+  /* ============ CONTACTO ============ */
+  .panel{
+    background:var(--surface); border:1px solid var(--line); padding:32px;
+  }
+  form .field{ margin-bottom:18px; }
+  label{ display:block; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:8px; color:var(--muted); }
+  input[type=text], input[type=email], input[type=number], textarea{
+    width:100%; padding:13px 14px; font:inherit; font-size:15px;
+    background:var(--bg); color:var(--ink);
+    border:1px solid var(--line); border-radius:0;
+  }
+  input:focus, textarea:focus{ border-color:var(--accent); outline:none; box-shadow:0 0 0 3px var(--accent-soft); }
+  textarea{ min-height:130px; resize:vertical; }
+  .hint{ font-size:12.5px; color:var(--muted); margin-top:10px; }
+  .form-note{ display:none; margin-top:14px; padding:12px 14px; font-size:14px; border:1px solid var(--ok); color:var(--ok); }
+  .form-note.show{ display:block; }
+
+  /* ============ DONACIONES ============ */
+  .donate{ background:var(--navy); color:var(--navy-ink); border-bottom:1px solid var(--line); }
+  .donate .sec-num, .donate .muted{ color:color-mix(in srgb, var(--navy-ink) 62%, transparent); }
+  .donate .prose p{ max-width:60ch; }
+  .amounts{ display:flex; flex-wrap:wrap; gap:12px; margin:26px 0 20px; }
+  .amounts a{
+    text-decoration:none; font-family:ui-monospace, Consolas, monospace;
+    font-weight:700; font-size:16px; padding:12px 20px;
+    border:1px solid color-mix(in srgb, var(--navy-ink) 30%, transparent);
+    color:var(--navy-ink); transition:all .15s ease;
+  }
+  .amounts a:hover{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .custom-donate{ display:flex; gap:12px; flex-wrap:wrap; align-items:stretch; max-width:420px; }
+  .custom-donate input{
+    flex:1; min-width:140px; background:transparent; color:var(--navy-ink);
+    border:1px solid color-mix(in srgb, var(--navy-ink) 30%, transparent);
+    padding:12px 14px; font:inherit; font-size:15px;
+  }
+  .custom-donate input::placeholder{ color:color-mix(in srgb, var(--navy-ink) 50%, transparent); }
+  .custom-donate button{ border:none; }
+
+  /* ============ PIE ============ */
+  footer{ padding:44px 0 60px; }
+  .foot{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:flex-start; }
+  .foot .brand-name{ font-size:13px; }
+  .foot p{ font-size:13px; color:var(--muted); max-width:44ch; }
+  .foot a{ color:var(--accent); text-decoration:none; font-weight:600; }
+  .foot a:hover{ text-decoration:underline; }
+</style>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="#inicio" aria-label="Lara Global Export — inicio">
+      <span class="brand-mark" aria-hidden="true">LG</span>
+      <span class="brand-name">Lara Global Export<small>Comercio internacional · Logística</small></span>
+    </a>
+    <nav class="main" aria-label="Navegación principal">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#donar">Apoyar</a>
+      <a class="cta" href="#contacto">Contáctenos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Exportación · Importación · Logística puerta a puerta</span>
+      <h1>Llevamos sus productos a <em>Europa</em>.</h1>
+      <p class="lede">
+        Usted elige el producto y cierra la compra; nosotros nos encargamos de todo lo demás:
+        transporte marítimo, aéreo o terrestre, documentación y coordinación aduanal, hasta la
+        entrega en destino. Lo único que tiene que hacer es <strong>contactarnos</strong>.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contacto">Solicitar cotización</a>
+        <a class="btn btn-ghost" href="#proceso">Ver cómo funciona</a>
+      </div>
+
+      <div class="route mono" aria-label="Ruta ilustrativa de embarque">
+        <div class="port"><b>ORIGEN</b><span>Su proveedor · cualquier país</span></div>
+        <div class="lane" aria-hidden="true"></div>
+        <div class="port"><b>EUROPA</b><span>Puerto / aeropuerto de destino</span></div>
+        <div class="modes">Barco · Avión · Terrestre</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIÉNES SOMOS -->
+  <section id="nosotros">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">SEC 01</span><h2>Quiénes somos</h2></div>
+      <div class="cols">
+        <div class="prose">
+          <p class="lead">
+            <strong>Lara Global Export</strong> es una firma de comercio internacional dirigida por
+            <strong>Luigi Lara</strong>, exportador con experiencia en el movimiento de mercancías
+            entre Asia, América y Europa.
+          </p>
+          <p>
+            Nuestro trabajo es simple de explicar y exigente de ejecutar: cuando un cliente quiere
+            llevar un producto de un país a otro, nosotros diseñamos y operamos toda la cadena
+            logística — selección del medio de transporte, contratación de flete, documentación de
+            exportación e importación y seguimiento del embarque hasta la entrega final.
+          </p>
+          <p>
+            El cliente conserva el control comercial de su compra; nosotros asumimos la complejidad
+            del traslado. Esa división clara de responsabilidades es lo que nos permite ofrecer un
+            servicio transparente, puntual y sin sorpresas.
+          </p>
+        </div>
+        <aside class="case" aria-label="Caso de ejemplo">
+          <span class="tag mono">Caso real · Referencia LGE-0001</span>
+          <dl>
+            <dt>Producto</dt><dd>Panel solar</dd>
+            <dt>Origen</dt><dd>China</dd>
+            <dt>Destino</dt><dd>México</dd>
+            <dt>Transporte</dt><dd>Marítimo + terrestre</dd>
+            <dt>Compra</dt><dd>Realizada por el cliente</dd>
+            <dt>Logística</dt><dd>Operada por nosotros</dd>
+          </dl>
+          <p class="note">
+            El cliente compró su panel solar al proveedor en China; nosotros lo trasladamos hasta
+            México coordinando flete, tránsito y entrega. Ese mismo modelo lo aplicamos hoy hacia
+            cualquier destino en Europa.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">SEC 02</span><h2>Lo que hacemos por usted</h2></div>
+      <div class="grid3">
+        <div class="cell">
+          <span class="glyph" aria-hidden="true">⚓</span>
+          <h3>Transporte marítimo</h3>
+          <p>Contenedor completo o carga consolidada. La opción más rentable para volúmenes grandes con tiempos de tránsito planificados.</p>
+        </div>
+        <div class="cell">
+          <span class="glyph" aria-hidden="true">✈</span>
+          <h3>Transporte aéreo</h3>
+          <p>Para mercancía urgente o de alto valor. Su producto llega a Europa en días, no en semanas.</p>
+        </div>
+        <div class="cell">
+          <span class="glyph" aria-hidden="true">▦</span>
+          <h3>Transporte terrestre</h3>
+          <p>Conexión final por carretera o ferrocarril hasta la puerta de su cliente o almacén en destino.</p>
+        </div>
+        <div class="cell">
+          <span class="glyph" aria-hidden="true">✓</span>
+          <h3>Gestión aduanal</h3>
+          <p>Coordinamos la documentación de exportación e importación para que su carga cruce fronteras sin retrasos.</p>
+        </div>
+        <div class="cell">
+          <span class="glyph" aria-hidden="true">◈</span>
+          <h3>Asesoría comercial</h3>
+          <p>Le orientamos sobre rutas, costos y requisitos del mercado europeo antes de que usted cierre su compra.</p>
+        </div>
+        <div class="cell">
+          <span class="glyph" aria-hidden="true">◎</span>
+          <h3>Seguimiento del embarque</h3>
+          <p>Información puntual del estado de su carga desde el origen hasta la entrega, con un solo punto de contacto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section id="proceso">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">SEC 03</span><h2>Cómo funciona</h2></div>
+      <div class="steps">
+        <div class="step">
+          <div>
+            <h3>Contáctenos</h3>
+            <p>Escríbanos con su nombre y lo que quiere lograr: qué producto es, dónde está y a qué país de Europa desea llevarlo.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Reciba su propuesta</h3>
+            <p>Analizamos la ruta y le presentamos una propuesta clara: medio de transporte recomendado, tiempos estimados y costos.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Usted compra su producto</h3>
+            <p>Usted cierra la compra directamente con su proveedor. El producto es suyo desde el primer momento.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Nosotros lo movemos</h3>
+            <p>Operamos el traslado completo — barco, avión o transporte terrestre — con la documentación en regla, hasta la entrega en Europa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">SEC 04</span><h2>Contáctenos</h2></div>
+      <div class="cols">
+        <div class="prose">
+          <p class="lead">Cuéntenos qué quiere mover y hacia dónde. Le respondemos con una propuesta concreta.</p>
+          <p class="muted">
+            Su mensaje llega directamente a nuestro correo. No necesita registrarse ni crear una
+            cuenta: solo su nombre, un medio para responderle y su mensaje.
+          </p>
+          <p class="muted mono" style="font-size:13px">
+            Correo directo: <a href="mailto:luigilara@gmail.com" style="color:var(--accent)">luigilara@gmail.com</a>
+          </p>
+        </div>
+        <div class="panel">
+          <form action="https://formsubmit.co/luigilara@gmail.com" method="POST" id="contact-form">
+            <input type="hidden" name="_subject" value="Nuevo mensaje — Lara Global Export">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="">
+            <div class="field">
+              <label for="f-nombre">Nombre del cliente</label>
+              <input id="f-nombre" name="Nombre" type="text" required autocomplete="name" placeholder="Su nombre completo">
+            </div>
+            <div class="field">
+              <label for="f-email">Correo para responderle</label>
+              <input id="f-email" name="Correo" type="email" required autocomplete="email" placeholder="usted@ejemplo.com">
+            </div>
+            <div class="field">
+              <label for="f-msg">¿Qué desea hacer?</label>
+              <textarea id="f-msg" name="Mensaje" required placeholder="Ejemplo: Quiero llevar 200 paneles solares de China a España. ¿Qué me recomiendan y cuánto costaría?"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+            <p class="hint">Al enviar, su mensaje se entrega al correo de Lara Global Export. Le responderemos a la brevedad.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONACIONES -->
+  <section id="donar" class="donate">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">SEC 05</span><h2>Apoye este proyecto</h2></div>
+      <div class="prose">
+        <p class="lead">
+          Lara Global Export es una empresa en crecimiento. Si nuestro trabajo le parece valioso,
+          puede apoyarnos con una aportación voluntaria desde <strong class="mono">$5 USD</strong>
+          hasta <strong class="mono">$1,000 USD</strong>.
+        </p>
+        <p class="muted">Cada aportación se procesa de forma segura a través de PayPal y se acredita directamente a nuestra cuenta.</p>
+      </div>
+      <div class="amounts" aria-label="Montos de aportación">
+        <a data-amount="5"    href="#">$5</a>
+        <a data-amount="25"   href="#">$25</a>
+        <a data-amount="50"   href="#">$50</a>
+        <a data-amount="100"  href="#">$100</a>
+        <a data-amount="250"  href="#">$250</a>
+        <a data-amount="500"  href="#">$500</a>
+        <a data-amount="1000" href="#">$1,000</a>
+      </div>
+      <form class="custom-donate" id="custom-donate">
+        <label for="f-donar" style="position:absolute; left:-9999px">Monto personalizado en dólares</label>
+        <input id="f-donar" type="number" min="5" max="1000" step="1" placeholder="Otro monto (5 – 1000 USD)">
+        <button class="btn btn-primary" type="submit">Donar</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <span class="brand-name">Lara Global Export</span>
+      <p>Comercio internacional y logística puerta a puerta. Usted compra; nosotros lo llevamos a Europa.</p>
+    </div>
+    <div>
+      <p class="mono" style="font-size:12px; letter-spacing:.08em">
+        CONTACTO DIRECTO<br>
+        <a href="mailto:luigilara@gmail.com">luigilara@gmail.com</a>
+      </p>
+    </div>
+    <div>
+      <p class="mono" style="font-size:12px; letter-spacing:.08em">© 2026 LARA GLOBAL EXPORT<br>Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* =========================================================
+     CONFIGURACIÓN — edite esta línea con su usuario de PayPal.Me
+     (cree su cuenta en https://www.paypal.com/paypalme con el
+     correo luigilara@gmail.com para recibir las aportaciones)
+     ========================================================= */
+  var PAYPAL_ME_USER = "luigilara"; // ← cambie esto por su usuario real de PayPal.Me
+
+  function paypalUrl(amount){
+    return "https://www.paypal.com/paypalme/" + PAYPAL_ME_USER + "/" + amount + "USD";
+  }
+
+  document.querySelectorAll(".amounts a").forEach(function(a){
+    a.setAttribute("href", paypalUrl(a.dataset.amount));
+    a.setAttribute("target", "_blank");
+    a.setAttribute("rel", "noopener");
+  });
+
+  document.getElementById("custom-donate").addEventListener("submit", function(e){
+    e.preventDefault();
+    var input = document.getElementById("f-donar");
+    var v = Math.round(Number(input.value));
+    if (!v || v < 5 || v > 1000){
+      input.setCustomValidity("Ingrese un monto entre 5 y 1000 dólares.");
+      input.reportValidity();
+      return;
+    }
+    input.setCustomValidity("");
+    window.open(paypalUrl(v), "_blank", "noopener");
+  });
+
+  /* Al volver del envío del formulario, regresar a esta misma página */
+  (function(){
+    var next = document.querySelector('input[name="_next"]');
+    if (next && location.protocol.indexOf("http") === 0){
+      next.value = location.href.split("#")[0] + "#contacto";
+    } else if (next) {
+      next.parentNode.removeChild(next);
+    }
+  })();
+</script>
