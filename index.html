@@ -69,6 +69,69 @@
     const PRICE_DAYPASS = "5.00";    // USD
     const PRICE_SUB     = "19.00";   // USD / mes
 
+    /* ── VENTA POR CÓDIGOS DE ACCESO ────────────────────────
+       Flujo: el cliente te paga → tú le envías un código →
+       él lo canjea en la web ("¿Ya tienes un código?").
+
+       ▸ TU ENLACE DE PAYPAL.ME (para recibir los pagos):
+         1. Entra a https://paypal.me con tu cuenta PayPal
+           (la que crees con matilara20092013@gmail.com).
+         2. Crea tu enlace (ej. https://paypal.me/TuNombre).
+         3. Pégalo abajo. El botón "Pagar con PayPal" del modal
+            abrirá tu enlace con el importe exacto ya puesto,
+            y el dinero llega DIRECTO a tu cuenta.
+       ▸ Los códigos en texto plano están en el archivo
+         codigos-viralforge.txt que te entregué por el chat —
+         guárdalo en privado y tacha cada código que vendas.
+       ▸ Aquí solo se guardan las HUELLAS (SHA-256) de los
+         códigos: nadie puede deducir un código leyendo esta
+         página.
+       ▸ Para GENERAR MÁS códigos: abre la consola del navegador
+         (F12) en la página y ejecuta, con tu código nuevo:
+           hashCode("VF-DIA-XXXX-XXXX").then(console.log)
+         Copia la huella que aparece y añádela a la lista.
+       ⚠️ Límite de esta versión sin servidor: un código canjeado
+       se marca como usado solo en el navegador del cliente. Si
+       alguien comparte su código, otra persona podría usarlo en
+       otro dispositivo. Para venta seria, valida los códigos en
+       un backend. */
+    const PAYPAL_ME = "";  // ← Pega aquí tu enlace, ej. "https://paypal.me/TuNombre"
+
+    const CODE_HASHES_DAYPASS = [   // Códigos de Pase Diario (24 h)
+      "c0ffa6630ae46be9f65cd84921cf0b5a26c7af1f5f754fdf98a3be59de3471c1",
+      "80abce1b7c5641f14032ac8e7da16e600a507441e5405109c0526f8e9a14d2e6",
+      "fd7ff0eb95e9f6f544f5663783643f125b4629c0fe962bbd6249107758f2b6bc",
+      "28f00866612a5d0cabe421bdce5d2116f25309eb77a9733aecced731c8495b47",
+      "623e0084f1f4ac3b5ee2e885f8b828252aea64c7f3ba39a26c066eb8746ff905",
+      "ccd40647f3d69e48a3f34555530d8b18f5e5f71776eaafe102c9e20f255466b5",
+      "92cba94a74a4bbd37515c90f8dd9905b83af451dcf63d888310917bae615b668",
+      "563a03b3d4963268292a1c94c8ae6a79f4db0e04922f01b0fcc6f5e3d362d1df",
+      "d70a82b861868ec1f0df3e4135e2b0ba6ff6100a028157d581dc7831dc4caa6d",
+      "6634d4fdbc23778738cb7c20b30807010e3baf043a0cff677732bd99acb25d99",
+      "cc3f2ebd6dbb985049e2c5f9d043a9b012f394f1b1f223c002fa9b90f8ab2737",
+      "ef4830e99d95cfa218f3de561abd96839cbab124ade8d7539852f6d2fb6e17d9",
+      "e29b3aa999be387ddefec2da6cac8f27ecaf66d68ee403dfbaeb2a50cd71ddd6",
+      "fca710db506f0e109832d44a562d0ac2f1508f17b79ebd0577816deffd80fbcb",
+      "b3aadbb4d3637075b5b0866e6f2cadce2dd701e840d34c61db5a844a1cb46c59"
+    ];
+    const CODE_HASHES_SUB = [       // Códigos Pro (30 días)
+      "289b92ae5c287cd383331d93da3e645e11a3c33dc7b1410c0cc6dbd4456fc471",
+      "da9dacf36687275c727ecbc470c2b42b379601d4f5ee1bbbdff6008e088ef8ad",
+      "7e60f62cf0dae1b42f7ff1a0cd352e12d2e71e5c1e2d9500b0135b8690d35870",
+      "83b653f3ed45dc65a23662fffb697a1ab6ef686150278404518eba4143853417",
+      "c5731ffc2a1df986211d677f199669597b06fc4e3c0f376cbea9094d31e884ac",
+      "6d3cde2a93f2c6739c409398878d404b76dfb190e618aafe997cae4458410dde",
+      "c709e9e3183188216817b51f2cf7b6c42f4f383a9656b53c2a1783adcfcac562",
+      "681e9fc30ffdd28823264a1d873e92ec7baabe31460efa878fcd22644fff9bcb",
+      "7ef886556891798b1c8b7615949ac46899088da8e293a97737bce0027de31059",
+      "f75b7a4f86061f151bdb0270dfdab580dd17de939f3010f348d34003a1455e7c",
+      "46c95e9f35a6a95f40d042e29c4a4f3980c81ec95bda1db6f2f4ac8635cd5419",
+      "9209b6deec3c3c464901a6c7ea3b2c99ea1e32bd3af6b07378b1a7a98b6de3b4",
+      "3190cb25d99adce2d932234dcfe8afced9eed372396fff567dc5ef97f5c33423",
+      "3be5628a7b41ec8321943e137f0f364def9927efc171ab88ce9b9bc8414c4ed9",
+      "7febcc2fadf4aee12cf38776e10ff89b4029b1825ba95cf4faa933bf09a8eccb"
+    ];
+
     /* ── CHAT DE SOPORTE CON IA ─────────────────────────────
        El chat funciona en dos modos:
        · SIN configurar: asistente automático local que responde
@@ -423,6 +486,13 @@
       </details>
       <details class="group py-5">
         <summary class="flex cursor-pointer items-center justify-between font-medium text-white">
+          Tengo un código de acceso, ¿cómo lo uso?
+          <span class="ml-4 text-mist-500 transition group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-3 text-sm leading-relaxed text-mist-500">Pulsa cualquier botón de compra para abrir el panel de planes y, en la sección "¿Ya tienes un código de acceso?", escribe tu código (formato VF-XXX-XXXX-XXXX) y pulsa Canjear. El acceso se activa al instante en ese navegador.</p>
+      </details>
+      <details class="group py-5">
+        <summary class="flex cursor-pointer items-center justify-between font-medium text-white">
           ¿Puedo cancelar la suscripción?
           <span class="ml-4 text-mist-500 transition group-open:rotate-45">+</span>
         </summary>
@@ -474,6 +544,15 @@
       <!-- Botones de PayPal (el SDK los renderiza aquí cuando configures tu Client ID) -->
       <div id="paypal-button-container" class="mt-6"></div>
 
+      <!-- Botón PayPal.me (se muestra si configuras PAYPAL_ME) -->
+      <a id="paypalMeBtn" href="#" target="_blank" rel="noopener"
+         class="mt-6 hidden w-full items-center justify-center rounded-md bg-[#0070ba] py-3 text-sm font-semibold text-white transition hover:brightness-110">
+        Pagar con PayPal
+      </a>
+      <p id="paypalMeNote" class="mt-2 hidden text-center text-xs leading-relaxed text-mist-500">
+        Tras el pago, recibirás tu código de acceso por correo. Vuelve aquí y canjéalo abajo.
+      </p>
+
       <!-- Botón Stripe (se muestra si configuras STRIPE_LINK_*) -->
       <a id="stripeBtn" href="#" target="_blank" rel="noopener"
          class="mt-3 hidden w-full items-center justify-center rounded-md bg-[#635bff] py-3 text-sm font-semibold text-white transition hover:brightness-110">
@@ -486,9 +565,25 @@
         Pagar ahora (DEMO — no se cobra nada)
       </button>
 
+      <!-- Canje de código de acceso -->
+      <div class="mt-5 border-t border-ink-700 pt-5">
+        <p class="text-sm font-semibold text-white">¿Ya tienes un código de acceso?</p>
+        <p class="mt-1 text-xs text-mist-500">Si compraste un pase o el plan Pro, introduce aquí el código que recibiste.</p>
+        <form id="codeForm" class="mt-3 flex gap-2">
+          <input id="codeInput" type="text" maxlength="20" autocomplete="off" spellcheck="false"
+            placeholder="VF-XXX-XXXX-XXXX"
+            class="min-w-0 flex-1 rounded-md border border-ink-600 bg-ink-800 px-3.5 py-2.5 text-sm uppercase tracking-wide text-white placeholder-mist-600 outline-none transition focus:border-accent-500">
+          <button type="submit"
+            class="shrink-0 rounded-md border border-accent-500 px-4 text-sm font-semibold text-accent-300 transition hover:bg-ink-800 disabled:opacity-50">
+            Canjear
+          </button>
+        </form>
+        <p id="codeMsg" class="mt-2 hidden text-xs"></p>
+      </div>
+
       <p class="mt-4 text-center text-[11px] leading-relaxed text-mist-600">
         Pago procesado de forma segura por PayPal / Stripe.<br>
-        Recibirás la confirmación por correo electrónico.
+        ¿Problemas con tu código? Escríbenos: matilara20092013@gmail.com
       </p>
     </div>
   </div>
@@ -970,19 +1065,66 @@
     active.classList.add('border-accent-500');
     active.classList.remove('border-ink-600');
     updateStripeLink();
+    updatePayPalMeLink();
     renderPayPalButtons();
   }
   const planPrice = () => selectedPlan === 'daypass' ? PRICE_DAYPASS : PRICE_SUB;
   const planName  = () => selectedPlan === 'daypass' ? 'ViralForge — Pase Diario 24h' : 'ViralForge — Suscripción Pro Mensual';
 
   /* ---------- 10. ACTIVACIÓN DEL ACCESO TRAS EL PAGO ---------- */
-  function grantAccess() {
+  function grantAccess(plan) {
     const DAY = 24 * 60 * 60 * 1000;
-    store.premiumUntil = Date.now() + (selectedPlan === 'daypass' ? DAY : 30 * DAY);
+    store.premiumUntil = Date.now() + ((plan || selectedPlan) === 'daypass' ? DAY : 30 * DAY);
     renderCredits();
     closePaywall();
-    showToast('Pago recibido. Acceso ilimitado activado — revisa tu correo.');
+    showToast('Acceso ilimitado activado. ¡A crear contenido!');
   }
+
+  /* ---------- 10b. CANJE DE CÓDIGOS DE ACCESO ----------
+     Los códigos se comparan por huella SHA-256 contra las listas
+     de la sección de configuración; el texto del código nunca
+     aparece en esta página. */
+  async function hashCode(code) {
+    const data = new TextEncoder().encode(code.toUpperCase().replace(/\s+/g, ''));
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function usedCodes() { return getJSON('vf_used_codes', []); }
+
+  function showCodeMsg(text, ok) {
+    const el = document.getElementById('codeMsg');
+    el.textContent = text;
+    el.classList.remove('hidden', 'text-red-400', 'text-emerald-400');
+    el.classList.add(ok ? 'text-emerald-400' : 'text-red-400');
+  }
+
+  document.getElementById('codeForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const input = document.getElementById('codeInput');
+    const raw = input.value.trim();
+    if (raw.length < 6) { showCodeMsg('Escribe el código completo (formato VF-XXX-XXXX-XXXX).', false); return; }
+    let hash;
+    try { hash = await hashCode(raw); }
+    catch { showCodeMsg('Tu navegador no permite validar códigos. Escríbenos a matilara20092013@gmail.com.', false); return; }
+
+    if (usedCodes().includes(hash)) {
+      showCodeMsg('Este código ya fue canjeado en este dispositivo.', false);
+      return;
+    }
+    let plan = null;
+    if (CODE_HASHES_DAYPASS.includes(hash)) plan = 'daypass';
+    else if (CODE_HASHES_SUB.includes(hash)) plan = 'sub';
+
+    if (!plan) {
+      showCodeMsg('Código no válido. Revisa que esté bien escrito o contáctanos.', false);
+      return;
+    }
+    setJSON('vf_used_codes', [...usedCodes(), hash]);
+    input.value = '';
+    showCodeMsg(plan === 'daypass' ? 'Código válido: Pase Diario activado (24 horas).' : 'Código válido: plan Pro activado (30 días).', true);
+    setTimeout(() => grantAccess(plan), 900);
+  });
 
   /* ---------- 11. PAYPAL — INTEGRACIÓN REAL ----------
      Se activa automáticamente cuando pegas tu Client ID arriba.
@@ -1036,6 +1178,26 @@
     else { btn.classList.add('hidden'); btn.classList.remove('flex'); }
   }
 
+  /* ---------- 12b. PAYPAL.ME (venta manual con códigos) ----------
+     Si configuraste PAYPAL_ME, el botón abre tu enlace con el importe
+     exacto del plan elegido; el dinero llega directo a tu cuenta y tú
+     envías el código al comprador. */
+  function updatePayPalMeLink() {
+    const btn = document.getElementById('paypalMeBtn');
+    const note = document.getElementById('paypalMeNote');
+    if (PAYPAL_ME) {
+      const amount = selectedPlan === 'daypass' ? '5' : '19';
+      btn.href = PAYPAL_ME.replace(/\/$/, '') + '/' + amount + 'USD';
+      btn.classList.remove('hidden'); btn.classList.add('flex');
+      note.classList.remove('hidden');
+      btn.textContent = `Pagar $${amount} con PayPal`;
+      document.getElementById('demoPayBtn').classList.add('hidden'); // con pago real configurado, fuera el demo
+    } else {
+      btn.classList.add('hidden'); btn.classList.remove('flex');
+      note.classList.add('hidden');
+    }
+  }
+
   /* ---------- 13. PAGO DEMO (solo mientras no hay pasarela) ----------
      Simula el flujo comercial completo para que pruebes la experiencia.
      Desaparece automáticamente al configurar PayPal. NO cobra nada,
@@ -1067,7 +1229,7 @@ Datos del producto:
 - Genera ganchos de apertura, guiones de video, descripciones SEO, planes de contenido semanales y bios de perfil, para TikTok, Instagram, YouTube y LinkedIn, con 4 tonos de marca.
 - Los usuarios nuevos tienen 3 créditos gratis, sin registro ni tarjeta. Cada generación consume 1 crédito.
 - Planes: Pase Diario de $5 USD (generaciones ilimitadas por 24 horas, pago único) y Pro Mensual de $19 USD (ilimitado, cancelable en un clic, sin permanencia).
-- Pagos procesados por PayPal o Stripe. Nunca almacenamos datos de tarjeta.
+- Pagos procesados por PayPal o Stripe. Nunca almacenamos datos de tarjeta. Tras pagar, el cliente recibe un código de acceso por correo y lo canjea en el panel de planes (sección "¿Ya tienes un código de acceso?").
 - El historial (últimas 20 generaciones) y los guardados se almacenan en el navegador del usuario; si borra los datos de navegación, se pierden.
 - Soporte humano: matilara20092013@gmail.com
 
@@ -1077,7 +1239,8 @@ Instrucciones: responde en español, en 2-4 frases, con tono profesional y cerca
   const KB = [
     { keys: ['precio','plan','cuesta','costo','vale','pagar','tarifa','suscrip'], a: 'Tenemos dos opciones: el Pase Diario de $5 USD (generaciones ilimitadas durante 24 horas, pago único) y el plan Pro Mensual de $19 USD, que se cancela en un clic y no tiene permanencia. Además, empiezas con 3 créditos gratis sin tarjeta.' },
     { keys: ['credito','gratis','free','generacion','limite'], a: 'Al entrar tienes 3 créditos gratuitos, sin registro ni tarjeta. Cada generación completa (5 ganchos, un guion, un paquete SEO, un plan semanal o 4 bios) consume 1 crédito. Al agotarlos, puedes continuar con el Pase Diario de $5 o el plan Pro.' },
-    { keys: ['paypal','stripe','tarjeta','metodo de pago','como pago','pago seguro','cobr'], a: 'Los pagos se procesan a través de PayPal o Stripe, líderes mundiales en pagos seguros. Nunca vemos ni almacenamos los datos de tu tarjeta. Tras el pago, el acceso ilimitado se activa de inmediato.' },
+    { keys: ['paypal','stripe','tarjeta','metodo de pago','como pago','pago seguro','cobr'], a: 'Los pagos se procesan a través de PayPal o Stripe, líderes mundiales en pagos seguros. Nunca vemos ni almacenamos los datos de tu tarjeta. Tras pagar recibirás tu código de acceso por correo, y lo canjeas en el panel de planes.' },
+    { keys: ['codigo','canjear','activar','code','clave de acceso'], a: 'Para canjear tu código: pulsa cualquier botón de compra para abrir el panel de planes, busca la sección "¿Ya tienes un código de acceso?", escribe tu código (formato VF-XXX-XXXX-XXXX) y pulsa Canjear. El acceso se activa al instante. Si tu código no funciona, escríbenos a matilara20092013@gmail.com.' },
     { keys: ['cancelar','baja','reembolso','devolucion','devolver'], a: 'Puedes cancelar la suscripción Pro en cualquier momento, con un clic y sin permanencia mínima: mantienes el acceso hasta el final del periodo pagado. Para solicitudes de reembolso, escríbenos a matilara20092013@gmail.com y lo revisamos.' },
     { keys: ['como funciona','como se usa','usar','empezar','tutorial','instruccion'], a: 'Es muy simple: 1) describe tu tema en una frase, 2) elige el formato (ganchos, guion, SEO, plan semanal o bio), la plataforma y el tono de tu marca, y 3) pulsa Generar. En segundos tendrás resultados listos para copiar, guardar o descargar.' },
     { keys: ['gancho','hook','guion','script','seo','hashtag','bio','formato','modo'], a: 'Ofrecemos 5 formatos: ganchos de apertura para video, guiones completos de 60 segundos con marcas de tiempo, paquetes SEO (título, meta descripción, keywords y hashtags), planes de contenido semanales y bios de perfil optimizadas.' },
@@ -1215,6 +1378,7 @@ Instrucciones: responde en español, en 2-4 frases, con tono profesional y cerca
   window.simulatePayment = simulatePayment;
   window.showTab = showTab;
   window.toggleChat = toggleChat;
+  window.hashCode = hashCode; // para generar huellas de códigos nuevos desde la consola
   </script>
 </body>
 </html>
