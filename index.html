@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ViralForge — Generador de ganchos para TikTok/Instagram y descripciones SEO para creadores y equipos de marketing. 3 créditos gratis.">
+  <meta name="description" content="ViralForge — Generador de ganchos, guiones, descripciones SEO y planes de contenido para TikTok, Instagram, YouTube y LinkedIn. 3 créditos gratis.">
   <title>ViralForge | Contenido que convierte, en segundos</title>
 
   <!-- ============================================================
@@ -75,6 +75,7 @@
     html { scroll-behavior:smooth; }
     body { font-family:'Inter',system-ui,sans-serif; }
     summary::-webkit-details-marker { display:none; }
+    select { background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a93a6' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right .75rem center; appearance:none; -webkit-appearance:none; padding-right:2.25rem; }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation:none !important; transition:none !important; }
     }
@@ -94,11 +95,12 @@
       </a>
       <div class="hidden items-center gap-8 text-sm font-medium text-mist-500 md:flex">
         <a href="#herramienta" class="transition hover:text-white">Herramienta</a>
+        <a href="#como-funciona" class="transition hover:text-white">Cómo funciona</a>
         <a href="#precios" class="transition hover:text-white">Precios</a>
         <a href="#faq" class="transition hover:text-white">Preguntas</a>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Contador de créditos (siempre visible) -->
+        <!-- Estado del plan / contador de créditos (siempre visible) -->
         <div id="creditBadge" class="rounded-md border border-ink-600 bg-ink-800 px-3 py-1.5 text-sm text-mist-300">
           Créditos: <span id="creditCount" class="font-semibold text-white">3</span>
         </div>
@@ -111,14 +113,14 @@
   <section class="border-b border-ink-800">
     <div class="mx-auto max-w-6xl px-5 pb-20 pt-24">
       <div class="max-w-3xl">
-        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-accent-300">Herramienta para creadores y equipos de marketing</p>
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-accent-300">Suite de contenido para creadores y equipos de marketing</p>
         <h1 class="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl" style="text-wrap:balance">
-          Ganchos y descripciones que convierten, listos en segundos.
+          Ganchos, guiones y descripciones que convierten, listos en segundos.
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist-500">
-          ViralForge genera ganchos para TikTok e Instagram, descripciones optimizadas para SEO
-          e ideas de contenido a partir de una breve descripción de tu tema.
-          Empieza con <strong class="font-semibold text-mist-100">3 créditos gratis</strong>, sin registro y sin tarjeta.
+          ViralForge genera ganchos de apertura, guiones de video, descripciones SEO, biografías de perfil
+          y planes de contenido para <strong class="font-semibold text-mist-100">TikTok, Instagram, YouTube y LinkedIn</strong>,
+          adaptados al tono de tu marca. Empieza con <strong class="font-semibold text-mist-100">3 créditos gratis</strong>, sin registro y sin tarjeta.
         </p>
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
           <a href="#herramienta" class="rounded-md bg-accent-500 px-7 py-3.5 text-center text-sm font-semibold text-white transition hover:bg-accent-600">
@@ -130,14 +132,18 @@
         </div>
       </div>
       <!-- Indicadores de negocio -->
-      <dl class="mt-16 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-lg border border-ink-700 bg-ink-700 sm:grid-cols-3">
+      <dl class="mt-16 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-lg border border-ink-700 bg-ink-700 sm:grid-cols-4">
         <div class="bg-ink-900 px-6 py-5">
           <dt class="text-xs font-medium uppercase tracking-wide text-mist-500">Tiempo por generación</dt>
           <dd class="mt-1 text-2xl font-bold text-white" style="font-variant-numeric:tabular-nums">&lt; 10 s</dd>
         </div>
         <div class="bg-ink-900 px-6 py-5">
-          <dt class="text-xs font-medium uppercase tracking-wide text-mist-500">Formatos disponibles</dt>
-          <dd class="mt-1 text-2xl font-bold text-white" style="font-variant-numeric:tabular-nums">3 modos</dd>
+          <dt class="text-xs font-medium uppercase tracking-wide text-mist-500">Formatos</dt>
+          <dd class="mt-1 text-2xl font-bold text-white" style="font-variant-numeric:tabular-nums">5 modos</dd>
+        </div>
+        <div class="bg-ink-900 px-6 py-5">
+          <dt class="text-xs font-medium uppercase tracking-wide text-mist-500">Plataformas</dt>
+          <dd class="mt-1 text-2xl font-bold text-white" style="font-variant-numeric:tabular-nums">4 redes</dd>
         </div>
         <div class="bg-ink-900 px-6 py-5">
           <dt class="text-xs font-medium uppercase tracking-wide text-mist-500">Costo de entrada</dt>
@@ -149,126 +155,232 @@
 
   <!-- ===================== HERRAMIENTA ===================== -->
   <section id="herramienta" class="mx-auto max-w-4xl px-5 py-16">
-    <div class="rounded-lg border border-ink-700 bg-ink-900 p-6 sm:p-10">
-      <div class="mb-8 flex flex-col items-start justify-between gap-4 border-b border-ink-700 pb-6 sm:flex-row sm:items-center">
-        <div>
-          <h2 class="text-xl font-bold text-white">Generador de contenido</h2>
-          <p class="mt-1 text-sm text-mist-500">Describe tu tema y selecciona el formato que necesitas.</p>
+    <div class="rounded-lg border border-ink-700 bg-ink-900">
+
+      <!-- Pestañas -->
+      <div class="flex items-center gap-1 border-b border-ink-700 px-4 pt-3">
+        <button id="tabGen" onclick="showTab('gen')" class="tab-btn rounded-t-md border-b-2 border-accent-500 px-4 py-2.5 text-sm font-semibold text-white">Generador</button>
+        <button id="tabHist" onclick="showTab('hist')" class="tab-btn rounded-t-md border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-mist-500 transition hover:text-white">Historial <span id="histCount" class="ml-1 rounded bg-ink-700 px-1.5 py-0.5 text-xs" style="font-variant-numeric:tabular-nums">0</span></button>
+        <button id="tabFav" onclick="showTab('fav')" class="tab-btn rounded-t-md border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-mist-500 transition hover:text-white">Guardados <span id="favCount" class="ml-1 rounded bg-ink-700 px-1.5 py-0.5 text-xs" style="font-variant-numeric:tabular-nums">0</span></button>
+      </div>
+
+      <!-- ========== PANEL: GENERADOR ========== -->
+      <div id="panelGen" class="p-6 sm:p-10">
+        <div class="mb-8 flex flex-col items-start justify-between gap-4 border-b border-ink-700 pb-6 sm:flex-row sm:items-center">
+          <div>
+            <h2 class="text-xl font-bold text-white">Generador de contenido</h2>
+            <p class="mt-1 text-sm text-mist-500">Describe tu tema, elige formato, plataforma y tono.</p>
+          </div>
+          <div class="rounded-md border border-ink-600 bg-ink-800 px-4 py-2 text-sm text-mist-300">
+            Generaciones disponibles: <span id="creditCountInline" class="font-semibold text-white">3</span>
+          </div>
         </div>
-        <div class="rounded-md border border-ink-600 bg-ink-800 px-4 py-2 text-sm text-mist-300">
-          Generaciones disponibles: <span id="creditCountInline" class="font-semibold text-white">3</span>
+
+        <!-- Selector de modo -->
+        <p class="mb-2 text-sm font-medium text-mist-300">Formato</p>
+        <div class="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3" role="tablist">
+          <button data-mode="hooks" class="mode-btn rounded-md border border-accent-500 bg-ink-800 px-4 py-3.5 text-left transition">
+            <span class="block text-sm font-semibold text-white">Ganchos de apertura</span>
+            <span class="mt-0.5 block text-xs text-mist-500">5 aperturas listas para grabar</span>
+          </button>
+          <button data-mode="guion" class="mode-btn rounded-md border border-ink-600 bg-ink-800 px-4 py-3.5 text-left transition hover:border-mist-500">
+            <span class="block text-sm font-semibold text-white">Guion de video</span>
+            <span class="mt-0.5 block text-xs text-mist-500">Estructura completa de 30–60 s</span>
+          </button>
+          <button data-mode="seo" class="mode-btn rounded-md border border-ink-600 bg-ink-800 px-4 py-3.5 text-left transition hover:border-mist-500">
+            <span class="block text-sm font-semibold text-white">Descripción SEO</span>
+            <span class="mt-0.5 block text-xs text-mist-500">Título, meta, keywords, hashtags</span>
+          </button>
+          <button data-mode="ideas" class="mode-btn rounded-md border border-ink-600 bg-ink-800 px-4 py-3.5 text-left transition hover:border-mist-500">
+            <span class="block text-sm font-semibold text-white">Plan de contenido</span>
+            <span class="mt-0.5 block text-xs text-mist-500">Calendario semanal completo</span>
+          </button>
+          <button data-mode="bio" class="mode-btn rounded-md border border-ink-600 bg-ink-800 px-4 py-3.5 text-left transition hover:border-mist-500">
+            <span class="block text-sm font-semibold text-white">Bio de perfil</span>
+            <span class="mt-0.5 block text-xs text-mist-500">4 biografías optimizadas</span>
+          </button>
+        </div>
+
+        <!-- Plataforma y tono -->
+        <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label for="platformSel" class="mb-2 block text-sm font-medium text-mist-300">Plataforma</label>
+            <select id="platformSel" class="w-full rounded-md border border-ink-600 bg-ink-800 p-3 text-sm text-white outline-none transition focus:border-accent-500">
+              <option value="tiktok">TikTok</option>
+              <option value="instagram">Instagram</option>
+              <option value="youtube">YouTube</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+          </div>
+          <div>
+            <label for="toneSel" class="mb-2 block text-sm font-medium text-mist-300">Tono de la marca</label>
+            <select id="toneSel" class="w-full rounded-md border border-ink-600 bg-ink-800 p-3 text-sm text-white outline-none transition focus:border-accent-500">
+              <option value="directo">Directo y persuasivo</option>
+              <option value="profesional">Profesional y sobrio</option>
+              <option value="cercano">Cercano y conversacional</option>
+              <option value="educativo">Educativo y didáctico</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Input -->
+        <label for="userInput" class="mb-2 block text-sm font-medium text-mist-300">¿De qué trata tu contenido?</label>
+        <textarea id="userInput" rows="3" maxlength="300"
+          placeholder="Ejemplo: recetas de cocina saludable para personas con poco tiempo"
+          class="w-full resize-none rounded-md border border-ink-600 bg-ink-800 p-4 text-white placeholder-mist-600 outline-none transition focus:border-accent-500 focus:ring-1 focus:ring-accent-500"></textarea>
+        <div class="mt-1 flex items-center justify-between">
+          <p class="text-xs text-mist-600">Prueba con:
+            <button class="chip text-accent-300 hover:underline" data-example="rutinas de gimnasio para principiantes">rutinas de gimnasio</button> ·
+            <button class="chip text-accent-300 hover:underline" data-example="finanzas personales y ahorro para jóvenes">finanzas personales</button> ·
+            <button class="chip text-accent-300 hover:underline" data-example="marketing digital para pequeños negocios">marketing digital</button>
+          </p>
+          <p class="text-xs text-mist-600" style="font-variant-numeric:tabular-nums"><span id="charCount">0</span>/300</p>
+        </div>
+
+        <button id="generateBtn"
+          class="mt-5 w-full rounded-md bg-accent-500 py-3.5 text-sm font-semibold text-white transition hover:bg-accent-600 disabled:cursor-not-allowed disabled:opacity-50">
+          Generar (1 crédito)
+        </button>
+
+        <!-- Animación de carga -->
+        <div id="loading" class="mt-8 hidden">
+          <div class="flex items-center gap-3 rounded-md border border-ink-700 bg-ink-800 px-4 py-3 text-sm text-mist-300">
+            <svg class="h-4 w-4 animate-spin text-accent-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+              <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z"/>
+            </svg>
+            <span id="loadingText">Analizando tu tema…</span>
+          </div>
+        </div>
+
+        <!-- Resultados -->
+        <div id="results" class="mt-8 hidden animate-fade-in">
+          <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h3 class="text-base font-semibold text-white">Resultados</h3>
+            <div class="flex flex-wrap gap-2">
+              <button id="regenBtn" class="rounded-md border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-300 transition hover:border-mist-500 hover:text-white">Regenerar (1 crédito)</button>
+              <button id="copyAllBtn" class="rounded-md border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-300 transition hover:border-mist-500 hover:text-white">Copiar todo</button>
+              <button id="downloadBtn" class="rounded-md border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-300 transition hover:border-mist-500 hover:text-white">Descargar .txt</button>
+            </div>
+          </div>
+          <div id="resultsList" class="space-y-2.5"></div>
+          <p id="platformHint" class="mt-4 rounded-md border border-ink-700 bg-ink-800 px-4 py-3 text-xs leading-relaxed text-mist-500"></p>
         </div>
       </div>
 
-      <!-- Selector de modo -->
-      <div class="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3" role="tablist">
-        <button data-mode="hooks" class="mode-btn rounded-md border border-accent-500 bg-ink-800 px-4 py-3.5 text-left transition">
-          <span class="block text-sm font-semibold text-white">Ganchos de apertura</span>
-          <span class="mt-0.5 block text-xs text-mist-500">TikTok · Reels · Shorts</span>
-        </button>
-        <button data-mode="seo" class="mode-btn rounded-md border border-ink-600 bg-ink-800 px-4 py-3.5 text-left transition hover:border-mist-500">
-          <span class="block text-sm font-semibold text-white">Descripción SEO</span>
-          <span class="mt-0.5 block text-xs text-mist-500">YouTube · Blog · E-commerce</span>
-        </button>
-        <button data-mode="ideas" class="mode-btn rounded-md border border-ink-600 bg-ink-800 px-4 py-3.5 text-left transition hover:border-mist-500">
-          <span class="block text-sm font-semibold text-white">Plan de contenido</span>
-          <span class="mt-0.5 block text-xs text-mist-500">Calendario semanal</span>
-        </button>
+      <!-- ========== PANEL: HISTORIAL ========== -->
+      <div id="panelHist" class="hidden p-6 sm:p-10">
+        <div class="mb-6 flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-white">Historial de generaciones</h2>
+            <p class="mt-1 text-sm text-mist-500">Se guardan tus últimas 20 generaciones en este navegador.</p>
+          </div>
+          <button id="clearHistBtn" class="rounded-md border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-300 transition hover:border-mist-500 hover:text-white">Vaciar historial</button>
+        </div>
+        <div id="histList" class="space-y-2.5"></div>
+        <p id="histEmpty" class="rounded-md border border-dashed border-ink-600 px-4 py-8 text-center text-sm text-mist-600">Aún no has generado contenido. Tus generaciones aparecerán aquí.</p>
       </div>
 
-      <!-- Input -->
-      <label for="userInput" class="mb-2 block text-sm font-medium text-mist-300">¿De qué trata tu contenido?</label>
-      <textarea id="userInput" rows="3" maxlength="300"
-        placeholder="Ejemplo: recetas de cocina saludable para personas con poco tiempo"
-        class="w-full resize-none rounded-md border border-ink-600 bg-ink-800 p-4 text-white placeholder-mist-600 outline-none transition focus:border-accent-500 focus:ring-1 focus:ring-accent-500"></textarea>
-
-      <button id="generateBtn"
-        class="mt-5 w-full rounded-md bg-accent-500 py-3.5 text-sm font-semibold text-white transition hover:bg-accent-600 disabled:cursor-not-allowed disabled:opacity-50">
-        Generar (1 crédito)
-      </button>
-
-      <!-- Animación de carga -->
-      <div id="loading" class="mt-8 hidden">
-        <div class="flex items-center gap-3 rounded-md border border-ink-700 bg-ink-800 px-4 py-3 text-sm text-mist-300">
-          <svg class="h-4 w-4 animate-spin text-accent-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-            <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z"/>
-          </svg>
-          <span id="loadingText">Analizando tu tema…</span>
+      <!-- ========== PANEL: GUARDADOS ========== -->
+      <div id="panelFav" class="hidden p-6 sm:p-10">
+        <div class="mb-6 flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-white">Resultados guardados</h2>
+            <p class="mt-1 text-sm text-mist-500">Tus mejores líneas, listas para copiar cuando las necesites.</p>
+          </div>
+          <button id="copyFavsBtn" class="rounded-md border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-300 transition hover:border-mist-500 hover:text-white">Copiar todos</button>
         </div>
-      </div>
-
-      <!-- Resultados -->
-      <div id="results" class="mt-8 hidden animate-fade-in">
-        <div class="mb-4 flex items-center justify-between">
-          <h3 class="text-base font-semibold text-white">Resultados</h3>
-          <button id="copyAllBtn" class="rounded-md border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-300 transition hover:border-mist-500 hover:text-white">Copiar todo</button>
-        </div>
-        <div id="resultsList" class="space-y-2.5"></div>
+        <div id="favList" class="space-y-2.5"></div>
+        <p id="favEmpty" class="rounded-md border border-dashed border-ink-600 px-4 py-8 text-center text-sm text-mist-600">No has guardado resultados. Pulsa "Guardar" en cualquier resultado para tenerlo siempre a mano.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===================== BENEFICIOS ===================== -->
-  <section class="border-y border-ink-800 bg-ink-900/50">
+  <!-- ===================== CÓMO FUNCIONA ===================== -->
+  <section id="como-funciona" class="border-y border-ink-800 bg-ink-900/50">
     <div class="mx-auto max-w-6xl px-5 py-16">
-      <h2 class="text-2xl font-bold text-white">Pensado para trabajar en serio</h2>
-      <div class="mt-10 grid gap-10 sm:grid-cols-3">
-        <div>
-          <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <h3 class="mt-3 font-semibold text-white">Menos horas de redacción</h3>
-          <p class="mt-2 text-sm leading-relaxed text-mist-500">Sustituye la lluvia de ideas de cada publicación por un flujo de trabajo de segundos: describe el tema, elige el formato y copia el resultado.</p>
-        </div>
-        <div>
-          <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-          <h3 class="mt-3 font-semibold text-white">Estructuras de retención probadas</h3>
-          <p class="mt-2 text-sm leading-relaxed text-mist-500">Los ganchos se construyen sobre las estructuras que mejor retienen audiencia: curiosidad, promesa concreta y urgencia, sin sonar genérico.</p>
-        </div>
-        <div>
-          <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <h3 class="mt-3 font-semibold text-white">SEO listo para publicar</h3>
-          <p class="mt-2 text-sm leading-relaxed text-mist-500">Título, meta descripción, palabras clave y hashtags entregados en un formato que puedes pegar directamente en YouTube, tu blog o tu tienda.</p>
-        </div>
+      <h2 class="text-2xl font-bold text-white">Cómo funciona</h2>
+      <ol class="mt-10 grid gap-10 sm:grid-cols-3">
+        <li>
+          <span class="text-xs font-semibold uppercase tracking-wide text-accent-300">Paso 1</span>
+          <h3 class="mt-2 font-semibold text-white">Describe tu tema</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mist-500">Una frase basta: tu nicho, tu producto o la idea del video. Elige la plataforma de destino y el tono de tu marca.</p>
+        </li>
+        <li>
+          <span class="text-xs font-semibold uppercase tracking-wide text-accent-300">Paso 2</span>
+          <h3 class="mt-2 font-semibold text-white">Elige el formato</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mist-500">Ganchos de apertura, guion completo, descripción SEO, plan semanal o bio de perfil. Cada formato entrega resultados listos para usar.</p>
+        </li>
+        <li>
+          <span class="text-xs font-semibold uppercase tracking-wide text-accent-300">Paso 3</span>
+          <h3 class="mt-2 font-semibold text-white">Copia, guarda o exporta</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mist-500">Copia líneas sueltas, guarda tus favoritas, descarga todo en un archivo de texto o regenera hasta dar con la versión perfecta.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== BENEFICIOS ===================== -->
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <h2 class="text-2xl font-bold text-white">Pensado para trabajar en serio</h2>
+    <div class="mt-10 grid gap-10 sm:grid-cols-3">
+      <div>
+        <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h3 class="mt-3 font-semibold text-white">Menos horas de redacción</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mist-500">Sustituye la lluvia de ideas de cada publicación por un flujo de trabajo de segundos: describe el tema, elige el formato y copia el resultado.</p>
+      </div>
+      <div>
+        <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        <h3 class="mt-3 font-semibold text-white">Adaptado a cada red</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mist-500">El mismo tema no se cuenta igual en TikTok que en LinkedIn. Cada resultado respeta los límites, el formato y las buenas prácticas de la plataforma elegida.</p>
+      </div>
+      <div>
+        <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <h3 class="mt-3 font-semibold text-white">SEO listo para publicar</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mist-500">Título, meta descripción, palabras clave y hashtags entregados en un formato que puedes pegar directamente en YouTube, tu blog o tu tienda.</p>
       </div>
     </div>
   </section>
 
   <!-- ===================== PRECIOS ===================== -->
-  <section id="precios" class="mx-auto max-w-5xl px-5 py-16">
-    <h2 class="text-2xl font-bold text-white">Planes y precios</h2>
-    <p class="mt-2 max-w-xl text-mist-500">Precios en USD. Sin permanencia: el pase es un pago único y la suscripción se cancela en un clic.</p>
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
-      <!-- Pase diario -->
-      <div class="flex flex-col rounded-lg border border-ink-700 bg-ink-900 p-8">
-        <h3 class="text-sm font-semibold uppercase tracking-wide text-mist-500">Pase Diario</h3>
-        <p class="mt-3 text-4xl font-bold text-white" style="font-variant-numeric:tabular-nums">$5 <span class="text-base font-medium text-mist-500">/ 24 horas</span></p>
-        <ul class="mt-6 flex-1 space-y-3 text-sm text-mist-300">
-          <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Generaciones ilimitadas durante 24 h</li>
-          <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Los 3 formatos incluidos</li>
-          <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Pago único, sin suscripción</li>
-        </ul>
-        <button onclick="openPaywall('daypass')" class="mt-8 w-full rounded-md border border-accent-500 py-3 text-sm font-semibold text-accent-300 transition hover:bg-ink-800">Comprar pase de $5</button>
-      </div>
-      <!-- Suscripción -->
-      <div class="flex flex-col rounded-lg border border-accent-500 bg-ink-900 p-8">
-        <div class="flex items-center justify-between">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-mist-500">Pro Mensual</h3>
-          <span class="rounded-full border border-accent-500 px-3 py-1 text-[11px] font-semibold text-accent-300">Recomendado</span>
+  <section id="precios" class="border-t border-ink-800">
+    <div class="mx-auto max-w-5xl px-5 py-16">
+      <h2 class="text-2xl font-bold text-white">Planes y precios</h2>
+      <p class="mt-2 max-w-xl text-mist-500">Precios en USD. Sin permanencia: el pase es un pago único y la suscripción se cancela en un clic.</p>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <!-- Pase diario -->
+        <div class="flex flex-col rounded-lg border border-ink-700 bg-ink-900 p-8">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-mist-500">Pase Diario</h3>
+          <p class="mt-3 text-4xl font-bold text-white" style="font-variant-numeric:tabular-nums">$5 <span class="text-base font-medium text-mist-500">/ 24 horas</span></p>
+          <ul class="mt-6 flex-1 space-y-3 text-sm text-mist-300">
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Generaciones ilimitadas durante 24 h</li>
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Los 5 formatos y las 4 plataformas</li>
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Historial y guardados incluidos</li>
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Pago único, sin suscripción</li>
+          </ul>
+          <button onclick="openPaywall('daypass')" class="mt-8 w-full rounded-md border border-accent-500 py-3 text-sm font-semibold text-accent-300 transition hover:bg-ink-800">Comprar pase de $5</button>
         </div>
-        <p class="mt-3 text-4xl font-bold text-white" style="font-variant-numeric:tabular-nums">$19 <span class="text-base font-medium text-mist-500">/ mes</span></p>
-        <ul class="mt-6 flex-1 space-y-3 text-sm text-mist-300">
-          <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Todo lo del Pase Diario, todos los días</li>
-          <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Acceso prioritario a nuevos formatos</li>
-          <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Historial de generaciones</li>
-          <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Cancelación en un clic, sin permanencia</li>
-        </ul>
-        <button onclick="openPaywall('sub')" class="mt-8 w-full rounded-md bg-accent-500 py-3 text-sm font-semibold text-white transition hover:bg-accent-600">Contratar plan Pro</button>
+        <!-- Suscripción -->
+        <div class="flex flex-col rounded-lg border border-accent-500 bg-ink-900 p-8">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-mist-500">Pro Mensual</h3>
+            <span class="rounded-full border border-accent-500 px-3 py-1 text-[11px] font-semibold text-accent-300">Recomendado</span>
+          </div>
+          <p class="mt-3 text-4xl font-bold text-white" style="font-variant-numeric:tabular-nums">$19 <span class="text-base font-medium text-mist-500">/ mes</span></p>
+          <ul class="mt-6 flex-1 space-y-3 text-sm text-mist-300">
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Todo lo del Pase Diario, todos los días</li>
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Acceso prioritario a nuevos formatos</li>
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Exportación de resultados sin límite</li>
+            <li class="flex gap-2.5"><span class="text-accent-400">✓</span> Cancelación en un clic, sin permanencia</li>
+          </ul>
+          <button onclick="openPaywall('sub')" class="mt-8 w-full rounded-md bg-accent-500 py-3 text-sm font-semibold text-white transition hover:bg-accent-600">Contratar plan Pro</button>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== FAQ ===================== -->
-  <section id="faq" class="mx-auto max-w-3xl px-5 pb-20 pt-4">
+  <section id="faq" class="mx-auto max-w-3xl px-5 pb-20 pt-16">
     <h2 class="text-2xl font-bold text-white">Preguntas frecuentes</h2>
     <div class="mt-8 divide-y divide-ink-700 border-y border-ink-700">
       <details class="group py-5">
@@ -277,6 +389,13 @@
           <span class="ml-4 text-mist-500 transition group-open:rotate-45">+</span>
         </summary>
         <p class="mt-3 text-sm leading-relaxed text-mist-500">Sí. Dispones de 3 créditos gratuitos sin registro y sin tarjeta. Al agotarlos, puedes continuar con el Pase Diario de $5 o el plan Pro mensual.</p>
+      </details>
+      <details class="group py-5">
+        <summary class="flex cursor-pointer items-center justify-between font-medium text-white">
+          ¿Qué incluye cada crédito?
+          <span class="ml-4 text-mist-500 transition group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-3 text-sm leading-relaxed text-mist-500">Cada crédito equivale a una generación completa: cinco ganchos, un guion entero, un paquete SEO completo, un plan semanal o cuatro biografías, según el formato elegido.</p>
       </details>
       <details class="group py-5">
         <summary class="flex cursor-pointer items-center justify-between font-medium text-white">
@@ -291,6 +410,13 @@
           <span class="ml-4 text-mist-500 transition group-open:rotate-45">+</span>
         </summary>
         <p class="mt-3 text-sm leading-relaxed text-mist-500">Sí, en cualquier momento y sin permanencia mínima. El acceso se mantiene hasta el final del periodo pagado.</p>
+      </details>
+      <details class="group py-5">
+        <summary class="flex cursor-pointer items-center justify-between font-medium text-white">
+          ¿Dónde se guardan mi historial y mis favoritos?
+          <span class="ml-4 text-mist-500 transition group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-3 text-sm leading-relaxed text-mist-500">En tu propio navegador. Nada de tu contenido sale de tu dispositivo, por lo que si cambias de navegador o borras los datos de navegación, el historial se reinicia.</p>
       </details>
     </div>
   </section>
@@ -311,7 +437,7 @@
       <h3 id="paywallTitle" class="text-xl font-bold text-white">Has agotado tus créditos gratuitos</h3>
       <p class="mt-2 text-sm leading-relaxed text-mist-500">
         Para continuar generando contenido, elige una de las dos opciones.
-        Ambas incluyen generaciones ilimitadas y los tres formatos.
+        Ambas incluyen generaciones ilimitadas, los cinco formatos y las cuatro plataformas.
       </p>
 
       <!-- Selector de plan dentro del modal -->
@@ -359,13 +485,16 @@
   <script>
   'use strict';
 
-  /* ---------- 1. SISTEMA DE CRÉDITOS ---------- */
+  /* ---------- 1. ALMACENAMIENTO Y SISTEMA DE CRÉDITOS ---------- */
   const FREE_CREDITS = 3;
   // localStorage puede estar bloqueado (navegación privada, iframes con
-  // sandbox); si falla, se usa memoria y los créditos se reinician al recargar.
+  // sandbox); si falla, se usa memoria y los datos se reinician al recargar.
   const mem = {};
   const safeGet = k => { try { return localStorage.getItem(k); } catch { return k in mem ? mem[k] : null; } };
   const safeSet = (k, v) => { try { localStorage.setItem(k, v); } catch { mem[k] = String(v); } };
+  const getJSON = (k, fallback) => { try { return JSON.parse(safeGet(k)) ?? fallback; } catch { return fallback; } };
+  const setJSON = (k, v) => safeSet(k, JSON.stringify(v));
+
   const store = {
     get credits() {
       const v = safeGet('vf_credits');
@@ -373,12 +502,22 @@
     },
     set credits(n) { safeSet('vf_credits', n); },
     get premiumUntil() { return parseInt(safeGet('vf_premium_until') || '0', 10); },
-    set premiumUntil(ts) { safeSet('vf_premium_until', ts); }
+    set premiumUntil(ts) { safeSet('vf_premium_until', ts); },
+    get history() { return getJSON('vf_history', []); },
+    set history(v) { setJSON('vf_history', v); },
+    get favs() { return getJSON('vf_favs', []); },
+    set favs(v) { setJSON('vf_favs', v); }
   };
   const isPremium = () => Date.now() < store.premiumUntil;
 
   function renderCredits() {
-    const label = isPremium() ? 'Ilimitados' : store.credits;
+    let label;
+    if (isPremium()) {
+      const hoursLeft = Math.max(1, Math.round((store.premiumUntil - Date.now()) / 3600000));
+      label = hoursLeft > 48 ? 'Ilimitados (Pro)' : `Ilimitados (${hoursLeft} h)`;
+    } else {
+      label = store.credits;
+    }
     document.getElementById('creditCount').textContent = label;
     document.getElementById('creditCountInline').textContent = label;
     const btn = document.getElementById('generateBtn');
@@ -387,7 +526,25 @@
       : 'Generar (1 crédito)';
   }
 
-  /* ---------- 2. MODOS DE GENERACIÓN ---------- */
+  /* ---------- 2. PESTAÑAS (Generador / Historial / Guardados) ---------- */
+  function showTab(tab) {
+    const map = { gen: ['tabGen','panelGen'], hist: ['tabHist','panelHist'], fav: ['tabFav','panelFav'] };
+    for (const [key, [btnId, panelId]] of Object.entries(map)) {
+      const active = key === tab;
+      const btn = document.getElementById(btnId);
+      btn.classList.toggle('border-accent-500', active);
+      btn.classList.toggle('border-transparent', !active);
+      btn.classList.toggle('text-white', active);
+      btn.classList.toggle('text-mist-500', !active);
+      btn.classList.toggle('font-semibold', active);
+      btn.classList.toggle('font-medium', !active);
+      document.getElementById(panelId).classList.toggle('hidden', !active);
+    }
+    if (tab === 'hist') renderHistory();
+    if (tab === 'fav') renderFavs();
+  }
+
+  /* ---------- 3. MODOS, PLATAFORMA, TONO Y EJEMPLOS ---------- */
   let currentMode = 'hooks';
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -401,114 +558,343 @@
     });
   });
 
-  /* ---------- 3. MOTOR DE GENERACIÓN (SIMULACIÓN DE IA) ----------
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const input = document.getElementById('userInput');
+      input.value = chip.dataset.example;
+      input.dispatchEvent(new Event('input'));
+      input.focus();
+    });
+  });
+
+  document.getElementById('userInput').addEventListener('input', e => {
+    document.getElementById('charCount').textContent = e.target.value.length;
+  });
+
+  /* ---------- 4. MOTOR DE GENERACIÓN (SIMULACIÓN DE IA) ----------
      ⚠️ ESTO ES UNA SIMULACIÓN con plantillas + el texto del usuario.
      Antes de cobrar dinero real, reemplaza generateContent() por una
      llamada a una API de IA real (p. ej. la API de Claude) desde un
      backend tuyo (nunca pongas la API key de la IA en el frontend). */
   const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 
-  function generateContent(topic, mode) {
+  const PLATFORMS = {
+    tiktok:    { name: 'TikTok',    len: 'videos de 15–60 s · descripción hasta 2200 caracteres', cta: 'Sígueme para más', tags: '#parati #fyp #viral' },
+    instagram: { name: 'Instagram', len: 'Reels de 15–90 s · caption hasta 2200 caracteres',      cta: 'Guarda este Reel', tags: '#reels #explora #instagram' },
+    youtube:   { name: 'YouTube',   len: 'título hasta 100 caracteres · descripción hasta 5000',  cta: 'Suscríbete al canal', tags: '#shorts #youtube' },
+    linkedin:  { name: 'LinkedIn',  len: 'publicación hasta 3000 caracteres · primeras 2 líneas visibles', cta: 'Comparte tu experiencia en comentarios', tags: '#carrera #negocios #liderazgo' }
+  };
+
+  const TONES = {
+    directo:     { hookStyle: 0, cierre: 'Actúa hoy: cada semana que esperas es alcance que pierdes.' },
+    profesional: { hookStyle: 1, cierre: 'Un enfoque consistente supera a la inspiración puntual.' },
+    cercano:     { hookStyle: 2, cierre: 'Cuéntame en comentarios cómo te funciona a ti.' },
+    educativo:   { hookStyle: 3, cierre: 'Guarda esta publicación para consultarla cuando la necesites.' }
+  };
+
+  function hookSet(short, tone) {
+    const sets = [
+      [ // directo
+        `Deja de hacer ${short} mal: haz esto en su lugar`,
+        `El error n.º 1 que todos cometen con ${short} (y cómo evitarlo)`,
+        `Nadie te ha contado esto sobre ${short}`,
+        `Si empiezas hoy con ${short}, en 90 días verás la diferencia`,
+        `${short}: lo que funciona en ${new Date().getFullYear()} no es lo que crees`
+      ],
+      [ // profesional
+        `3 claves de ${short} que separan a los que crecen de los que se estancan`,
+        `Lo que aprendí analizando ${short} durante meses, resumido en 60 segundos`,
+        `${short}: el proceso que uso con mis clientes, paso a paso`,
+        `La métrica que casi nadie mira en ${short} (y lo cambia todo)`,
+        `Antes de invertir un minuto más en ${short}, revisa estos 3 puntos`
+      ],
+      [ // cercano
+        `Te cuento cómo me fue con ${short} — spoiler: no fue como esperaba`,
+        `Ojalá alguien me hubiera explicado así ${short} cuando empecé`,
+        `Probé ${short} durante 30 días: estos son los resultados reales`,
+        `La verdad incómoda sobre ${short} que aprendí a base de errores`,
+        `¿Te pasa también con ${short}? Esto me cambió la forma de verlo`
+      ],
+      [ // educativo
+        `${short} explicado en 60 segundos, sin tecnicismos`,
+        `Guía rápida de ${short}: los 3 conceptos que debes dominar primero`,
+        `Mitos y realidad de ${short}: qué dice la práctica`,
+        `El método de 3 pasos para empezar con ${short} desde cero`,
+        `Guarda este video: ${short} de principiante a intermedio`
+      ]
+    ];
+    return sets[tone.hookStyle];
+  }
+
+  function generateContent(topic, mode, platformKey, toneKey) {
     const t = topic.trim().replace(/\.$/, '');
     const short = t.length > 60 ? t.slice(0, 57) + '…' : t;
+    const p = PLATFORMS[platformKey];
+    const tone = TONES[toneKey];
+    const year = new Date().getFullYear();
+
     if (mode === 'hooks') {
+      // Baraja ligera para que regenerar dé variedad
+      return hookSet(short, tone).map(h => pick([h, h])).sort(() => Math.random() - 0.5);
+    }
+
+    if (mode === 'guion') {
+      const hooks = hookSet(short, tone);
       return [
-        pick([`Nadie te ha contado esto sobre ${short}`, `Lo que descubrí sobre ${short} cambió mi forma de trabajar`]),
-        pick([`Deja de hacer ${short} mal: haz esto en su lugar`, `El error n.º 1 que todos cometen con ${short} (y cómo evitarlo)`]),
-        pick([`3 claves de ${short} que los expertos rara vez comparten`, `Probé ${short} durante 30 días: estos son los resultados`]),
-        pick([`Si empiezas hoy con ${short}, en 90 días verás la diferencia`, `La guía honesta de ${short} que me habría ahorrado meses`]),
-        `Guarda este video: ${short} explicado en 60 segundos`
+        `[0–3 s · Gancho] ${pick(hooks)}`,
+        `[3–10 s · Contexto] La mayoría falla con ${short} por una razón: aplica consejos genéricos sin un método. Hoy te doy el método.`,
+        `[10–25 s · Punto 1] Primero, define un objetivo concreto y medible relacionado con ${short}. Sin eso, no hay forma de saber si mejoras.`,
+        `[25–40 s · Punto 2] Segundo, dedica 20 minutos diarios a la parte de ${short} que más resultados te da. La constancia pequeña gana a los atracones.`,
+        `[40–50 s · Punto 3] Tercero, mide una sola métrica por semana y ajusta. Un cambio a la vez: así sabrás qué funciona de verdad.`,
+        `[50–60 s · Cierre] ${tone.cierre} ${p.cta}.`
       ];
     }
+
     if (mode === 'seo') {
       const kw = t.toLowerCase();
       const firstWord = kw.split(' ')[0] || 'guía';
       return [
-        `Título SEO: ${short.charAt(0).toUpperCase() + short.slice(1)} — Guía Completa ${new Date().getFullYear()} (Paso a Paso)`,
+        `Título SEO (${p.name}): ${short.charAt(0).toUpperCase() + short.slice(1)} — Guía Completa ${year} (Paso a Paso)`,
         `Meta descripción: Descubre todo sobre ${kw}: consejos prácticos, errores comunes y trucos de expertos. Guía actualizada paso a paso. Empieza hoy.`,
-        `Palabras clave sugeridas: ${kw} · cómo ${kw.split(' ').slice(0, 3).join(' ')} · ${firstWord} para principiantes · mejores trucos de ${firstWord}`,
-        `Hashtags: #${kw.split(' ').map(w => w.replace(/[^a-záéíóúñü0-9]/gi,'')).filter(Boolean).slice(0,3).join(' #')} #viral #parati #fyp`,
-        `Llamada a la acción sugerida: "¿Te resultó útil? Guarda esta publicación y sígueme para más contenido de ${short}"`
+        `Palabras clave sugeridas: ${kw} · cómo ${kw.split(' ').slice(0, 3).join(' ')} · ${firstWord} para principiantes · mejores trucos de ${firstWord} · ${firstWord} ${year}`,
+        `Hashtags para ${p.name}: #${kw.split(' ').map(w => w.replace(/[^a-záéíóúñü0-9]/gi,'')).filter(Boolean).slice(0,3).join(' #')} ${p.tags}`,
+        `Llamada a la acción: "¿Te resultó útil? ${p.cta} y no te pierdas el próximo contenido de ${short}"`,
+        `Recordatorio de formato: en ${p.name}, ${p.len}.`
       ];
     }
-    // ideas
+
+    if (mode === 'bio') {
+      return [
+        `Opción 1 — Autoridad: Ayudo a mi audiencia con ${short}. Método probado, cero relleno. Nuevo contenido cada semana.`,
+        `Opción 2 — Resultado: ${short.charAt(0).toUpperCase() + short.slice(1)}, explicado para que lo apliques hoy. ${p.cta}.`,
+        `Opción 3 — Personal: Comparto lo que funciona (y lo que no) en ${short}. Aprende de mis aciertos y mis errores.`,
+        `Opción 4 — Directa: Todo sobre ${short} en menos de 60 segundos por video. Empieza por el contenido fijado.`,
+        `Consejo: añade un enlace con tu oferta o lead magnet debajo de la bio; en ${p.name} es tu principal vía de conversión.`
+      ];
+    }
+
+    // Plan de contenido semanal
     return [
-      `Lunes — "Mitos y realidad": desmonta 3 mitos comunes sobre ${short}`,
-      `Miércoles — Tutorial exprés: "${short} en menos de 60 segundos"`,
-      `Viernes — Caso real: tu mayor error con ${short} y qué aprendiste`,
-      `Sábado — Tendencia: adapta el formato viral del momento a ${short}`,
-      `Domingo — Preguntas y respuestas: responde las 3 dudas más frecuentes de tu audiencia sobre ${short}`
+      `Lunes — "Mitos y realidad": desmonta 3 mitos comunes sobre ${short}. Formato: hablar a cámara con texto en pantalla.`,
+      `Martes — Micro-tutorial: una técnica de ${short} explicada en 30 segundos. Formato: manos a la obra / pantalla.`,
+      `Miércoles — Contenido de opinión: una postura clara sobre una práctica extendida en ${short}. Genera conversación.`,
+      `Jueves — Caso real: resultados propios o de un cliente con ${short}, con números concretos.`,
+      `Viernes — Tendencia: adapta el formato viral de la semana a ${short} sin perder tu tono.`,
+      `Sábado — Detrás de cámaras: tu proceso de trabajo con ${short}. Humaniza y fideliza.`,
+      `Domingo — Preguntas y respuestas: responde las 3 dudas más repetidas de tu audiencia sobre ${short}. ${TONES[toneKey].cierre}`
     ];
   }
 
-  /* ---------- 4. FLUJO DE GENERACIÓN + ANIMACIÓN DE CARGA (2 s) ---------- */
-  const loadingMsgs = ['Analizando tu tema…', 'Aplicando estructuras de retención…', 'Redactando resultados…'];
+  /* ---------- 5. FLUJO DE GENERACIÓN + ANIMACIÓN DE CARGA (2 s) ---------- */
+  const loadingMsgs = ['Analizando tu tema…', 'Adaptando al formato de la plataforma…', 'Aplicando estructuras de retención…', 'Redactando resultados…'];
+  let lastRun = null; // { topic, mode, platform, tone } para "Regenerar"
+  let currentResults = [];
 
-  document.getElementById('generateBtn').addEventListener('click', () => {
-    // Sin créditos y sin premium → bloquear y abrir modal de pago
-    if (!isPremium() && store.credits <= 0) { openPaywall('daypass'); return; }
-
-    const topic = document.getElementById('userInput').value.trim();
-    if (topic.length < 3) { showToast('Escribe primero de qué trata tu contenido'); return; }
-
+  function runGeneration(topic, mode, platformKey, toneKey) {
     const btn = document.getElementById('generateBtn');
     const loading = document.getElementById('loading');
     const results = document.getElementById('results');
     btn.disabled = true;
+    document.getElementById('regenBtn').disabled = true;
     results.classList.add('hidden');
     loading.classList.remove('hidden');
+    loading.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    // Mensajes de carga rotativos
     let i = 0;
     document.getElementById('loadingText').textContent = loadingMsgs[0];
     const msgTimer = setInterval(() => {
       i = (i + 1) % loadingMsgs.length;
       document.getElementById('loadingText').textContent = loadingMsgs[i];
-    }, 700);
+    }, 650);
 
     // Procesamiento con retardo de 2 segundos (simula el tiempo de la IA)
     setTimeout(() => {
       clearInterval(msgTimer);
       loading.classList.add('hidden');
       btn.disabled = false;
+      document.getElementById('regenBtn').disabled = false;
 
-      // Descontar crédito (solo usuarios gratuitos)
       if (!isPremium()) { store.credits = store.credits - 1; }
       renderCredits();
 
-      // Pintar resultados
-      const list = document.getElementById('resultsList');
-      list.innerHTML = '';
-      generateContent(topic, currentMode).forEach(text => {
-        const row = document.createElement('div');
-        row.className = 'flex items-start justify-between gap-3 rounded-md border border-ink-700 bg-ink-800 p-4';
-        const p = document.createElement('p');
-        p.className = 'text-sm leading-relaxed text-mist-100';
-        p.textContent = text;
-        const copy = document.createElement('button');
-        copy.className = 'shrink-0 rounded-md border border-ink-600 px-2.5 py-1 text-xs text-mist-500 transition hover:border-mist-500 hover:text-white';
-        copy.textContent = 'Copiar';
-        copy.addEventListener('click', () => { navigator.clipboard.writeText(text); showToast('Copiado al portapapeles'); });
-        row.append(p, copy);
-        list.appendChild(row);
-      });
-      results.classList.remove('hidden');
-      results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      currentResults = generateContent(topic, mode, platformKey, toneKey);
+      lastRun = { topic, mode, platform: platformKey, tone: toneKey };
+      addToHistory(lastRun, currentResults);
+      paintResults();
 
       // Si fue el último crédito, abrir el paywall tras mostrar el valor
       if (!isPremium() && store.credits <= 0) {
         setTimeout(() => openPaywall('daypass'), 2500);
       }
     }, 2000);
+  }
+
+  function paintResults() {
+    const list = document.getElementById('resultsList');
+    const favs = store.favs;
+    list.innerHTML = '';
+    currentResults.forEach(text => {
+      const row = document.createElement('div');
+      row.className = 'flex items-start justify-between gap-3 rounded-md border border-ink-700 bg-ink-800 p-4';
+      const par = document.createElement('p');
+      par.className = 'text-sm leading-relaxed text-mist-100';
+      par.textContent = text;
+      const actions = document.createElement('div');
+      actions.className = 'flex shrink-0 gap-1.5';
+      const copy = document.createElement('button');
+      copy.className = 'rounded-md border border-ink-600 px-2.5 py-1 text-xs text-mist-500 transition hover:border-mist-500 hover:text-white';
+      copy.textContent = 'Copiar';
+      copy.addEventListener('click', () => { navigator.clipboard.writeText(text); showToast('Copiado al portapapeles'); });
+      const fav = document.createElement('button');
+      const saved = favs.includes(text);
+      fav.className = saved
+        ? 'rounded-md border border-accent-500 px-2.5 py-1 text-xs text-accent-300 transition'
+        : 'rounded-md border border-ink-600 px-2.5 py-1 text-xs text-mist-500 transition hover:border-mist-500 hover:text-white';
+      fav.textContent = saved ? 'Guardado' : 'Guardar';
+      fav.addEventListener('click', () => { toggleFav(text); paintResults(); });
+      actions.append(copy, fav);
+      row.append(par, actions);
+      list.appendChild(row);
+    });
+
+    const p = PLATFORMS[lastRun.platform];
+    document.getElementById('platformHint').textContent =
+      `Recomendaciones para ${p.name}: ${p.len}. Cierre sugerido: "${p.cta}".`;
+
+    const results = document.getElementById('results');
+    results.classList.remove('hidden');
+    results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    if (!isPremium() && store.credits <= 0) { openPaywall('daypass'); return; }
+    const topic = document.getElementById('userInput').value.trim();
+    if (topic.length < 3) { showToast('Escribe primero de qué trata tu contenido'); return; }
+    runGeneration(topic, currentMode, document.getElementById('platformSel').value, document.getElementById('toneSel').value);
+  });
+
+  document.getElementById('regenBtn').addEventListener('click', () => {
+    if (!lastRun) return;
+    if (!isPremium() && store.credits <= 0) { openPaywall('daypass'); return; }
+    runGeneration(lastRun.topic, lastRun.mode, lastRun.platform, lastRun.tone);
   });
 
   document.getElementById('copyAllBtn').addEventListener('click', () => {
-    const all = [...document.querySelectorAll('#resultsList p')].map(p => p.textContent).join('\n\n');
-    navigator.clipboard.writeText(all);
+    navigator.clipboard.writeText(currentResults.join('\n\n'));
     showToast('Todos los resultados copiados');
   });
 
-  /* ---------- 5. MODAL DE PAGO ---------- */
+  /* ---------- 6. EXPORTAR A .TXT ---------- */
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!lastRun) return;
+    const header = `ViralForge — ${MODE_NAMES[lastRun.mode]} · ${PLATFORMS[lastRun.platform].name}\nTema: ${lastRun.topic}\n${'-'.repeat(40)}\n\n`;
+    const blob = new Blob([header + currentResults.join('\n\n')], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `viralforge-${lastRun.mode}.txt`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast('Archivo descargado');
+  });
+
+  const MODE_NAMES = { hooks: 'Ganchos de apertura', guion: 'Guion de video', seo: 'Descripción SEO', ideas: 'Plan de contenido', bio: 'Bio de perfil' };
+
+  /* ---------- 7. HISTORIAL ---------- */
+  function addToHistory(run, results) {
+    const h = store.history;
+    h.unshift({ ...run, results, ts: Date.now() });
+    store.history = h.slice(0, 20);
+    updateCounts();
+  }
+
+  function renderHistory() {
+    const list = document.getElementById('histList');
+    const h = store.history;
+    document.getElementById('histEmpty').classList.toggle('hidden', h.length > 0);
+    list.innerHTML = '';
+    h.forEach((entry, idx) => {
+      const row = document.createElement('div');
+      row.className = 'flex flex-wrap items-center justify-between gap-3 rounded-md border border-ink-700 bg-ink-800 p-4';
+      const info = document.createElement('div');
+      info.className = 'min-w-0';
+      const title = document.createElement('p');
+      title.className = 'truncate text-sm font-medium text-mist-100';
+      title.textContent = entry.topic;
+      const meta = document.createElement('p');
+      meta.className = 'mt-0.5 text-xs text-mist-500';
+      meta.textContent = `${MODE_NAMES[entry.mode]} · ${PLATFORMS[entry.platform].name} · ${new Date(entry.ts).toLocaleString('es', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' })}`;
+      info.append(title, meta);
+      const view = document.createElement('button');
+      view.className = 'rounded-md border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-300 transition hover:border-mist-500 hover:text-white';
+      view.textContent = 'Ver resultados';
+      view.addEventListener('click', () => {
+        currentResults = entry.results;
+        lastRun = { topic: entry.topic, mode: entry.mode, platform: entry.platform, tone: entry.tone };
+        showTab('gen');
+        paintResults();
+      });
+      row.append(info, view);
+      list.appendChild(row);
+    });
+  }
+
+  document.getElementById('clearHistBtn').addEventListener('click', () => {
+    store.history = [];
+    renderHistory();
+    updateCounts();
+    showToast('Historial vaciado');
+  });
+
+  /* ---------- 8. GUARDADOS (FAVORITOS) ---------- */
+  function toggleFav(text) {
+    const favs = store.favs;
+    const i = favs.indexOf(text);
+    if (i >= 0) { favs.splice(i, 1); showToast('Eliminado de guardados'); }
+    else { favs.unshift(text); showToast('Añadido a guardados'); }
+    store.favs = favs;
+    updateCounts();
+  }
+
+  function renderFavs() {
+    const list = document.getElementById('favList');
+    const favs = store.favs;
+    document.getElementById('favEmpty').classList.toggle('hidden', favs.length > 0);
+    list.innerHTML = '';
+    favs.forEach(text => {
+      const row = document.createElement('div');
+      row.className = 'flex items-start justify-between gap-3 rounded-md border border-ink-700 bg-ink-800 p-4';
+      const par = document.createElement('p');
+      par.className = 'text-sm leading-relaxed text-mist-100';
+      par.textContent = text;
+      const actions = document.createElement('div');
+      actions.className = 'flex shrink-0 gap-1.5';
+      const copy = document.createElement('button');
+      copy.className = 'rounded-md border border-ink-600 px-2.5 py-1 text-xs text-mist-500 transition hover:border-mist-500 hover:text-white';
+      copy.textContent = 'Copiar';
+      copy.addEventListener('click', () => { navigator.clipboard.writeText(text); showToast('Copiado al portapapeles'); });
+      const del = document.createElement('button');
+      del.className = 'rounded-md border border-ink-600 px-2.5 py-1 text-xs text-mist-500 transition hover:border-mist-500 hover:text-white';
+      del.textContent = 'Quitar';
+      del.addEventListener('click', () => { toggleFav(text); renderFavs(); });
+      actions.append(copy, del);
+      row.append(par, actions);
+      list.appendChild(row);
+    });
+  }
+
+  document.getElementById('copyFavsBtn').addEventListener('click', () => {
+    const favs = store.favs;
+    if (!favs.length) { showToast('No hay resultados guardados'); return; }
+    navigator.clipboard.writeText(favs.join('\n\n'));
+    showToast('Guardados copiados al portapapeles');
+  });
+
+  function updateCounts() {
+    document.getElementById('histCount').textContent = store.history.length;
+    document.getElementById('favCount').textContent = store.favs.length;
+  }
+
+  /* ---------- 9. MODAL DE PAGO ---------- */
   let selectedPlan = 'daypass';
 
   function openPaywall(plan) {
@@ -537,7 +923,7 @@
   const planPrice = () => selectedPlan === 'daypass' ? PRICE_DAYPASS : PRICE_SUB;
   const planName  = () => selectedPlan === 'daypass' ? 'ViralForge — Pase Diario 24h' : 'ViralForge — Suscripción Pro Mensual';
 
-  /* ---------- 6. ACTIVACIÓN DEL ACCESO TRAS EL PAGO ---------- */
+  /* ---------- 10. ACTIVACIÓN DEL ACCESO TRAS EL PAGO ---------- */
   function grantAccess() {
     const DAY = 24 * 60 * 60 * 1000;
     store.premiumUntil = Date.now() + (selectedPlan === 'daypass' ? DAY : 30 * DAY);
@@ -546,7 +932,7 @@
     showToast('Pago recibido. Acceso ilimitado activado — revisa tu correo.');
   }
 
-  /* ---------- 7. PAYPAL — INTEGRACIÓN REAL ----------
+  /* ---------- 11. PAYPAL — INTEGRACIÓN REAL ----------
      Se activa automáticamente cuando pegas tu Client ID arriba.
      El dinero y las notificaciones de venta llegan a la cuenta
      PayPal Business dueña de ese Client ID (la que crees con
@@ -587,7 +973,7 @@
     }).render('#paypal-button-container');
   }
 
-  /* ---------- 8. STRIPE (Payment Links) ----------
+  /* ---------- 12. STRIPE (Payment Links) ----------
      Si pegaste tus Payment Links arriba, se muestra el botón.
      Nota: con Payment Links el acceso se confirma por correo/backend;
      este frontend no puede verificar el pago por sí solo. */
@@ -598,7 +984,7 @@
     else { btn.classList.add('hidden'); btn.classList.remove('flex'); }
   }
 
-  /* ---------- 9. PAGO DEMO (solo mientras no hay pasarela) ----------
+  /* ---------- 13. PAGO DEMO (solo mientras no hay pasarela) ----------
      Simula el flujo comercial completo para que pruebes la experiencia.
      Desaparece automáticamente al configurar PayPal. NO cobra nada,
      y el botón lo dice explícitamente para no engañar a nadie. */
@@ -614,7 +1000,7 @@
     }, 1800);
   }
 
-  /* ---------- 10. TOAST ---------- */
+  /* ---------- 14. TOAST ---------- */
   let toastTimer;
   function showToast(msg) {
     const t = document.getElementById('toast');
@@ -626,11 +1012,13 @@
 
   /* ---------- INICIO ---------- */
   renderCredits();
+  updateCounts();
   loadPayPalSdk();
   window.openPaywall = openPaywall;
   window.closePaywall = closePaywall;
   window.selectPlan = selectPlan;
   window.simulatePayment = simulatePayment;
+  window.showTab = showTab;
   </script>
 </body>
 </html>
