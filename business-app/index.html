@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DailyDrive — the productivity app for business amateurs. Organize your day, unlock your focus, and draw a better business.">
+  <title>DailyDrive | Organize Your Day. Build Your Business.</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-icon">&#9889;</span>
+        Daily<span class="nav__logo-accent">Drive</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="index.html" class="nav__link nav__link--active">Home</a></li>
+        <li><a href="advices.html" class="nav__link">Advices</a></li>
+        <li><a href="my-day.html" class="nav__link nav__link--cta">My Day</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="container hero__content">
+        <p class="hero__eyebrow">For business amateurs with big dreams</p>
+        <h1 class="hero__title">
+          Your business starts with<br><span class="text-accent">one organized day.</span>
+        </h1>
+        <p class="hero__subtitle">
+          You don't need an MBA. You don't need a fancy office. You need <strong>today</strong> —
+          planned, focused, and completely yours. DailyDrive helps beginners in business
+          turn messy days into powerful, productive ones.
+        </p>
+        <div class="hero__actions">
+          <a href="my-day.html" class="btn btn--primary">Plan My Day Now</a>
+          <a href="advices.html" class="btn btn--ghost">Read the Advices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Why organize ===== -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section__title">Why being organized changes <span class="text-accent">everything</span></h2>
+        <p class="section__lead">
+          Every successful business you admire started exactly where you are: with a person,
+          an idea, and a chaotic to-do list. The difference? They got organized. And so can you — starting today.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <div class="card__icon">&#129504;</div>
+            <h3 class="card__title">A clear mind makes better decisions</h3>
+            <p>When your day lives on paper (or on a screen) instead of bouncing around your head,
+              you stop forgetting, stop stressing, and start <em>deciding</em> like a business owner.</p>
+          </article>
+          <article class="card">
+            <div class="card__icon">&#9200;</div>
+            <h3 class="card__title">Time is your first investment</h3>
+            <p>Amateurs don't have big budgets — but you have 24 hours, exactly like every CEO on Earth.
+              Organize them well and you're already ahead of most people.</p>
+          </article>
+          <article class="card">
+            <div class="card__icon">&#128200;</div>
+            <h3 class="card__title">Small wins build unstoppable momentum</h3>
+            <p>One organized day becomes a week. A week becomes a habit. A habit becomes a business
+              that actually grows. It all begins with writing down what you need <strong>today</strong>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== How it works ===== -->
+    <section class="section section--alt">
+      <div class="container">
+        <h2 class="section__title">How DailyDrive works</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="step__number">1</span>
+            <h3>Write your day in "My Day"</h3>
+            <p>List everything you need — tasks, materials, calls, money, people. Be specific. Your day deserves details.</p>
+          </div>
+          <div class="step">
+            <span class="step__number">2</span>
+            <h3>Prioritize like a pro</h3>
+            <p>Mark what is urgent, what is important, and what can wait. Focus is a skill — and you're building it.</p>
+          </div>
+          <div class="step">
+            <span class="step__number">3</span>
+            <h3>Draw a Better Business</h3>
+            <p>Visit the Advices page and learn how sketching your ideas — even with stick figures — can unlock your next big move.</p>
+          </div>
+        </div>
+        <div class="section__cta">
+          <a href="my-day.html" class="btn btn--primary">Start Organizing — It's Free</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Motivation banner ===== -->
+    <section class="banner">
+      <div class="container banner__content">
+        <h2>"You don't become productive by accident.<br>You become productive by <span class="text-accent">design</span>."</h2>
+        <p>And design starts with a plan. Let's make yours.</p>
+        <a href="my-day.html" class="btn btn--light">Plan Today</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <p><strong>DailyDrive</strong> — Organize your day. Draw a Better Business.</p>
+      <nav class="footer__nav">
+        <a href="index.html">Home</a>
+        <a href="advices.html">Advices</a>
+        <a href="my-day.html">My Day</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

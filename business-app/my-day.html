@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My Day — write down everything you need for your day: priorities, schedule, materials, calls, budget and errands. Your whole day, organized in one place.">
+  <title>My Day | DailyDrive</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-icon">&#9889;</span>
+        Daily<span class="nav__logo-accent">Drive</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="advices.html" class="nav__link">Advices</a></li>
+        <li><a href="my-day.html" class="nav__link nav__link--cta nav__link--active">My Day</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== My Day Hero ===== -->
+    <section class="hero hero--compact">
+      <div class="container hero__content">
+        <p class="hero__eyebrow" id="today-date">Today</p>
+        <h1 class="hero__title">This is <span class="text-accent">your day.</span> Write it down.</h1>
+        <p class="hero__subtitle">
+          Be specific — the more detail you give your day, the more your day gives back.
+          Everything you write here is saved automatically on your device.
+        </p>
+        <div class="dayplan__progress">
+          <div class="dayplan__progress-bar"><div id="progress-fill" class="dayplan__progress-fill"></div></div>
+          <p id="progress-label" class="dayplan__progress-label">0 of 0 done — let's begin!</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--planner">
+      <div class="container">
+
+        <!-- ===== Top priorities ===== -->
+        <div class="panel">
+          <h2 class="panel__title">&#127919; My 3 top priorities today</h2>
+          <p class="panel__hint">If you only finish these three things, today is a victory. Choose wisely.</p>
+          <div class="priorities">
+            <input type="text" class="priority-input" data-priority="0" maxlength="120" placeholder="Priority #1 — the ONE thing that matters most">
+            <input type="text" class="priority-input" data-priority="1" maxlength="120" placeholder="Priority #2 — important, but after #1">
+            <input type="text" class="priority-input" data-priority="2" maxlength="120" placeholder="Priority #3 — finish strong with this">
+          </div>
+        </div>
+
+        <!-- ===== Schedule ===== -->
+        <div class="panel">
+          <h2 class="panel__title">&#128336; My schedule, hour by hour</h2>
+          <p class="panel__hint">Give every task a time. A task with a time is a promise; a task without one is just a wish.</p>
+          <form class="add-form" data-list="schedule">
+            <input type="time" class="add-form__time" aria-label="Time" required>
+            <input type="text" class="add-form__text" maxlength="140" placeholder="e.g. 09:00 — Answer customer messages" aria-label="Scheduled task" required>
+            <button type="submit" class="btn btn--primary btn--small">Add</button>
+          </form>
+          <ul class="item-list" id="list-schedule" aria-live="polite"></ul>
+        </div>
+
+        <!-- ===== Needs grid ===== -->
+        <h2 class="section__title section__title--left">&#128203; Everything I need for today</h2>
+        <p class="section__lead section__lead--left">
+          Empty your head into these lists. Materials, people, money, errands — if your day needs it, it belongs here.
+        </p>
+
+        <div class="needs-grid">
+          <div class="panel">
+            <h3 class="panel__title panel__title--small">&#128230; Materials &amp; supplies I need</h3>
+            <form class="add-form" data-list="materials">
+              <input type="text" class="add-form__text" maxlength="140" placeholder="e.g. Packaging boxes, printer ink, notebook…" aria-label="Material needed" required>
+              <button type="submit" class="btn btn--primary btn--small">Add</button>
+            </form>
+            <ul class="item-list" id="list-materials" aria-live="polite"></ul>
+          </div>
+
+          <div class="panel">
+            <h3 class="panel__title panel__title--small">&#128222; Calls &amp; people I need to contact</h3>
+            <form class="add-form" data-list="calls">
+              <input type="text" class="add-form__text" maxlength="140" placeholder="e.g. Call supplier about prices, message Ana…" aria-label="Person to contact" required>
+              <button type="submit" class="btn btn--primary btn--small">Add</button>
+            </form>
+            <ul class="item-list" id="list-calls" aria-live="polite"></ul>
+          </div>
+
+          <div class="panel">
+            <h3 class="panel__title panel__title--small">&#128176; Money &amp; budget for today</h3>
+            <form class="add-form" data-list="money">
+              <input type="text" class="add-form__text" maxlength="140" placeholder="e.g. Budget $20 for materials, collect payment…" aria-label="Money item" required>
+              <button type="submit" class="btn btn--primary btn--small">Add</button>
+            </form>
+            <ul class="item-list" id="list-money" aria-live="polite"></ul>
+          </div>
+
+          <div class="panel">
+            <h3 class="panel__title panel__title--small">&#128694; Errands &amp; places I need to go</h3>
+            <form class="add-form" data-list="errands">
+              <input type="text" class="add-form__text" maxlength="140" placeholder="e.g. Post office, bank, pick up supplies…" aria-label="Errand" required>
+              <button type="submit" class="btn btn--primary btn--small">Add</button>
+            </form>
+            <ul class="item-list" id="list-errands" aria-live="polite"></ul>
+          </div>
+        </div>
+
+        <!-- ===== Notes ===== -->
+        <div class="panel">
+          <h2 class="panel__title">&#9997;&#65039; Notes, ideas &amp; sketch thoughts</h2>
+          <p class="panel__hint">
+            An idea popped up? Write it before it escapes. Better yet — grab paper and
+            <a href="advices.html">Draw a Better Business</a>.
+          </p>
+          <textarea id="day-notes" class="notes-area" rows="5" placeholder="Write anything your day needs you to remember…"></textarea>
+        </div>
+
+        <!-- ===== Day controls ===== -->
+        <div class="dayplan__controls">
+          <p class="dayplan__saved" id="save-status">&#10003; Everything is saved automatically on this device</p>
+          <button id="new-day" class="btn btn--ghost btn--danger">Start a fresh day (clear all)</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <p><strong>DailyDrive</strong> — Organize your day. Draw a Better Business.</p>
+      <nav class="footer__nav">
+        <a href="index.html">Home</a>
+        <a href="advices.html">Advices</a>
+        <a href="my-day.html">My Day</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
