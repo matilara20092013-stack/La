@@ -357,14 +357,19 @@
 
   /* ---------- 1. SISTEMA DE CRÉDITOS ---------- */
   const FREE_CREDITS = 3;
+  // localStorage puede estar bloqueado (navegación privada, iframes con
+  // sandbox); si falla, se usa memoria y los créditos se reinician al recargar.
+  const mem = {};
+  const safeGet = k => { try { return localStorage.getItem(k); } catch { return k in mem ? mem[k] : null; } };
+  const safeSet = (k, v) => { try { localStorage.setItem(k, v); } catch { mem[k] = String(v); } };
   const store = {
     get credits() {
-      const v = localStorage.getItem('vf_credits');
+      const v = safeGet('vf_credits');
       return v === null ? FREE_CREDITS : parseInt(v, 10);
     },
-    set credits(n) { localStorage.setItem('vf_credits', n); },
-    get premiumUntil() { return parseInt(localStorage.getItem('vf_premium_until') || '0', 10); },
-    set premiumUntil(ts) { localStorage.setItem('vf_premium_until', ts); }
+    set credits(n) { safeSet('vf_credits', n); },
+    get premiumUntil() { return parseInt(safeGet('vf_premium_until') || '0', 10); },
+    set premiumUntil(ts) { safeSet('vf_premium_until', ts); }
   };
   const isPremium = () => Date.now() < store.premiumUntil;
 
