@@ -1,169 +1,233 @@
-/* ==========================================================================
-   GlobalRoute Consulting — Interactividad
-   ========================================================================== */
+/* ============================================================
+   FortMacros XB — Interacciones
+   ============================================================ */
 
-document.addEventListener("DOMContentLoaded", () => {
-  initMobileMenu();
-  initScrollAnimations();
-  initCounters();
-  initForm();
-  document.getElementById("year").textContent = new Date().getFullYear();
+// ===== Datos de presets: bind por botón del control =====
+const PRESETS = {
+  edicion: {
+    nombre: "Edición Rápida",
+    binds: {
+      LT: "Apuntar (ADS)",
+      RT: "Disparar",
+      LB: "Rueda de objetos",
+      RB: "Cambiar a construcción",
+      LS: "Moverse / Click: esprintar",
+      RS: "Mirar / Click: restablecer edición",
+      DPAD: "Emotes y marcadores",
+      Y: "Cambiar de arma",
+      X: "Recargar / Interactuar",
+      B: "Agacharse",
+      A: "Saltar",
+      P1: "Editar (= Y en modo construcción)",
+      P2: "Confirmar edición (= RT)",
+      P3: "Saltar (= A)",
+      P4: "Agacharse (= B)"
+    }
+  },
+  constructor: {
+    nombre: "Constructor Pro+",
+    binds: {
+      LT: "Techo cono",
+      RT: "Rampa",
+      LB: "Piso",
+      RB: "Muro",
+      LS: "Moverse / Click: esprintar",
+      RS: "Mirar / Click: editar",
+      DPAD: "Emotes y marcadores",
+      Y: "Cambiar de arma",
+      X: "Interactuar / Recargar",
+      B: "Agacharse",
+      A: "Saltar",
+      P1: "Editar (= click stick der.)",
+      P2: "Confirmar edición (= RT)",
+      P3: "Saltar (= A)",
+      P4: "Rueda de objetos (= LB)"
+    }
+  },
+  aim: {
+    nombre: "Aim Fighter",
+    binds: {
+      LT: "Apuntar (ADS)",
+      RT: "Disparar",
+      LB: "Arma anterior",
+      RB: "Arma siguiente",
+      LS: "Moverse / Click: esprintar",
+      RS: "Mirar / Click: golpe de pico",
+      DPAD: "Marcadores rápidos",
+      Y: "Modo construcción",
+      X: "Recargar / Interactuar",
+      B: "Agacharse / Deslizarse",
+      A: "Saltar",
+      P1: "Arma anterior (= LB)",
+      P2: "Arma siguiente (= RB)",
+      P3: "Saltar (= A)",
+      P4: "Esprintar (= click stick izq.)"
+    }
+  }
+};
+
+let presetActivo = "constructor";
+
+// ===== Navegación móvil =====
+const navToggle = document.getElementById("nav-toggle");
+const navMenu = document.getElementById("nav-menu");
+
+navToggle.addEventListener("click", () => {
+  const abierto = navMenu.classList.toggle("is-open");
+  navToggle.classList.toggle("is-open", abierto);
+  navToggle.setAttribute("aria-expanded", String(abierto));
 });
 
-/* ===== Menú móvil ===== */
-function initMobileMenu() {
-  const toggle = document.getElementById("nav-toggle");
-  const menu = document.getElementById("nav-menu");
-
-  toggle.addEventListener("click", () => {
-    const isOpen = menu.classList.toggle("is-open");
-    toggle.classList.toggle("is-open", isOpen);
-    toggle.setAttribute("aria-expanded", String(isOpen));
+navMenu.querySelectorAll("a").forEach((enlace) => {
+  enlace.addEventListener("click", () => {
+    navMenu.classList.remove("is-open");
+    navToggle.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
   });
+});
 
-  // Cierra el menú al pulsar un enlace (navegación por anclas)
-  menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      menu.classList.remove("is-open");
-      toggle.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
+// ===== Animaciones de entrada =====
+const observador = new IntersectionObserver(
+  (entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("is-visible");
+        observador.unobserve(entrada.target);
+      }
     });
-  });
-}
+  },
+  { threshold: 0.15 }
+);
 
-/* ===== Animaciones al hacer scroll (IntersectionObserver) ===== */
-function initScrollAnimations() {
-  const elements = document.querySelectorAll("[data-animate]");
+document.querySelectorAll("[data-animate]").forEach((el) => observador.observe(el));
 
-  if (!("IntersectionObserver" in window)) {
-    elements.forEach((el) => el.classList.add("is-visible"));
-    return;
+// ===== Contadores del hero =====
+function animarContador(el) {
+  const objetivo = Number(el.dataset.count);
+  const duracion = 1200;
+  const inicio = performance.now();
+
+  function paso(ahora) {
+    const progreso = Math.min((ahora - inicio) / duracion, 1);
+    el.textContent = Math.round(objetivo * progreso);
+    if (progreso < 1) requestAnimationFrame(paso);
   }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  elements.forEach((el) => observer.observe(el));
+  requestAnimationFrame(paso);
 }
 
-/* ===== Contadores animados del hero ===== */
-function initCounters() {
-  const counters = document.querySelectorAll("[data-counter]");
-  const DURATION = 1800;
-
-  const animate = (el) => {
-    const target = parseInt(el.dataset.counter, 10);
-    const suffix = el.dataset.suffix || "";
-    const start = performance.now();
-
-    const step = (now) => {
-      const progress = Math.min((now - start) / DURATION, 1);
-      // Easing out para que frene suavemente al final
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  };
-
-  if (!("IntersectionObserver" in window)) {
-    counters.forEach((el) => {
-      el.textContent = el.dataset.counter + (el.dataset.suffix || "");
+const observadorStats = new IntersectionObserver(
+  (entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        animarContador(entrada.target);
+        observadorStats.unobserve(entrada.target);
+      }
     });
-    return;
+  },
+  { threshold: 0.6 }
+);
+
+document.querySelectorAll(".stat__number").forEach((el) => observadorStats.observe(el));
+
+// ===== Mapeo interactivo =====
+const nombrePresetEl = document.getElementById("mapa-preset-nombre");
+const bindTitulo = document.getElementById("bind-titulo");
+const bindDescripcion = document.getElementById("bind-descripcion");
+const bindTabla = document.getElementById("bind-tabla");
+const botonesPad = document.querySelectorAll(".pad__btn");
+const botonesPreset = document.querySelectorAll("[data-preset]");
+
+function pintarTabla() {
+  const binds = PRESETS[presetActivo].binds;
+  bindTabla.innerHTML = "";
+  Object.entries(binds).forEach(([boton, accion]) => {
+    const fila = document.createElement("div");
+    fila.className = "row";
+    fila.dataset.bind = boton;
+    fila.innerHTML = `<b>${boton}</b><span>${accion}</span>`;
+    bindTabla.appendChild(fila);
+  });
+}
+
+function seleccionarBoton(boton) {
+  const accion = PRESETS[presetActivo].binds[boton];
+  bindTitulo.textContent = boton;
+  bindDescripcion.textContent = accion || "Sin asignación en este preset.";
+
+  botonesPad.forEach((b) => b.classList.toggle("is-active", b.dataset.bind === boton));
+  bindTabla.querySelectorAll(".row").forEach((fila) => {
+    fila.classList.toggle("is-active", fila.dataset.bind === boton);
+  });
+}
+
+function cargarPreset(clave) {
+  presetActivo = clave;
+  nombrePresetEl.textContent = PRESETS[clave].nombre;
+  botonesPreset.forEach((b) => b.classList.toggle("is-active", b.dataset.preset === clave));
+  pintarTabla();
+  bindTitulo.textContent = "Toca un botón";
+  bindDescripcion.textContent =
+    "Pulsa cualquier botón del control para ver qué hace en el preset activo. P1–P4 son las paletas traseras (Elite / remapeo en app Accesorios).";
+  botonesPad.forEach((b) => b.classList.remove("is-active"));
+}
+
+botonesPad.forEach((boton) => {
+  boton.addEventListener("click", () => seleccionarBoton(boton.dataset.bind));
+});
+
+botonesPreset.forEach((boton) => {
+  boton.addEventListener("click", () => {
+    cargarPreset(boton.dataset.preset);
+    document.getElementById("mapeo").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+cargarPreset("constructor");
+
+// ===== Calculadora de sensibilidad =====
+const sliders = [
+  { id: "sens-x", out: "sens-x-val", etiqueta: "Mirar horizontal" },
+  { id: "sens-y", out: "sens-y-val", etiqueta: "Mirar vertical" },
+  { id: "sens-boost", out: "sens-boost-val", etiqueta: "Aceleración de giro" },
+  { id: "dz-left", out: "dz-left-val", etiqueta: "Zona muerta stick izq." },
+  { id: "dz-right", out: "dz-right-val", etiqueta: "Zona muerta stick der." }
+];
+
+const resumenEl = document.getElementById("sens-resumen");
+
+function actualizarResumen() {
+  const lineas = sliders.map(({ id, out, etiqueta }) => {
+    const valor = document.getElementById(id).value;
+    document.getElementById(out).textContent = valor + "%";
+    return `${etiqueta.padEnd(26, " ")} ${valor}%`;
+  });
+  lineas.push(`${"Curva de respuesta".padEnd(26, " ")} Lineal`);
+  lineas.push(`${"Turbo construcción".padEnd(26, " ")} Activada`);
+  resumenEl.textContent = lineas.join("\n");
+}
+
+sliders.forEach(({ id }) => {
+  document.getElementById(id).addEventListener("input", actualizarResumen);
+});
+
+actualizarResumen();
+
+// ===== Copiar configuración =====
+const btnCopiar = document.getElementById("copiar-config");
+const msgCopiado = document.getElementById("copiado-msg");
+
+btnCopiar.addEventListener("click", async () => {
+  const texto = `FortMacros XB — Preset ${PRESETS[presetActivo].nombre}\n\n${resumenEl.textContent}`;
+  try {
+    await navigator.clipboard.writeText(texto);
+  } catch {
+    const area = document.createElement("textarea");
+    area.value = texto;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
   }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  counters.forEach((el) => observer.observe(el));
-}
-
-/* ===== Formulario / Simulador ===== */
-function initForm() {
-  const form = document.getElementById("expansion-form");
-  const success = document.getElementById("form-success");
-  const successDetail = document.getElementById("form-success-detail");
-  const resetBtn = document.getElementById("form-reset");
-  const requiredFields = ["nombre", "email", "producto", "origen", "destino"];
-
-  const showError = (id, visible) => {
-    const field = document.getElementById(id);
-    const error = form.querySelector(`[data-error-for="${id}"]`);
-    field.classList.toggle("is-invalid", visible);
-    if (error) error.classList.toggle("is-visible", visible);
-  };
-
-  const validateField = (id) => {
-    const field = document.getElementById(id);
-    let valid = field.value.trim() !== "";
-    if (valid && field.type === "email") {
-      valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
-    }
-    showError(id, !valid);
-    return valid;
-  };
-
-  // Validación en vivo: limpia el error en cuanto el campo es válido
-  requiredFields.forEach((id) => {
-    const field = document.getElementById(id);
-    const eventName = field.tagName === "SELECT" ? "change" : "input";
-    field.addEventListener(eventName, () => {
-      if (field.classList.contains("is-invalid")) validateField(id);
-    });
-  });
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const allValid = requiredFields
-      .map((id) => validateField(id))
-      .every(Boolean);
-
-    if (!allValid) {
-      const firstInvalid = form.querySelector(".is-invalid");
-      if (firstInvalid) firstInvalid.focus();
-      return;
-    }
-
-    // Mensaje de éxito personalizado con los datos del simulador
-    const nombre = document.getElementById("nombre").value.trim();
-    const producto = document.getElementById("producto");
-    const productoTexto = producto.options[producto.selectedIndex].text;
-    const origen = document.getElementById("origen").value;
-    const destino = document.getElementById("destino").value;
-
-    successDetail.textContent =
-      `Gracias, ${nombre}. Hemos registrado tu solicitud para exportar ` +
-      `${productoTexto.toLowerCase()} desde ${origen} hacia ${destino}. ` +
-      `Nuestro equipo te contactará en menos de 48 horas con tu propuesta personalizada.`;
-
-    success.hidden = false;
-    success.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-
-  resetBtn.addEventListener("click", () => {
-    form.reset();
-    requiredFields.forEach((id) => showError(id, false));
-    success.hidden = true;
-  });
-}
+  msgCopiado.hidden = false;
+  setTimeout(() => { msgCopiado.hidden = true; }, 2200);
+});
