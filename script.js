@@ -1,169 +1,91 @@
-/* ==========================================================================
-   GlobalRoute Consulting — Interactividad
-   ========================================================================== */
+// ===== Menú móvil =====
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.querySelector('.nav-links');
 
-document.addEventListener("DOMContentLoaded", () => {
-  initMobileMenu();
-  initScrollAnimations();
-  initCounters();
-  initForm();
-  document.getElementById("year").textContent = new Date().getFullYear();
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
 });
 
-/* ===== Menú móvil ===== */
-function initMobileMenu() {
-  const toggle = document.getElementById("nav-toggle");
-  const menu = document.getElementById("nav-menu");
+navLinks.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') {
+    navLinks.classList.remove('open');
+  }
+});
 
-  toggle.addEventListener("click", () => {
-    const isOpen = menu.classList.toggle("is-open");
-    toggle.classList.toggle("is-open", isOpen);
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  });
+// ===== Contador animado del hero =====
+const statFps = document.getElementById('statFps');
+const FPS_TARGET = 60;
+const COUNT_DURATION = 1200;
 
-  // Cierra el menú al pulsar un enlace (navegación por anclas)
-  menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      menu.classList.remove("is-open");
-      toggle.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
-  });
+function animateFpsCounter() {
+  const start = performance.now();
+
+  function tick(now) {
+    const progress = Math.min((now - start) / COUNT_DURATION, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    statFps.textContent = '+' + Math.round(eased * FPS_TARGET);
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    }
+  }
+
+  requestAnimationFrame(tick);
 }
 
-/* ===== Animaciones al hacer scroll (IntersectionObserver) ===== */
-function initScrollAnimations() {
-  const elements = document.querySelectorAll("[data-animate]");
+animateFpsCounter();
 
-  if (!("IntersectionObserver" in window)) {
-    elements.forEach((el) => el.classList.add("is-visible"));
+// ===== Calculadora de eDPI =====
+const dpiInput = document.getElementById('dpiInput');
+const sensInput = document.getElementById('sensInput');
+const calcBtn = document.getElementById('calcBtn');
+const calcResult = document.getElementById('calcResult');
+const edpiValue = document.getElementById('edpiValue');
+const edpiMarker = document.getElementById('edpiMarker');
+const edpiVerdict = document.getElementById('edpiVerdict');
+
+// La barra representa 0–160 de eDPI; el rango pro (40–80) está pintado en CSS.
+const BAR_MAX_EDPI = 160;
+const PRO_MIN = 40;
+const PRO_MAX = 80;
+
+function calcularEdpi() {
+  const dpi = parseFloat(dpiInput.value);
+  const sens = parseFloat(sensInput.value);
+
+  if (!dpi || !sens || dpi <= 0 || sens <= 0) {
+    calcResult.hidden = false;
+    edpiValue.textContent = '—';
+    edpiVerdict.textContent = 'Introduce un DPI y una sensibilidad válidos.';
+    edpiVerdict.className = 'edpi-verdict warn';
     return;
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
+  // eDPI en Fortnite: DPI × sensibilidad (%) / 100... pero la convención
+  // habitual en la comunidad es DPI × sens% (ej. 800 × 8% = 64).
+  const edpi = Math.round(dpi * (sens / 100) * 100) / 100;
 
-  elements.forEach((el) => observer.observe(el));
-}
+  calcResult.hidden = false;
+  edpiValue.textContent = edpi;
 
-/* ===== Contadores animados del hero ===== */
-function initCounters() {
-  const counters = document.querySelectorAll("[data-counter]");
-  const DURATION = 1800;
+  const pos = Math.min(edpi / BAR_MAX_EDPI, 1) * 100;
+  edpiMarker.style.left = `calc(${pos}% - 2px)`;
 
-  const animate = (el) => {
-    const target = parseInt(el.dataset.counter, 10);
-    const suffix = el.dataset.suffix || "";
-    const start = performance.now();
-
-    const step = (now) => {
-      const progress = Math.min((now - start) / DURATION, 1);
-      // Easing out para que frene suavemente al final
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  };
-
-  if (!("IntersectionObserver" in window)) {
-    counters.forEach((el) => {
-      el.textContent = el.dataset.counter + (el.dataset.suffix || "");
-    });
-    return;
+  if (edpi >= PRO_MIN && edpi <= PRO_MAX) {
+    edpiVerdict.textContent = `✅ ${edpi} de eDPI está dentro del rango pro (${PRO_MIN}–${PRO_MAX}). Sensibilidad equilibrada para apuntar y editar.`;
+    edpiVerdict.className = 'edpi-verdict ok';
+  } else if (edpi < PRO_MIN) {
+    edpiVerdict.textContent = `🐢 ${edpi} de eDPI es más bajo que el rango pro (${PRO_MIN}–${PRO_MAX}). Buena precisión, pero puede costarte girar rápido en peleas de cajas.`;
+    edpiVerdict.className = 'edpi-verdict warn';
+  } else {
+    edpiVerdict.textContent = `⚡ ${edpi} de eDPI es más alto que el rango pro (${PRO_MIN}–${PRO_MAX}). Giros rápidos, pero la puntería fina sufre. Prueba a bajarla poco a poco.`;
+    edpiVerdict.className = 'edpi-verdict warn';
   }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  counters.forEach((el) => observer.observe(el));
 }
 
-/* ===== Formulario / Simulador ===== */
-function initForm() {
-  const form = document.getElementById("expansion-form");
-  const success = document.getElementById("form-success");
-  const successDetail = document.getElementById("form-success-detail");
-  const resetBtn = document.getElementById("form-reset");
-  const requiredFields = ["nombre", "email", "producto", "origen", "destino"];
+calcBtn.addEventListener('click', calcularEdpi);
 
-  const showError = (id, visible) => {
-    const field = document.getElementById(id);
-    const error = form.querySelector(`[data-error-for="${id}"]`);
-    field.classList.toggle("is-invalid", visible);
-    if (error) error.classList.toggle("is-visible", visible);
-  };
-
-  const validateField = (id) => {
-    const field = document.getElementById(id);
-    let valid = field.value.trim() !== "";
-    if (valid && field.type === "email") {
-      valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
-    }
-    showError(id, !valid);
-    return valid;
-  };
-
-  // Validación en vivo: limpia el error en cuanto el campo es válido
-  requiredFields.forEach((id) => {
-    const field = document.getElementById(id);
-    const eventName = field.tagName === "SELECT" ? "change" : "input";
-    field.addEventListener(eventName, () => {
-      if (field.classList.contains("is-invalid")) validateField(id);
-    });
+[dpiInput, sensInput].forEach((input) => {
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') calcularEdpi();
   });
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const allValid = requiredFields
-      .map((id) => validateField(id))
-      .every(Boolean);
-
-    if (!allValid) {
-      const firstInvalid = form.querySelector(".is-invalid");
-      if (firstInvalid) firstInvalid.focus();
-      return;
-    }
-
-    // Mensaje de éxito personalizado con los datos del simulador
-    const nombre = document.getElementById("nombre").value.trim();
-    const producto = document.getElementById("producto");
-    const productoTexto = producto.options[producto.selectedIndex].text;
-    const origen = document.getElementById("origen").value;
-    const destino = document.getElementById("destino").value;
-
-    successDetail.textContent =
-      `Gracias, ${nombre}. Hemos registrado tu solicitud para exportar ` +
-      `${productoTexto.toLowerCase()} desde ${origen} hacia ${destino}. ` +
-      `Nuestro equipo te contactará en menos de 48 horas con tu propuesta personalizada.`;
-
-    success.hidden = false;
-    success.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-
-  resetBtn.addEventListener("click", () => {
-    form.reset();
-    requiredFields.forEach((id) => showError(id, false));
-    success.hidden = true;
-  });
-}
+});

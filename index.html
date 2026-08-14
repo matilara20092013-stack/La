@@ -3,258 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Consultoría y logística internacional. Expande tus productos hacia Europa con más de 30 años de experiencia, seguridad y una red global de transporte.">
-  <title>GlobalRoute Consulting | Expansión y Logística hacia Europa</title>
+  <title>FN Tweaks — Optimiza tu Fortnite</title>
+  <meta name="description" content="Guía de tweaks y optimización para Fortnite: más FPS, menos input lag y la mejor configuración competitiva.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ===== Header / Navegación ===== -->
-  <header class="header" id="inicio">
-    <nav class="nav container">
-      <a href="#inicio" class="nav__logo">
-        <span class="nav__logo-icon">&#9992;</span>
-        Global<span class="nav__logo-accent">Route</span>
-      </a>
-      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav__menu" id="nav-menu">
-        <li><a href="#propuesta" class="nav__link">Quiénes Somos</a></li>
-        <li><a href="#beneficios" class="nav__link">Beneficios</a></li>
-        <li><a href="#simulador" class="nav__link">Simulador</a></li>
-        <li><a href="#simulador" class="nav__link nav__link--cta">Contacto</a></li>
-      </ul>
-    </nav>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">⚡ FN<span>Tweaks</span></a>
+      <nav class="nav-links">
+        <a href="#video">Video</a>
+        <a href="#windows">Windows</a>
+        <a href="#config">Config</a>
+        <a href="#sensibilidad">Sensibilidad</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+    </div>
   </header>
 
-  <main>
-
-    <!-- ===== Hero Section ===== -->
-    <section class="hero">
-      <div class="hero__overlay"></div>
-      <div class="container hero__content" data-animate>
-        <p class="hero__eyebrow">Consultoría &amp; Logística Internacional</p>
-        <h1 class="hero__title">
-          Lleva tus productos a <span class="text-gold">Europa</span><br>
-          con la seguridad de los expertos
-        </h1>
-        <p class="hero__subtitle">
-          Diseñamos tu estrategia de exportación de principio a fin: normativas,
-          aranceles, transporte y distribución en los principales mercados europeos.
-        </p>
-        <a href="#simulador" class="btn btn--gold btn--lg" id="cta-hero">Iniciar Expansión &rarr;</a>
-        <div class="hero__stats">
-          <div class="hero__stat">
-            <span class="hero__stat-number" data-counter="30" data-suffix="+">0</span>
-            <span class="hero__stat-label">Años de experiencia</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-number" data-counter="27" data-suffix="">0</span>
-            <span class="hero__stat-label">Países de la UE cubiertos</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-number" data-counter="120" data-suffix="+">0</span>
-            <span class="hero__stat-label">Destinos globales</span>
-          </div>
-        </div>
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Temporada actual · Guía 2026</span>
+      <h1>Más <span class="accent">FPS</span>, menos input lag.<br>Domina cada partida.</h1>
+      <p class="hero-sub">Tweaks legítimos y seguros para exprimir tu PC en Fortnite: ajustes de video, optimización de Windows y configuración competitiva. Sin hacks, sin riesgo de baneo.</p>
+      <div class="hero-actions">
+        <a href="#video" class="btn btn-primary">Empezar a optimizar</a>
+        <a href="#sensibilidad" class="btn btn-ghost">Calculadora de sensibilidad</a>
       </div>
-    </section>
-
-    <!-- ===== Propuesta de Valor ===== -->
-    <section class="value" id="propuesta">
-      <div class="container">
-        <div class="value__banner" data-animate>
-          <span class="value__years">+30</span>
-          <div class="value__banner-text">
-            <h2>Más de 30 años de experiencia internacional</h2>
-            <p>Tres décadas abriendo mercados y moviendo mercancías por todo el mundo nos avalan.</p>
-          </div>
-        </div>
-        <div class="value__grid">
-          <article class="value__card" data-animate>
-            <div class="value__icon">&#128737;</div>
-            <h3>Seguridad garantizada</h3>
-            <p>Cada operación está respaldada por protocolos de seguridad, seguros de carga y trazabilidad completa de tu mercancía puerta a puerta.</p>
-          </article>
-          <article class="value__card" data-animate>
-            <div class="value__icon">&#9878;</div>
-            <h3>Normativas de la Unión Europea</h3>
-            <p>Dominamos la regulación aduanera, sanitaria y fiscal de la UE. Tu producto entra al mercado europeo cumpliendo cada requisito legal.</p>
-          </article>
-          <article class="value__card" data-animate>
-            <div class="value__icon">&#127758;</div>
-            <h3>Red global de transporte</h3>
-            <p>Alianzas marítimas, aéreas y terrestres que conectan tu origen con múltiples destinos del mundo, con rutas optimizadas y tiempos fiables.</p>
-          </article>
-        </div>
+      <div class="hero-stats">
+        <div class="stat"><strong id="statFps">+0</strong><span>FPS de media*</span></div>
+        <div class="stat"><strong>0€</strong><span>Coste total</span></div>
+        <div class="stat"><strong>100%</strong><span>Seguro y reversible</span></div>
       </div>
-    </section>
+      <p class="hero-note">*Resultados típicos combinando todos los tweaks en PCs de gama media.</p>
+    </div>
+  </section>
 
-    <!-- ===== Beneficios ===== -->
-    <section class="benefits" id="beneficios">
-      <div class="container">
-        <header class="section-head" data-animate>
-          <p class="section-head__eyebrow">Ventajas competitivas</p>
-          <h2 class="section-head__title">¿Por qué exportar con nosotros?</h2>
-        </header>
-        <ul class="benefits__list">
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">01</span>
-            <div>
-              <h3>Gestión de aranceles</h3>
-              <p>Clasificación arancelaria precisa y aprovechamiento de acuerdos comerciales para reducir al mínimo tus costes de importación en la UE.</p>
-            </div>
-          </li>
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">02</span>
-            <div>
-              <h3>Logística integrada</h3>
-              <p>Un único interlocutor para todo el flujo: recogida, consolidación, transporte internacional, despacho de aduanas y entrega final.</p>
-            </div>
-          </li>
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">03</span>
-            <div>
-              <h3>Consultoría legal</h3>
-              <p>Asesoramiento en contratos internacionales, etiquetado, certificaciones CE y requisitos regulatorios específicos de cada país europeo.</p>
-            </div>
-          </li>
-          <li class="benefits__item" data-animate>
-            <span class="benefits__num">04</span>
-            <div>
-              <h3>Optimización de rutas</h3>
-              <p>Analizamos costes, plazos y huella de carbono para elegir siempre la combinación de rutas más eficiente para tu carga.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ===== Simulador / Formulario ===== -->
-    <section class="simulator" id="simulador">
-      <div class="container simulator__grid">
-        <div class="simulator__intro" data-animate>
-          <p class="section-head__eyebrow section-head__eyebrow--light">Simulador de expansión</p>
-          <h2 class="section-head__title section-head__title--light">Comienza tu ruta hacia Europa</h2>
-          <p class="simulator__text">
-            Cuéntanos qué exportas, desde dónde y hacia qué mercado europeo.
-            Nuestro equipo preparará una propuesta personalizada de logística
-            y consultoría en menos de 48 horas.
-          </p>
-          <ul class="simulator__checks">
-            <li>&#10003; Respuesta en 48 horas</li>
-            <li>&#10003; Análisis arancelario incluido</li>
-            <li>&#10003; Sin compromiso</li>
-          </ul>
-        </div>
-
-        <form class="form" id="expansion-form" novalidate data-animate>
-          <h3 class="form__title">Solicita tu simulación gratuita</h3>
-
-          <div class="form__group">
-            <label for="nombre">Nombre y empresa <span class="req">*</span></label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ej: María Pérez — Alimentos del Sur S.A." required>
-            <small class="form__error" data-error-for="nombre">Por favor, indica tu nombre o empresa.</small>
-          </div>
-
-          <div class="form__group">
-            <label for="email">Correo electrónico <span class="req">*</span></label>
-            <input type="email" id="email" name="email" placeholder="tucorreo@empresa.com" required>
-            <small class="form__error" data-error-for="email">Introduce un correo electrónico válido.</small>
-          </div>
-
-          <div class="form__group">
-            <label for="producto">Tipo de producto <span class="req">*</span></label>
-            <select id="producto" name="producto" required>
-              <option value="" disabled selected>Selecciona una categoría</option>
-              <option value="alimentos">Alimentos y bebidas</option>
-              <option value="textil">Textil y moda</option>
-              <option value="tecnologia">Tecnología y electrónica</option>
-              <option value="industrial">Maquinaria e industrial</option>
-              <option value="cosmetica">Cosmética y farmacéutica</option>
-              <option value="artesania">Artesanía y decoración</option>
-              <option value="otro">Otro</option>
-            </select>
-            <small class="form__error" data-error-for="producto">Selecciona el tipo de producto.</small>
-          </div>
-
-          <div class="form__row">
-            <div class="form__group">
-              <label for="origen">País de origen <span class="req">*</span></label>
-              <select id="origen" name="origen" required>
-                <option value="" disabled selected>Selecciona origen</option>
-                <option>México</option>
-                <option>Colombia</option>
-                <option>Argentina</option>
-                <option>Chile</option>
-                <option>Perú</option>
-                <option>Ecuador</option>
-                <option>Brasil</option>
-                <option>Estados Unidos</option>
-                <option>Otro</option>
-              </select>
-              <small class="form__error" data-error-for="origen">Selecciona el país de origen.</small>
-            </div>
-
-            <div class="form__group">
-              <label for="destino">Destino en Europa <span class="req">*</span></label>
-              <select id="destino" name="destino" required>
-                <option value="" disabled selected>Selecciona destino</option>
-                <option>España</option>
-                <option>Francia</option>
-                <option>Alemania</option>
-                <option>Italia</option>
-                <option>Países Bajos</option>
-                <option>Bélgica</option>
-                <option>Portugal</option>
-                <option>Polonia</option>
-                <option>Otro país de la UE</option>
-              </select>
-              <small class="form__error" data-error-for="destino">Selecciona el país de destino.</small>
-            </div>
-          </div>
-
-          <div class="form__group">
-            <label for="mensaje">Cuéntanos más (opcional)</label>
-            <textarea id="mensaje" name="mensaje" rows="3" placeholder="Volumen estimado, plazos, dudas sobre normativas..."></textarea>
-          </div>
-
-          <button type="submit" class="btn btn--navy btn--block">Solicitar simulación</button>
-
-          <div class="form__success" id="form-success" role="status" hidden>
-            <span class="form__success-icon">&#10004;</span>
-            <h4>¡Solicitud enviada con éxito!</h4>
-            <p id="form-success-detail">
-              Gracias por confiar en nosotros. Nuestro equipo te contactará en menos de 48 horas.
-            </p>
-            <button type="button" class="btn btn--outline" id="form-reset">Enviar otra solicitud</button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===== Footer ===== -->
-  <footer class="footer">
-    <div class="container footer__grid">
-      <div>
-        <p class="footer__logo">Global<span class="nav__logo-accent">Route</span> Consulting</p>
-        <p class="footer__tagline">Más de 30 años conectando tu negocio con el mundo.</p>
-      </div>
-      <nav class="footer__links" aria-label="Enlaces del pie de página">
-        <a href="#propuesta">Quiénes Somos</a>
-        <a href="#beneficios">Beneficios</a>
-        <a href="#simulador">Simulador</a>
-      </nav>
-      <div class="footer__contact">
-        <p>&#9993; contacto@globalroute.example</p>
-        <p>&#9742; +34 900 000 000</p>
+  <section id="video" class="section">
+    <div class="container">
+      <h2>🎮 Ajustes de video óptimos</h2>
+      <p class="section-sub">La configuración que usan la mayoría de jugadores competitivos. Prioriza FPS estables y visibilidad por encima de gráficos bonitos.</p>
+      <div class="cards-grid">
+        <article class="card">
+          <h3>Modo de renderizado</h3>
+          <p><strong>Rendimiento (beta)</strong> si buscas FPS máximos, o <strong>DirectX 12</strong> si tu GPU es potente y quieres mejor calidad.</p>
+        </article>
+        <article class="card">
+          <h3>Resolución y pantalla</h3>
+          <p>Pantalla completa (no ventana sin bordes), resolución nativa de tu monitor y <strong>límite de FPS = Hz de tu monitor</strong> (o sin límite si tu PC lo aguanta).</p>
+        </article>
+        <article class="card">
+          <h3>Distancia de visión</h3>
+          <p><strong>Épica</strong>. Es el único ajuste que conviene alto: te deja ver enemigos y estructuras lejanas. Apenas cuesta FPS.</p>
+        </article>
+        <article class="card">
+          <h3>Sombras, efectos y postprocesado</h3>
+          <p><strong>Todo en Bajo o Desactivado</strong>. Las sombras son el ajuste que más FPS roba y además ocultan enemigos.</p>
+        </article>
+        <article class="card">
+          <h3>Texturas</h3>
+          <p><strong>Bajo</strong> con 4 GB de VRAM o menos; <strong>Medio</strong> si tienes 6-8 GB. No afecta al input lag, solo a la memoria de video.</p>
+        </article>
+        <article class="card">
+          <h3>VSync y desenfoque</h3>
+          <p><strong>VSync: OFF siempre</strong> (añade input lag). Desenfoque de movimiento: OFF. Mostrar FPS: ON para monitorizar.</p>
+        </article>
       </div>
     </div>
-    <div class="footer__bottom">
-      <p>&copy; <span id="year"></span> GlobalRoute Consulting. Todos los derechos reservados.</p>
+  </section>
+
+  <section id="windows" class="section section-alt">
+    <div class="container">
+      <h2>🖥️ Optimización de Windows</h2>
+      <p class="section-sub">Tweaks seguros del sistema. Todos son reversibles y no tocan nada crítico.</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>
+            <h3>Plan de energía: Alto rendimiento</h3>
+            <p>Panel de control → Opciones de energía → <strong>Alto rendimiento</strong>. Evita que la CPU baje de frecuencia en mitad de una partida.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            <h3>Modo de juego activado</h3>
+            <p>Configuración → Juegos → Modo de juego → <strong>Activado</strong>. Windows prioriza el juego frente a procesos en segundo plano.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>
+            <h3>Programación de GPU acelerada por hardware</h3>
+            <p>Configuración → Pantalla → Gráficos → <strong>Programación de GPU acelerada por hardware: ON</strong> y reinicia. Reduce latencia en GPUs modernas.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div>
+            <h3>Drivers de GPU al día</h3>
+            <p>Actualiza desde <strong>NVIDIA App / AMD Adrenalin</strong>. Los drivers nuevos suelen traer mejoras específicas para Fortnite.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span>
+          <div>
+            <h3>Cierra apps en segundo plano</h3>
+            <p>Discord con aceleración por hardware desactivada, navegador cerrado, y desactiva superposiciones (overlays) que no uses: menos consumo de CPU y RAM.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">6</span>
+          <div>
+            <h3>NVIDIA Reflex / AMD Anti-Lag</h3>
+            <p>En Fortnite: Ajustes de video → <strong>NVIDIA Reflex: Activado + Boost</strong> (o Anti-Lag en AMD). Es la mayor reducción de input lag gratis que existe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="config" class="section">
+    <div class="container">
+      <h2>⚙️ Configuración competitiva</h2>
+      <p class="section-sub">Ajustes de juego y periféricos que marcan la diferencia en el late game.</p>
+      <div class="cards-grid">
+        <article class="card">
+          <h3>Keybinds recomendados</h3>
+          <ul>
+            <li>Pared: <kbd>Q</kbd> o botón lateral del ratón</li>
+            <li>Suelo: <kbd>C</kbd> o <kbd>Mouse 4</kbd></li>
+            <li>Rampa: <kbd>F</kbd> o <kbd>Mouse 5</kbd></li>
+            <li>Editar: <kbd>G</kbd> o rueda del ratón</li>
+            <li>Confirmar edición: soltar botón (edición al soltar)</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Opciones de juego clave</h3>
+          <ul>
+            <li>Construcción turbo: <strong>ON</strong></li>
+            <li>Cambiar material/arma automáticamente: <strong>OFF</strong></li>
+            <li>Restablecer edición al soltar: <strong>ON</strong></li>
+            <li>Sprint automático: <strong>ON</strong></li>
+            <li>Efectos visuales de sonido: <strong>ON</strong> (ver pasos en pantalla)</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Periféricos</h3>
+          <ul>
+            <li>Ratón: 400–800 DPI, polling 1000 Hz</li>
+            <li>Monitor: activa los Hz reales en Windows (Pantalla → Frecuencia de actualización)</li>
+            <li>Auriculares: sonido estéreo, nada de "surround virtual"</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sensibilidad" class="section section-alt">
+    <div class="container">
+      <h2>🎯 Calculadora de sensibilidad</h2>
+      <p class="section-sub">Calcula tu eDPI y compárala con el rango que usan los pros.</p>
+      <div class="calc">
+        <div class="calc-inputs">
+          <label>
+            DPI del ratón
+            <input type="number" id="dpiInput" value="800" min="100" max="26000" step="50">
+          </label>
+          <label>
+            Sensibilidad X en Fortnite (%)
+            <input type="number" id="sensInput" value="8" min="1" max="100" step="0.1">
+          </label>
+          <button class="btn btn-primary" id="calcBtn">Calcular</button>
+        </div>
+        <div class="calc-result" id="calcResult" hidden>
+          <p class="edpi-value">Tu eDPI: <strong id="edpiValue">—</strong></p>
+          <div class="edpi-bar">
+            <div class="edpi-range" title="Rango típico de jugadores pro (40–80)"></div>
+            <div class="edpi-marker" id="edpiMarker"></div>
+          </div>
+          <p class="edpi-verdict" id="edpiVerdict"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>❓ Preguntas frecuentes</h2>
+      <div class="faq-list">
+        <details>
+          <summary>¿Estos tweaks pueden hacer que me baneen?</summary>
+          <p>No. Todo lo de esta guía son ajustes oficiales del juego, de Windows o de los drivers de tu GPU. No se modifica ningún archivo del juego ni se inyecta nada. Evita siempre "FPS boosters" de terceros que prometen milagros: muchos son malware.</p>
+        </details>
+        <details>
+          <summary>¿Cuántos FPS voy a ganar?</summary>
+          <p>Depende de tu PC. El cambio a modo Rendimiento + sombras en bajo suele ser lo que más se nota (a veces el doble de FPS en PCs modestos). El resto de tweaks suman estabilidad y reducen los tirones.</p>
+        </details>
+        <details>
+          <summary>¿Qué es el eDPI?</summary>
+          <p>Es tu DPI del ratón multiplicado por la sensibilidad del juego. Sirve para comparar sensibilidades entre jugadores aunque usen DPI distintos. La mayoría de pros de Fortnite juegan entre 40 y 80 de eDPI.</p>
+        </details>
+        <details>
+          <summary>¿Mejor rendimiento o DirectX 12?</summary>
+          <p>Modo Rendimiento si tu prioridad son los FPS y tienes una GPU modesta. DirectX 12 si tienes una GPU potente y quieres mejores gráficos sin sacrificar mucho. Prueba ambos: el contador de FPS no miente.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>⚡ FNTweaks — Guía no oficial hecha por y para jugadores. Fortnite es una marca de Epic Games; este sitio no está afiliado a Epic Games.</p>
     </div>
   </footer>
 
